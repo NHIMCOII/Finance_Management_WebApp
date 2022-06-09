@@ -1,0 +1,29 @@
+{
+  "name": "datta-able-bootstrap-dashboard",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codedthemes/datta-able-bootstrap-dashboard.git"
+  },
+  "author": "duy anh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codedthemes/datta-able-bootstrap-dashboard/issues"
+  },
+  "homepage": "https://github.com/codedthemes/datta-able-bootstrap-dashboard#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "bootstrap": "^5.2.0-beta1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1"
+  }
+}
