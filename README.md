@@ -1,3 +1,38 @@
+# Co-Working Procedure
+## Step 1: Set-up enviroment
+ - [Download and Install NodeJs](https://nodejs.org/en/)
+ - Clone from Github 
+```
+git clone https://github.com/NHIMCOII/Finance_Management_WebApp.git
+```
+ - Installing npm
+```
+npm install
+```
+ - Initialize npm
+```
+ npm init
+```
+ - Go into package.json -> scroll down to "scripts" -> add "start": "nodemon app.js" (remmeber to add ',')
+ - Installing Nodemon
+```
+npm install nodemon --save-dev
+```
+ - Installing Express 
+```
+npm install --save express 
+```
+ - Installing Packages
+```
+npm install --save body-parser
+npm install --save ejs
+```
+
+## Step 2: Workflow
+ ### For /Views
+ - Read any .ejs file and notice changes in <link> and <scripts>  (must change)
+ - When done editing a .html file, change to .ejs file
+
 # Datta Able Free Bootstrap 4 Admin Template
 
 Datta Able Free Dashboard Template made using Bootstrap 4 framework, It is a free lite version of [Datta Able Pro](https://codedthemes.com/item/datta-able-premium/) Dashboard Template that makes you fulfill your Dashboard needs.
