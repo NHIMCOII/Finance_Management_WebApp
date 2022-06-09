@@ -30,7 +30,7 @@ npm install --save ejs
 
 ## Step 2: Workflow
  ### For /Views
- - Read any .ejs file and notice changes in <link> and <scripts>  (must change)
+ - Read any .ejs file and notice changes in link and scripts tag  (must change)
  - When done editing a .html file, change to .ejs file
 
 # Datta Able Free Bootstrap 4 Admin Template
