@@ -29,10 +29,13 @@ npm install --save ejs
 ```
 
 ## Step 2: Workflow
+ ### GIT
+ 
+ 
  ### For /Views
  - Read any .ejs file and notice path changes in any tag use outer resources  (must change)
  - When done editing a .html file, change to .ejs file
-
+ 
 # Datta Able Free Bootstrap 4 Admin Template
 
 Datta Able Free Dashboard Template made using Bootstrap 4 framework, It is a free lite version of [Datta Able Pro](https://codedthemes.com/item/datta-able-premium/) Dashboard Template that makes you fulfill your Dashboard needs.
