@@ -31,6 +31,7 @@ npm install --save ejs
 ## Step 2: Workflow
  ### GIT
 ```
+git pull origin master
 git push origin [your_branch]
 ```
  
