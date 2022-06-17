@@ -38,6 +38,10 @@ git commit -m 'commit messsage'
 git push origin [your_branch]
 ```
  - Delete your old branch after finish your work then create new branch to start working on next feature
+```
+    git branch -d [old branch]
+    git switch -c "new branch"
+```
  - Create Pull request
  
  ### For /Views
