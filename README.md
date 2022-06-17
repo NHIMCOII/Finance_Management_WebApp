@@ -31,10 +31,18 @@ npm install --save ejs
 ## Step 2: Workflow
  ### GIT
 ```
+git checkout [your_branch]
 git pull origin master
+git add .
+git commit -m 'commit messsage'
 git push origin [your_branch]
 ```
+<<<<<<< HEAD
  - Delete your old branch after finish your work then create new branch to start working on next feature
+=======
+ - Create Pull Request
+ - Test then merge to master branch
+>>>>>>> 389dbee7af03db25a5768dd8d5e928362863110b
  
  ### For /Views
  - Read any .ejs file and notice path changes in any tag use outer resources  (must change)
