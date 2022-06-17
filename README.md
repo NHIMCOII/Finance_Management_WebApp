@@ -38,14 +38,11 @@ git commit -m 'commit messsage'
 git push origin [your_branch]
 ```
  - Delete your old branch after finish your work then create new branch to start working on next feature
-<<<<<<< HEAD
-=======
 ```
     git branch -d [old branch]
     git switch -c "new branch"
 ```
  - Create Pull request
->>>>>>> 7bd958051d9c173ebc442aae8b1582da3d20f761
  
  ### For /Views
  - Read any .ejs file and notice path changes in any tag use outer resources  (must change)
