@@ -41,6 +41,7 @@ git push origin [your_branch]
 ```
     git branch -d [old branch]
     git switch -c "new branch"
+    git push -u origin [new branch]
 ```
  - Create Pull request
  
