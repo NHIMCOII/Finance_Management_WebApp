@@ -34,6 +34,7 @@ npm install --save ejs
 git pull origin master
 git push origin [your_branch]
 ```
+ - Delete your old branch after finish your work then create new branch to start working on next feature
  
  ### For /Views
  - Read any .ejs file and notice path changes in any tag use outer resources  (must change)
