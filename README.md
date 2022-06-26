@@ -26,6 +26,7 @@ npm install --save express
 ```
 npm install --save body-parser
 npm install --save ejs
+npm install --save express-session
 ```
 
 ## Step 2: Workflow
