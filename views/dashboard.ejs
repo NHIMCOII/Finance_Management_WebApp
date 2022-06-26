@@ -206,9 +206,11 @@
                             <div class="pro-head">
                                 <img src="/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
                                 <span>John Doe</span>
-                                <a href="/login" class="dud-logout" title="Logout">
-                                    <i class="feather icon-log-out"></i>
-                                </a>
+                                <form action="/logout" class="dud-logout" title="Logout" method="POST">
+                                    <button type="submit">
+                                        <i class="feather icon-log-out"></i>
+                                    </button>                                       
+                                </form>
                             </div>
                             <ul class="pro-body">
                                 <li><a href="javascript:" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
@@ -870,6 +872,6 @@
 <script src="/js/vendor-all.min.js"></script>
 	<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/js/pcoded.min.js"></script>
-
+ 
 </body>
 </html>

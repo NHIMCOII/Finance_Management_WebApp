@@ -2,14 +2,9 @@ exports.getIndex = (req,res,next) => {
     res.render('index');
 }
 
-exports.getSignIn = (req,res,next) => {
-    res.render('auth-signin');
-}
-
-exports.getSignUp = (req,res,next) => {
-    res.render('auth-signup');
-}
-
 exports.getDashboard = (req,res,next) => {
-    res.render('dashboard')
+    // console.log(req.isloggedIn);
+    res.render('dashboard',{
+        isAuthenticated: req.isloggedIn
+    })
 }
