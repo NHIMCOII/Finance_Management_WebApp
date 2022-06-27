@@ -6,6 +6,8 @@ const indexController = require('../controllers/index');
 
 const router = express.Router();
 
+router.get('/profile',indexController.getProfile);
+
 router.get('/dashboard',indexController.getDashboard);
 
 router.get('/',indexController.getIndex);
