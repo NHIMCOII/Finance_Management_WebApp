@@ -50,13 +50,13 @@ git push origin [your_branch]
  - Read any .ejs file and notice path changes in any tag use outer resources  (must change)
  - When done editing a .html file, change to .ejs file
  
-# Datta Able Free Bootstrap 4 Admin Template
+# FMS Free Bootstrap 4 Admin Template
 
-Datta Able Free Dashboard Template made using Bootstrap 4 framework, It is a free lite version of [Datta Able Pro](https://codedthemes.com/item/datta-able-premium/) Dashboard Template that makes you fulfill your Dashboard needs.
+FMS Free Dashboard Template made using Bootstrap 4 framework, It is a free lite version of [FMS Pro](https://codedthemes.com/item/datta-able-premium/) Dashboard Template that makes you fulfill your Dashboard needs.
 
-![Datta Able Free Admin Template Preview Image](http://html.codedthemes.com/datta-able/bootstrap/adv-banner/git-datta-free.png)
+![FMS Free Admin Template Preview Image](http://html.codedthemes.com/datta-able/bootstrap/adv-banner/git-datta-free.png)
 
-Datta Able Admin Template comes with variety of components like Button, Badges, Tabs, Breadcrumb, Icons, Form elements, Table, Charts & Authentication pages.
+FMS Admin Template comes with variety of components like Button, Badges, Tabs, Breadcrumb, Icons, Form elements, Table, Charts & Authentication pages.
 
 The code structure is high flexible to use and modify. 
 
@@ -66,7 +66,7 @@ It is modern concept dashboard design with eye catchy colors. Wish you happy to 
 
 ## Free Version Preview & Download
 
-Check out live preview of Datta Able lite version & download it.
+Check out live preview of FMS lite version & download it.
 
 #### Preview
 
@@ -79,7 +79,7 @@ Check out live preview of Datta Able lite version & download it.
  
  ## Premium Version Preview & Download
 
-Datta Able Pro Admin Template is available to purchase. Visit its numerous demos and make your purchase decision.
+FMS Pro Admin Template is available to purchase. Visit its numerous demos and make your purchase decision.
 #### Preview
 
  - [Demo](http://html.codedthemes.com/datta-able/bootstrap/default)
@@ -108,11 +108,11 @@ Clone from Github
 ```
 git clone https://github.com/codedthemes/datta-able-bootstrap-dashboard.git
 ```
-*no other dependencies required to run the Datta Able Template*
+*no other dependencies required to run the FMS Template*
 
 ## Online Documentation
 
-Datta Able Lite version documentation cover in its Pro version documentation - check our [website.](http://html.codedthemes.com/datta-able/bootstrap/default/docs.html)
+FMS Lite version documentation cover in its Pro version documentation - check our [website.](http://html.codedthemes.com/datta-able/bootstrap/default/docs.html)
 
 ## Build With
 
@@ -159,7 +159,7 @@ Datta-able/
 
 ## RoadMap
 
-We are continuously working in Datta Able Project and going to make it a awesome dashboard template via your support. Give us the ideas, suggestion for include more components, pages, plugins. Few of future release pages are
+We are continuously working in FMS Project and going to make it a awesome dashboard template via your support. Give us the ideas, suggestion for include more components, pages, plugins. Few of future release pages are
  
 #### Layouts 
  - Horizontal version
