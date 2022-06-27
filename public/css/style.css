@@ -1,6 +1,6 @@
 /**======================================================================
 =========================================================================
-Template Name: Datta Able Admin Template
+Template Name: FMS Admin Template
 Author: Codedthemes
 supports: https://codedthemes.support-hub.io/
 File: style.css
@@ -1516,7 +1516,7 @@ p.text-muted {
           align-items: center;
 }
 .b-brand .b-bg {
-  background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
+  /*background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);*/
   border-radius: 10px;
   width: 35px;
   height: 35px;
@@ -1534,10 +1534,11 @@ p.text-muted {
   color: #fff;
 }
 .b-brand .b-title {
-  margin-left: 10px;
-  font-weight: 100;
+  margin-left: 13px;
+  font-weight: 500;
   color: #fff;
   font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .navbar-collapsed .b-brand .b-title {
