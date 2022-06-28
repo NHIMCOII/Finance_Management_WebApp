@@ -23,7 +23,7 @@
 <!--                     <li class="nav-item pcoded-menu-caption"> -->
 <!--                         <label>Navigation</label> -->
 <!--                     </li> -->
-                <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item active">
+                <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item <% if (path === '/dashboard') { %>active<% } %>  ">
                     <a href="/dashboard" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-house"></i></span><span class="pcoded-mtext">Home</span></a>
                 </li>
 <!--                     <li class="nav-item pcoded-menu-caption"> -->
@@ -46,21 +46,27 @@
                 <li class="nav-item pcoded-menu-caption">
                     <label>Personal Finance</label>
                 </li>
-                <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
+                <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item <% if (path === '/income') { %>active<% } %>">
                     <a href="/income" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-money-bill-trend-up"></i></span><span class="pcoded-mtext">Income</span></a>
                 </li>
-                <li data-username="Table bootstrap datatable footable" class="nav-item">
+                <li data-username="Table bootstrap datatable footable" class="nav-item <% if (path === '/expense') { %>active<% } %>">
                     <a href="/expense" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-money-check-dollar"></i></span><span class="pcoded-mtext">Expense</span></a>
                 </li>
                 <li class="nav-item pcoded-menu-caption">
                     <label>Wallets</label>
                 </li>
-                <li data-username="Charts Morris" class="nav-item"><a href="/editWallet" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-wallet"></i></i></span><span class="pcoded-mtext">Edit Wallet</span></a></li>
-                <li data-username="Maps Google" class="nav-item"><a href="/moneyTransfer" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-money-bill-transfer"></i></span><span class="pcoded-mtext">Money Transfer</span></a></li>
+                <li data-username="Charts Morris" class="nav-item <% if (path === '/editWallet') { %>active<% } %>">
+                    <a href="/editWallet" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-wallet"></i></i></span><span class="pcoded-mtext">Edit Wallet</span></a>
+                </li>
+                <li data-username="Maps Google" class="nav-item <% if (path === '/moneyTransfer') { %>active<% } %>">
+                    <a href="/moneyTransfer" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-money-bill-transfer"></i></span><span class="pcoded-mtext">Money Transfer</span></a>
+                </li>
                 <li class="nav-item pcoded-menu-caption">
                     <label>Report</label>
                 </li>
-                <li data-username="Maps Google" class="nav-item"><a href="/monthlyBalance" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-chart-pie"></i></span><span class="pcoded-mtext">Monthly Balance</span></a></li>
+                <li data-username="Maps Google" class="nav-item <% if (path === '/monthlyBalance') { %>active<% } %>">
+                    <a href="/monthlyBalance" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-chart-pie"></i></span><span class="pcoded-mtext">Monthly Balance</span></a>
+                </li>
                 <li class="nav-item pcoded-menu-caption">
                     <label>Profile & Account</label>
                 </li>
@@ -72,7 +78,9 @@
 <!--                         </ul> -->
 <!--                     </li> -->
 <!--                     <li data-username="Sample Page" class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li> -->
-                <li data-username="Maps Google" class="nav-item"><a href="/profile" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-user"></i></span><span class="pcoded-mtext">Profile</span></a></li>
+                <li data-username="Maps Google" class="nav-item <% if (path === '/profile') { %>active<% } %>">
+                    <a href="/profile" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-user"></i></span><span class="pcoded-mtext">Profile</span></a>
+                </li>
                 <form action="/logout" title="Logout" method="POST">
                     <button type="submit">
                         <li  data-username="Disabled Menu" class="nav-item disabled"><a href="javascript:" class="nav-link"><span class="pcoded-micon"><i class="fa-solid fa-right-from-bracket"></i></i></span><span class="pcoded-mtext">Logout</span></a></li>
