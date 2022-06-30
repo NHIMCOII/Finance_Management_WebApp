@@ -27,6 +27,10 @@ npm install --save express
 npm install --save body-parser
 npm install --save ejs
 npm install --save express-session
+npm install --save mysql2
+npm install express-mysql-session --save
+npm install --save bcryptjs
+npm install --save csurf
 ```
 
 ## Step 2: Workflow
