@@ -1,20 +1,23 @@
 exports.getIndex = (req,res,next) => {
-    res.render('index');
+    res.render('index',{
+    });
 }
 
-exports.getDashboard = (req,res,next) => {
-    // console.log(req.isloggedIn);
+exports.getDashboard = (req,res,next) => {;
     res.render('dashboard',{
-        isAuthenticated: req.isloggedIn,
         pageTitle: 'Dashboard',
-        path: '/dashboard'
+        path: '/dashboard',
+        username: req.session.user[0].username,
+        isAuthenticated: req.session.isLoggedIn,
+        csrfToken: req.csrfToken()
     })
 }
 
 exports.getProfile = (req,res,next) => {
     res.render('profile',{
-        isAuthenticated: req.isloggedIn,
+        isAuthenticated: req.session.isLoggedIn,
         pageTitle: 'Profile',
+        username: req.session.user[0].username,
         path: '/profile'
     });
 }

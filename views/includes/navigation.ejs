@@ -14,7 +14,7 @@
 <!--                         <i class="feather icon-github"></i> -->
                          <img width=50px src="images/logo.png">
                 </div>
-                <span class="b-title"><a href = "/profile">Hello Minh</a></span>
+                <span class="b-title"><a href = "/profile">Hello <%= username %> </a></span>
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
         </div>
@@ -82,6 +82,7 @@
                     <a href="/profile" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-user"></i></span><span class="pcoded-mtext">Profile</span></a>
                 </li>
                 <form action="/logout" title="Logout" method="POST">
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                     <button type="submit">
                         <li  data-username="Disabled Menu" class="nav-item disabled"><a href="javascript:" class="nav-link"><span class="pcoded-micon"><i class="fa-solid fa-right-from-bracket"></i></i></span><span class="pcoded-mtext">Logout</span></a></li>
                     </button>
@@ -194,6 +195,7 @@
                             <img src="/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
                             <span>John Doe</span>
                             <form action="/logout" class="dud-logout" title="Logout" method="POST">
+                                <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                                 <button type="submit">
                                     <i class="feather icon-log-out"></i>
                                 </button>                                       
