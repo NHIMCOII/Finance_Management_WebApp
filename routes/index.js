@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/profile',isAuth,indexController.getProfile);
 
-router.get('/dashboard',indexController.getDashboard);   //protect route
+router.get('/dashboard',isAuth,indexController.getDashboard);   
 
 router.get('/',indexController.getIndex);
 
