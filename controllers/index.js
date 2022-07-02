@@ -3,19 +3,16 @@ exports.getIndex = (req,res,next) => {
     });
 }
 
-exports.getDashboard = (req,res,next) => {;
+exports.getDashboard = (req,res,next) => {
     res.render('dashboard',{
         pageTitle: 'Dashboard',
         path: '/dashboard',
-        username: req.session.user[0].username,
-        isAuthenticated: req.session.isLoggedIn,
-        csrfToken: req.csrfToken()
+        username: req.user.username,
     })
 }
 
 exports.getProfile = (req,res,next) => {
     res.render('profile',{
-        isAuthenticated: req.session.isLoggedIn,
         pageTitle: 'Profile',
         username: req.session.user[0].username,
         path: '/profile'

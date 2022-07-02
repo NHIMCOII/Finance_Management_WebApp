@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Login</title>
+    <title><%= pageTitle%></title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -29,6 +29,10 @@
 </head>
 
 <body>
+    <% if(errorMessage) { %> 
+        <div><%= errorMessage %> </div>
+    <% } %> 
+
     <div class="auth-wrapper">
         <div class="auth-content">
             <div class="auth-bg">
@@ -57,7 +61,7 @@
                     </div>
                     <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                     <button class="btn btn-primary shadow-2 mb-4">Login</button>
-                    <p class="mb-2 text-muted">Forgot password? <a href="auth-reset-password.html">Reset</a></p>
+                    <p class="mb-2 text-muted">Forgot password? <a href="/reset">Reset</a></p>
                     <p class="mb-0 text-muted">Don’t have an account? <a href="/signup">Signup</a></p>
                 </form>
             </div>

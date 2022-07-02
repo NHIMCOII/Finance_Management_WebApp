@@ -1,7 +1,6 @@
 exports.getEditWallet = (req,res,next) => {
     res.render('editWallet',{
-        isAuthenticated: req.session.isLoggedIn,
-        username: req.session.user[0].username,
+        username: req.user.username,
         pageTitle: 'Edit Wallet',
         path: '/editWallet'
     });
@@ -11,8 +10,7 @@ exports.postEditWallet = (req,res,next) => {}
 
 exports.getMoneyTransfer = (req,res,next) => {
     res.render('moneyTransfer',{
-        isAuthenticated: req.session.isLoggedIn,
-        username: req.session.user[0].username,
+        username: req.user.username,
         pageTitle: 'Money Transfer',
         path: '/moneyTransfer'
     });

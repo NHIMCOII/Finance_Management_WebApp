@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const csrf = require('csurf');
+const flash = require('connect-flash');
 
 const errorController = require('./controllers/error');
 
@@ -43,13 +44,15 @@ app.use(session({
 }));
 
 app.use(csrfProtection);
+app.use(flash());
+
 app.use((req,res,next) => {
 	if(req.session.user === undefined){
 		return next();
 	}
     User.findByPk(req.session.user[0].id)
     .then(user => {
-        req.user = user;
+        req.user = user[0][0];
         next();
     })
     .catch(err => console.log(err));

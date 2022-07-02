@@ -1,12 +1,19 @@
 const bcrypt = require('bcryptjs');
+const {validationResult} =require('express-validator/check');
 
 const User = require("../models/user");
 
 exports.getLogin = (req,res,next) => {
+    let message = req.flash('error');
+    if(message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('auth-login',{
-        isAuthenticated: false,
-        pagetitle: 'Login',
-        path:'/login'
+        pageTitle: 'Login',
+        path:'/login',
+        errorMessage: message
     });
 }
 
@@ -16,6 +23,7 @@ exports.postLogin = (req,res,next) => {
     User.findByEmail(email)
     .then(user => {
         if(user[0].length === 0){
+            req.flash('error','Invalid email or password');
             return res.redirect('/login');
         }
         bcrypt
@@ -24,12 +32,12 @@ exports.postLogin = (req,res,next) => {
             if(doMatch){
                 req.session.isLoggedIn = true;
                 req.session.user = user[0];
-                console.log(user);
                 return req.session.save(err => {
-                    console.log(err);
+                    // console.log(err);
                     res.redirect('/dashboard');
                 });
             }
+            req.flash('error','Invalid email or password');
             res.redirect('/login');
         })
         .catch(err => {
@@ -48,9 +56,16 @@ exports.postLogout = (req,res,next) => {
 }
 
 exports.getSignup = (req,res,next) => {
+    let message = req.flash('error');
+    if(message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('auth-signup',{
-        pagetitle: 'Signup',
-        path:'/signup'
+        pageTitle: 'Signup',
+        path:'/signup',
+        errorMessage: message
     });
 }
 
@@ -59,11 +74,20 @@ exports.postSignup = (req,res,next) => {
     const email = req.body.email;
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
-  
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(422).render('auth-signup',{
+            pageTitle: 'Signup',
+            path:'/signup',
+            errorMessage: errors.array()[0].msg
+        });
+    }
+
     User
     .findByEmail(email)
     .then(userDoc => {
         if(userDoc[0].length != 0){
+            req.flash('error','Email already exist ! Please choose a different one ');
             return res.redirect('/signup');
         }
         return bcrypt
@@ -77,6 +101,22 @@ exports.postSignup = (req,res,next) => {
         })
     })
     .catch(err => console.log(err));
-    //Find existing user -> redirect '/signup' <auth>
-    //else -> create new user & encryted password <auth> -> save ->redirect /login
+}
+
+exports.getReset = (req,res,next) => {
+    let message = req.flash('error');
+    if(message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
+    res.render('auth-reset-password',{
+        pageTitle: 'Reset Password',
+        path:'/reset',
+        errorMessage: message
+    });
+}
+
+exports.postReset = (req,res,next) => {
+    res.redirect('/login');
 }

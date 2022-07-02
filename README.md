@@ -31,6 +31,8 @@ npm install --save mysql2
 npm install express-mysql-session --save
 npm install --save bcryptjs
 npm install --save csurf
+npm install --save connect-flash
+npm install --save express-validator
 ```
 
 ## Step 2: Workflow
