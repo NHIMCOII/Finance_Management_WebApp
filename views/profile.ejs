@@ -17,7 +17,7 @@
                                         <h5 class="m-b-10">Profile</h5>
                                     </div>
                                     <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
                                         <li class="breadcrumb-item"><a href="javascript:">Profile</a></li>
                                     </ul>
                                 </div>
@@ -28,11 +28,12 @@
                                   <div class="col-lg-4">
                                     <div class="card mb-4">
                                       <div class="card-body text-center">
-                                        <img src="/images/user/avatar-2.jpg" alt="avatar"
+                                        <img <% if(user.gender === 1){ %> src="/images/user/avatar-2.jpg"<% }else{ %>src="/images/user/avatar-1.jpg"<% } %>   alt="avatar"
                                           class="rounded-circle img-fluid" style="width: 150px;">
-                                        <h5 class="my-3">Minh Tran</h5>
-                                        <p class="text-muted mb-1">Full Stack Developer</p>
-                                        <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                                        <h5 class="my-3"><%= user.username %></h5>
+                                        <hr>
+                                        <p class="text-muted mb-1"><%= user.job %></p>
+                                        <p class="text-muted mb-4"><%= user.address %></p>
 <!--                                        <div class="d-flex justify-content-center mb-2">-->
 <!--                                          <button type="button" class="btn btn-primary">Follow</button>-->
 <!--                                          <button type="button" class="btn btn-outline-primary ms-1">Message</button>-->
@@ -43,9 +44,10 @@
                                         <div class="row">
                                         <div class="col-sm">
                                         </div>
-                                        <div class="col-sm">
-                                            <a href="/edit_profile"><button type="button" class="btn btn-primary" title="" data-toggle="tooltip"><i class="fa-solid fa-file-pen"></i>Edit Profile</button></a>
-                                        </div>
+                                        <form class="col-sm" action="/profile" method="POST">
+                                            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                            <button type="submit" class="btn btn-primary" title="" data-toggle="tooltip"><i class="fa-solid fa-file-pen"></i>Edit Profile</button>
+                                        </form>
                                         <div class="col-sm">
                                         </div>
                                         </div>
@@ -59,25 +61,7 @@
                                             <p class="mb-0">Username</p>
                                           </div>
                                           <div class="col-sm-9">
-                                            <p class="text-muted mb-0">minhtran</p>
-                                          </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                          <div class="col-sm-3">
-                                            <p class="mb-0">Last Name</p>
-                                          </div>
-                                          <div class="col-sm-9">
-                                            <p class="text-muted mb-0">Tran</p>
-                                          </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                          <div class="col-sm-3">
-                                            <p class="mb-0">Middle Name</p>
-                                          </div>
-                                          <div class="col-sm-9">
-                                            <p class="text-muted mb-0">Cong</p>
+                                            <p class="text-muted mb-0"><%= user.username %></p>
                                           </div>
                                         </div>
                                         <hr>
@@ -86,7 +70,34 @@
                                             <p class="mb-0">First Name</p>
                                           </div>
                                           <div class="col-sm-9">
-                                            <p class="text-muted mb-0">Minh</p>
+                                            <p class="text-muted mb-0"><%= user.firstName %></p>
+                                          </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                          <div class="col-sm-3">
+                                            <p class="mb-0">Last Name</p>
+                                          </div>
+                                          <div class="col-sm-9">
+                                            <p class="text-muted mb-0"><%= user.lastName %></p>
+                                          </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                          <div class="col-sm-3">
+                                            <p class="mb-0">Gender</p>
+                                          </div>
+                                          <div class="col-sm-9">
+                                            <p class="text-muted mb-0"><%if(user.gender === 1){ %>Male<% } else { %>Female<% } %> </p>
+                                          </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                          <div class="col-sm-3">
+                                            <p class="mb-0">Date of Birth</p>
+                                          </div>
+                                          <div class="col-sm-9">
+                                            <p class="text-muted mb-0"><%= user.dob %></p>
                                           </div>
                                         </div>
                                         <hr>
@@ -95,7 +106,7 @@
                                             <p class="mb-0">Email</p>
                                           </div>
                                           <div class="col-sm-9">
-                                            <p class="text-muted mb-0">example@example.com</p>
+                                            <p class="text-muted mb-0"><%= user.email %></p>
                                           </div>
                                         </div>
                                         <hr>
@@ -104,7 +115,7 @@
                                             <p class="mb-0">Phone</p>
                                           </div>
                                           <div class="col-sm-9">
-                                            <p class="text-muted mb-0">(097) 234-5678</p>
+                                            <p class="text-muted mb-0"><%= user.phone %></p>
                                           </div>
                                         </div>
                                         <hr>
@@ -113,7 +124,7 @@
                                             <p class="mb-0">Job</p>
                                           </div>
                                           <div class="col-sm-9">
-                                            <p class="text-muted mb-0">Fullstack Dev</p>
+                                            <p class="text-muted mb-0"><%= user.job %></p>
                                           </div>
                                         </div>
                                         <hr>
@@ -123,7 +134,7 @@
                                             <p class="mb-0">Address</p>
                                           </div>
                                           <div class="col-sm-9">
-                                            <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                                            <p class="text-muted mb-0"><%= user.address %></p>
                                           </div>
                                         </div>
                                           <hr>
@@ -132,16 +143,7 @@
                                             <p class="mb-0">Facebook</p>
                                           </div>
                                           <div class="col-sm-9">
-                                            <p class="text-muted mb-0">Fullstack Dev</p>
-                                          </div>
-                                        </div>
-                                          <hr>
-                                          <div class="row">
-                                          <div class="col-sm-3">
-                                            <p class="mb-0">Github</p>
-                                          </div>
-                                          <div class="col-sm-9">
-                                            <p class="text-muted mb-0">...</p>
+                                            <p class="text-muted mb-0"><%= user.facebook %></p>
                                           </div>
                                         </div>
                                           <hr>
@@ -150,7 +152,7 @@
                                             <p class="mb-0">Linkedin</p>
                                           </div>
                                           <div class="col-sm-9">
-                                            <p class="text-muted mb-0">...</p>
+                                            <p class="text-muted mb-0"><%= user.linkedin %></p>
                                           </div>
                                         </div>
 

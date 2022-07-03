@@ -1,6 +1,6 @@
 exports.getIncome = (req,res,next) => {
     res.render('income',{
-        username: req.user.username,
+        user: req.user,
         pageTitle: 'Income',
         path: '/income'
     });
@@ -10,7 +10,7 @@ exports.postIncome = (req,res,next) => {}
 
 exports.getExpense = (req,res,next) => {
     res.render('expense',{
-        username: req.user.username,
+        user: req.user,
         pageTitle: 'Expense',
         path: '/expense'
     });

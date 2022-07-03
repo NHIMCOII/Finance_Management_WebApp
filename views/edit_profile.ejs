@@ -17,8 +17,8 @@
                                         <h5 class="m-b-10">Profile</h5>
                                     </div>
                                     <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                                        <li class="breadcrumb-item"><a href="javascript:">Profile</a></li>
+                                        <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="/profile">Profile</a></li>
                                         <li class="breadcrumb-item"><a href="javascript:">Edit Profile</a></li>
                                     </ul>
                                 </div>
@@ -30,61 +30,71 @@
                                         <div class="card-header">
                                             <h5>EDIT PROFILE</h5>
                                         </div>
-                                        <div class="card-body">
+                                        <form class="card-body" action="/editProfile" method="POST">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <form>
+                                                    <div>
                                                         <div class="form-group">
-                                                            <label for="exampleInputEmail1">Email address</label>
-                                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                                            <label for="exampleInputEmail1">Username</label>
+                                                            <input value="<%= user.username%>" name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
 <!--                                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="exampleInputPassword1">Password</label>
-                                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                                        </div>
+                                                            <label for="exampleInputEmail1">Email address</label>
+                                                            <input value="<%= user.email%>" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+<!--                                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                                                        </div>                                 
                                                         <div class="form-group">
                                                             <label for="InputFirstName">First name</label>
-                                                            <input type="text" class="form-control" id="InputFirstName" placeholder="First Name">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="InputMiddleName">Middle name</label>
-                                                            <input type="text" class="form-control" id="InputMiddleName" placeholder="Middle Name">
+                                                            <input value="<%= user.firstName%>" name="firstName" type="text" class="form-control" id="InputFirstName" placeholder="First Name">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputLastName">Lastname</label>
-                                                            <input type="text" class="form-control" id="InputLastName" placeholder="Last Name">
+                                                            <input value="<%= user.lastName%>" name="lastName" type="text" class="form-control" id="InputLastName" placeholder="Last Name">
                                                         </div>
-                                                        <a href="/profile"><button type="submit" class="btn btn-primary">Submit</button></a>
-                                                    </form>
+                                                        <div>
+                                                            <label>Gender</label>
+                                                            <select class="mb-3 form-control" value="<%= user.gender%>" name="gender">                                                                
+                                                                <option value="1">Male</option>
+                                                                <option value="0">Female</option>
+                                                                
+                                                            </select>
+                                                        </div>  
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Date of Birth</label>
+                                                            <input value="<%= user.dob%>" name="dob" type="date" class="form-control" id="exampleInputPassword1" placeholder="dob">
+                                                        </div>                          
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <form>
+                                                    <div>
                                                         <div class="form-group">
                                                             <label for="InputJob">Job</label>
-                                                            <input type="text" class="form-control" id="InputJob"  placeholder="Project Management">
+                                                            <input value="<%= user.job%>" name="job" type="text" class="form-control" id="InputJob"  placeholder="Project Manager">
 <!--                                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputPhone">Phone</label>
-                                                            <input type="number" class="form-control" id="InputPhone" placeholder="0904928310">
+                                                            <input value="<%= user.phone%>" name="phone" type="text" class="form-control" id="InputPhone" placeholder="09012345678">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputAddress">Address</label>
-                                                            <input type="text" class="form-control" id="InputAddress" placeholder="98 Post St, San Francisco, CA">
+                                                            <input value="<%= user.address%>" name="address" type="text" class="form-control" id="InputAddress" placeholder="98 Post St, San Francisco, CA">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputFacebook">Facebook</label>
-                                                            <input type="url" class="form-control" id="InputFacebook" placeholder="https://www.facebook.com/...">
+                                                            <input value="<%= user.facebook%>" name="facebook" type="url" class="form-control" id="InputFacebook" placeholder="https://www.facebook.com/...">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputLinkedin">Linkedin</label>
-                                                            <input type="url" class="form-control" id="InputLinkedin" placeholder="https://www.linkedin.com/...">
+                                                            <input value="<%= user.linkedin%>" name="linkedin" type="url" class="form-control" id="InputLinkedin" placeholder="https://www.linkedin.com/...">
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                            <button type="submit" class="btn btn-primary">Save</button>                                          
+                                        </form>
                                         </div>
                                     </div>
                                     <!-- Input group -->

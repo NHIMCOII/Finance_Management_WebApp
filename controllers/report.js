@@ -1,6 +1,6 @@
 exports.getMonthlyBalance = (req,res,next) => {
     res.render('monthlyBalance',{
-        username: req.user.username,
+        user: req.user,
         pageTitle: 'Monthly Balance',
         path: '/monthlyBalance'
     });
