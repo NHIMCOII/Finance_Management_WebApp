@@ -1,0 +1,105 @@
+<%- include('./includes/head.ejs') %>
+
+<body>
+
+    <%- include('./includes/navigation.ejs') %>
+<!-- main content -->
+ <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Expense Details</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="javascript:">Expense</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript:">{id}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <!-- [ Breadcrumbs & Pagination ] start -->
+                                <div class = "col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5><i class="fa-solid fa-cart-shopping"></i> Expense </h5>
+                                            Salary
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5><i class="fa-solid fa-dollar-sign"></i> Amount </h5>
+                                            10,000,000
+                                            VND
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5><i class="fa-solid fa-calendar-days"></i> Date </h5>
+                                            22/05/2016
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5><i class="fa-solid fa-wallet"></i> Wallet </h5>
+                                            Cash - {2,000,000} VND left
+                                        </div>
+                                    </div>
+                                </div>
+                               <div class = "col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5><i class="fa-solid fa-pen-to-square"></i> Note </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            {Example note | None}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                        </div>
+                                        <div class="col-sm">
+                                            <button type="button" class="btn btn-primary" title="Previous invoice" data-toggle="tooltip"><i class="fa-solid fa-backward"></i>Previous</button>
+                                            <button type="button" class="btn btn-danger" title="Permanently delete the invoice" data-toggle="tooltip"><i class="fa-solid fa-eraser"></i>Remove</button>
+                                            <a href="/expense"><button type="button" class="btn btn-warning" title="Remove and add new invoice" data-toggle="tooltip"><i class="fa-solid fa-file-pen"></i>Edit</button></a>
+                                            <button type="button" class="btn btn-primary" title="Next invoice" data-toggle="tooltip"><span style="padding-right: 5px">Next</span>  <span> <i class="fa-solid fa-forward"></i></span> </button>
+
+                                        </div>
+                                        <div class="col-sm-2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- [ Breadcrumbs & Pagination ] end -->
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- end of main -->
+    <%- include('./includes/script.ejs') %>
+</body>
+</html>
