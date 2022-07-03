@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8322fe5-eecb-4af6-afe1-6f170ec8a36f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/views/expense.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/expense.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/expense_id_template.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/expense_id_template.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +52,7 @@
       <workItem from="1656293027991" duration="260000" />
       <workItem from="1656293303002" duration="5870000" />
       <workItem from="1656310488682" duration="1157000" />
-      <workItem from="1656778503657" duration="14875000" />
+      <workItem from="1656778503657" duration="15148000" />
     </task>
     <servers />
   </component>
