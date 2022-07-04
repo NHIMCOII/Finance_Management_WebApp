@@ -40,7 +40,6 @@ exports.postLogin = (req, res, next) => {
   }
   User.findByEmail(email)
     .then((user) => {
-      console.log(user);
       if (user[0].length === 0) {
         req.flash("error", "Invalid email or password");
         return res.redirect("/login");
