@@ -35,6 +35,19 @@ npm install --save connect-flash
 npm install --save express-validator
 ```
 
+ - Set up sessions-database
+     In SQL Server Management Studio, run the following query
+     ```
+      CREATE TABLE [dbo].[sessions](
+           [sid] [nvarchar](255) NOT NULL PRIMARY KEY,
+           [session] [nvarchar](max) NOT NULL,
+           [expires] [datetime] NOT NULL
+      )
+     ```
+ - Set up database configuarion
+   In ./utils/dbconfig.js, indentify your port that the sql server is listening on. (learn more: https://www.mssqltips.com/sqlservertip/2495/identify-sql-server-tcp-ip-port-being-used/)
+   Change the attribute "port" to the port you have identified.
+
 ## Step 2: Workflow
  ### GIT
 ```
