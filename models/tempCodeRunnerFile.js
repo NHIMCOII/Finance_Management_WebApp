@@ -1,0 +1,2 @@
+return  db.execute('UPDATE users SET username = ?, email = ?,firstName = ?,lastName = ?,job = ?,address = ?,phone = ?,facebook = ?,linkedin = ?,gender = ?,dob = ? WHERE id = ?;',
+        [this.username,this.email,this.firstName,this.lastName,this.job,this.address,this.phone,this.facebook,this.linkedin,this.gender,this.dob,this.id]);

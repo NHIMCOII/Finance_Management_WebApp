@@ -1,4 +1,5 @@
-const db = require('../util/database');
+const sql = require('mssql');
+const config = require('../utils/dbconfig');
 
 module.exports = class User {
     constructor(id,username,email,password,firstName,lastName,gender,dob,phone,job,facebook,linkedin,address) {
@@ -17,26 +18,67 @@ module.exports = class User {
         this.address = address;
     }
 
-    save() {
-        return db.execute('INSERT INTO users (username,email,password,firstName,lastName,gender,dob,phone,job,facebook,linkedin,address) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
-            [this.username,this.email,this.password,this.firstName,this.lastName,this.gender,this.dob,this.phone,this.job,this.facebook,this.linkedin,this.address]
-        );
+    async save() {
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "INSERT INTO users (username,email,password) VALUES (@username,@email,@password)"
+            let res = await pool.request()
+            .input('username', sql.VarChar, this.username)
+            .input('email', sql.VarChar, this.email)
+            .input('password', sql.VarChar, this.password)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
     }
 
-    update() {
-        return  db.execute('UPDATE users SET username = ?, email = ?,firstName = ?,lastName = ?,job = ?,address = ?,phone = ?,facebook = ?,linkedin = ?,gender = ?,dob = ? WHERE id = ?;',
-        [this.username,this.email,this.firstName,this.lastName,this.job,this.address,this.phone,this.facebook,this.linkedin,this.gender,this.dob,this.id]);
-    }
-    
-    static fetchAll() {
-        db.execute('SELECT * from users');
+    async update() {
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "UPDATE users SET username = @username, email = @email,firstName = @firstName,lastName = @lastName,job = @job,address = @address,phone = @phone,facebook = @facebook,linkedin = @linkedin,gender = @gender,dob = @dob WHERE id = @id"
+            let res = await pool.request()
+            .input('username', sql.VarChar, this.username)
+            .input('email', sql.VarChar, this.email)
+            .input('firstName', sql.NVarChar, this.firstName)
+            .input('lastName', sql.NVarChar, this.lastName)
+            .input('job', sql.NVarChar, this.job)
+            .input('address', sql.VarChar, this.address)
+            .input('phone', sql.VarChar, this.phone)
+            .input('facebook', sql.VarChar, this.facebook)
+            .input('linkedin', sql.VarChar, this.linkedin)
+            .input('gender', sql.VarChar, this.gender)
+            .input('id', sql.VarChar, this.id)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
     }
 
-    static findByPk(id) {
-        return db.execute('SELECT * FROM users WHERE users.id = ?', [id]);
+    static async findByPk(id) {
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "SELECT * FROM users WHERE users.id = @id"
+            let res = await pool.request()
+            .input('id', sql.Int, id)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
     }
 
-    static findByEmail(email) {
-        return db.execute('SELECT * FROM users WHERE users.email = ?', [email]);
+    static async findByEmail(email) {
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "SELECT * FROM users WHERE users.email = @email"
+            let res = await pool.request()
+            .input('email', sql.VarChar, email)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
     }
 };
