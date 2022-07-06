@@ -27,23 +27,18 @@ npm install --save express
 npm install --save body-parser
 npm install --save ejs
 npm install --save express-session
-npm install --save mysql2
-npm install express-mysql-session --save
+npm install --save mssql
+npm install --save msnodesqlv8
+npm install --save connect-mssql-v2
 npm install --save bcryptjs
 npm install --save csurf
 npm install --save connect-flash
 npm install --save express-validator
 ```
 
- - Set up sessions-database
-     In SQL Server Management Studio, run the following query
-```
-CREATE TABLE [dbo].[sessions](
-   [sid] [nvarchar](255) NOT NULL PRIMARY KEY,
-   [session] [nvarchar](max) NOT NULL,
-   [expires] [datetime] NOT NULL
-)
-```
+ - Set up sessions-database: 
+     In SQL Server Management Studio, run the query in ./utils/database.sql
+     
  - Set up database configuarion: 
    In ./utils/dbconfig.js, indentify your port that the sql server is listening on. Learn more: https://www.mssqltips.com/sqlservertip/2495/identify-sql-server-tcp-ip-port-being-used/.
    Change the attribute "port" to the port you have identified.
