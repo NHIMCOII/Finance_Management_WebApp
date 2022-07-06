@@ -5,3 +5,4 @@
 Icon?
 .idea
 .DS_Store
+/utils/dbconfig.js
