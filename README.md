@@ -39,6 +39,13 @@ npm install --save express-validator
     Determine the dynamic port in your PC
     Change the attribute "port" in db.config.js to the port that your server is listening on
 
+ - Set up sessions-database: 
+     In SQL Server Management Studio, run the query in ./utils/database.sql
+     
+ - Set up database configuarion: 
+   In ./utils/dbconfig.js, indentify your port that the sql server is listening on. Learn more: https://www.mssqltips.com/sqlservertip/2495/identify-sql-server-tcp-ip-port-being-used/.
+   Change the attribute "port" to the port you have identified.
+
 ## Step 2: Workflow
  ### GIT
 ```
