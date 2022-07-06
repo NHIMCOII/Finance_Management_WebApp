@@ -47,8 +47,8 @@ module.exports = class User {
             .input('phone', sql.VarChar, this.phone)
             .input('facebook', sql.VarChar, this.facebook)
             .input('linkedin', sql.VarChar, this.linkedin)
-            .input('gender', sql.VarChar, this.gender)
-            .input('dob', sql.Date, this.gender)
+            .input('gender', sql.Bit, this.gender)
+            .input('dob', sql.Date, this.dob)
             .input('id', sql.Int, this.id)
             .query(sqlString);
             return res.recordsets;

@@ -28,8 +28,17 @@
                                   <div class="col-lg-4">
                                     <div class="card mb-4">
                                       <div class="card-body text-center">
-                                        <img <% if(user.gender === 1){ %> src="/images/user/avatar-2.jpg"<% }else{ %>src="/images/user/avatar-1.jpg"<% } %>   alt="avatar"
-                                          class="rounded-circle img-fluid" style="width: 150px;">
+                                        <img 
+                                          <% if(user.gender == 1){ %> 
+                                            src="/images/user/avatar-2.jpg"
+                                          <% }else{ %>
+                                            src="/images/user/avatar-1.jpg"
+                                          <% } %> 
+                                            alt="avatar" 
+                                            class="rounded-circle img-fluid" 
+                                            style="width: 150px;"
+                                        >
+
                                         <h5 class="my-3"><%= user.username %></h5>
                                         <hr>
                                         <p class="text-muted mb-1"><%= user.job %></p>
@@ -88,7 +97,7 @@
                                             <p class="mb-0">Gender</p>
                                           </div>
                                           <div class="col-sm-9">
-                                            <p class="text-muted mb-0"><%if(user.gender === 1){ %>Male<% } else { %>Female<% } %> </p>
+                                            <p class="text-muted mb-0"><%if(user.gender == 1){ %>Male<% } else { %>Female<% } %> </p>
                                           </div>
                                         </div>
                                         <hr>
