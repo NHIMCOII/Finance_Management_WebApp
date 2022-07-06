@@ -36,7 +36,7 @@ module.exports = class User {
     async update() {
         try{
             let pool = await sql.connect(config);
-            const sqlString = "UPDATE users SET username = @username, email = @email,firstName = @firstName,lastName = @lastName,job = @job,address = @address,phone = @phone,facebook = @facebook,linkedin = @linkedin,gender = @gender,dob = @dob WHERE id = @id"
+            const sqlString = "UPDATE users SET username = @username, email = @email, firstName = @firstName, lastName = @lastName, job = @job, address = @address, phone = @phone, facebook = @facebook, linkedin = @linkedin, gender = @gender, dob = @dob WHERE id = @id"
             let res = await pool.request()
             .input('username', sql.VarChar, this.username)
             .input('email', sql.VarChar, this.email)
@@ -48,7 +48,8 @@ module.exports = class User {
             .input('facebook', sql.VarChar, this.facebook)
             .input('linkedin', sql.VarChar, this.linkedin)
             .input('gender', sql.VarChar, this.gender)
-            .input('id', sql.VarChar, this.id)
+            .input('dob', sql.Date, this.gender)
+            .input('id', sql.Int, this.id)
             .query(sqlString);
             return res.recordsets;
         } catch (error){
