@@ -2,26 +2,18 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-//const MySQLStore = require('express-mysql-session')(session);
+
 //! session
 const MSSQLStore = require('connect-mssql-v2');
 const config = require('./utils/dbconfig');
 //!
+
 const csrf = require('csurf');
 const flash = require('connect-flash');
 
 const errorController = require('./controllers/error');
 
-// const options = {
-// 	host: 'localhost',
-// 	port: 3306,
-// 	user: 'root',
-// 	password: '123456',
-// 	database: 'db-project'
-// };
-
 const app = express();
-//const sessionStore = new MySQLStore(options);
 const csrfProtection = csrf();
 
 app.set('view engine', 'ejs');
@@ -38,14 +30,6 @@ const User = require('./models/user');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(session({
-// 	key: 'session_cookie_name',
-// 	secret: 'session_cookie_secret',
-// 	store: sessionStore,
-// 	resave: false,
-// 	saveUninitialized: false
-// }));
-
 const options = {
     table: 'sessions',
     autoRemove: true,
@@ -60,10 +44,6 @@ app.use(
 		secret: 'supersecret',
 		resave: false,
 		saveUninitialized: false,
-		// cookie: {
-		// 	maxAge: 1000 * 60 * 60 * 2,
-		// 	path: '/',
-		// }
 	})
 );
 

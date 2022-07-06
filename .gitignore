@@ -4,3 +4,4 @@
 *.json
 Icon?
 .idea
+.DS_Store
