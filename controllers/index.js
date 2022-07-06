@@ -26,9 +26,11 @@ exports.postProfile = (req,res,next) => {
 }
 
 exports.getEditProfile = (req,res,next) => {
+    // console.log(req.user.dob.toLocaleDateString().toString().split("/").map(Number)[1]);
     res.render('edit_profile',{
         pageTitle: 'Edit Profile',
         user: req.user,
+        dob: req.user.dob.toLocaleDateString().toString().split("/").map(Number),
         path: '/editProfile'
     });
 }
