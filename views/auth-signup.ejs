@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Sign up</title>
+    <title><%= pageTitle%></title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -29,6 +29,9 @@
 </head>
 
 <body>
+    <% if(errorMessage) { %> 
+        <div><%= errorMessage %> </div>
+    <% } %>
     <div class="auth-wrapper">
         <div class="auth-content">
             <div class="auth-bg">
@@ -38,22 +41,22 @@
                 <span class="r"></span>
             </div>
             <div class="card">
-                <form class="card-body text-center" action="/signup" method="POST">
+                <form class="card-body text-center" action="/signup" method="POST" novalidate>
                     <div class="mb-4">
                         <i class="feather icon-user-plus auth-icon"></i>
                     </div>
                     <h3 class="mb-4">Sign up</h3>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Username" name="username">
+                        <input type="text" class="form-control" placeholder="Username" name="username" value="<%=oldInput.username%>">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email" name="email">
+                        <input type="email" class="form-control" placeholder="Email" name="email" value="<%=oldInput.email%>">
                     </div>
                     <div class="input-group mb-4">
-                        <input type="password" class="form-control" placeholder="password" name="password">
+                        <input type="password" class="form-control" placeholder="password" name="password" value="<%= oldInput.password %>">
                     </div>
                     <div class="input-group mb-4">
-                        <input type="confirmPassword" class="form-control" placeholder="confirm password" name="confirmPassword">
+                        <input type="password" class="form-control" placeholder="confirm password" name="confirmPassword" value="<%= oldInput.confirmPassword %>">
                     </div>
                     <div class="form-group text-left">
                         <div class="checkbox checkbox-fill d-inline">
@@ -67,8 +70,9 @@
                             <label for="checkbox-fill-2" class="cr">Send me the <a href="#!"> Newsletter</a> weekly.</label>
                         </div>
                     </div>
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                     <button class="btn btn-primary shadow-2 mb-4">Sign up</button>
-                    <p class="mb-0 text-muted">Allready have an account? <a href="/login"> Login</a></p>
+                    <p class="mb-0 text-muted">Already have an account? <a href="/login"> Login</a></p>
                 </form>
             </div>
         </div>

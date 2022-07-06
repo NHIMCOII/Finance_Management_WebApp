@@ -1,5 +1,5 @@
 # Co-Working Procedure
-## Step 1: Set-up enviroment
+## Step 1: Set-up environment
  - [Download and Install NodeJs](https://nodejs.org/en/) Current
  - Clone from Github 
 ```
@@ -13,7 +13,7 @@ npm install
 ```
  npm init
 ```
- - Go into package.json -> scroll down to "scripts" -> add "start": "nodemon app.js" (remmeber to add ',')
+ - Go into package.json -> scroll down to "scripts" -> add "start": "nodemon app.js" (remember to add ',')
  - Installing Nodemon
 ```
 npm install nodemon --save-dev
@@ -27,7 +27,24 @@ npm install --save express
 npm install --save body-parser
 npm install --save ejs
 npm install --save express-session
+npm install --save mssql
+npm install --save msnodesqlv8
+npm install --save connect-mssql-v2
+npm install --save bcryptjs
+npm install --save csurf
+npm install --save connect-flash
+npm install --save express-validator
 ```
+ - Configuration Database (in ./utils/dbconfig.js)
+    Determine the dynamic port in your PC
+    Change the attribute "port" in db.config.js to the port that your server is listening on
+
+ - Set up sessions-database: 
+     In SQL Server Management Studio, run the query in ./utils/database.sql
+     
+ - Set up database configuarion: 
+   In ./utils/dbconfig.js, indentify your port that the sql server is listening on. Learn more: https://www.mssqltips.com/sqlservertip/2495/identify-sql-server-tcp-ip-port-being-used/.
+   Change the attribute "port" to the port you have identified.
 
 ## Step 2: Workflow
  ### GIT

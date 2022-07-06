@@ -3,3 +3,6 @@
 /node_modules
 *.json
 Icon?
+.idea
+.DS_Store
+/utils/dbconfig.js
