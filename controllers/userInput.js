@@ -22,7 +22,7 @@ exports.getDetailsIncome = (req,res,next) => {
     res.render('income_details', {
         pageTitle: 'Income Details',
         user: req.user,
-        path: '/income/details'
+        path: '/incomeDetails'
     })
 }
 
@@ -32,7 +32,7 @@ exports.getDetailsExpense = (req,res,next) => {
     res.render('expense_details', {
         pageTitle: 'Expense Details',
         user: req.user,
-        path: '/expense/details'
+        path: '/expenseDetails'
     })
 }
 

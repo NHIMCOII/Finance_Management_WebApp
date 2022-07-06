@@ -1,10 +1,10 @@
 const config = {
-    server: "ANDIEZS-LAP",
+    server: "DESKTOP-0C831A9",
     user: "sa",
     password: "123456",
     database: "db-project",
     driver: "msnodesqlv8",
-    port: 62617, // make sure to change port
+    port: 56542, // make sure to change port
     dialect: "mssql",
     options: {
         trustedconnection: true,
