@@ -14,6 +14,9 @@ exports.getDashboard = (req,res,next) => {
 }
 
 exports.getProfile = (req,res,next) => {
+    if(req.user.dob!=null){
+        req.user.dob = req.user.dob.toLocaleDateString();
+    }
     res.render('profile',{
         pageTitle: 'Profile',
         user: req.user,
@@ -26,11 +29,12 @@ exports.postProfile = (req,res,next) => {
 }
 
 exports.getEditProfile = (req,res,next) => {
-    // console.log(req.user.dob.toLocaleDateString().toString().split("/").map(Number)[1]);
+    if(req.user.dob!=null){
+        req.user.dob = req.user.dob.toLocaleDateString();
+    }
     res.render('edit_profile',{
         pageTitle: 'Edit Profile',
         user: req.user,
-        dob: req.user.dob.toLocaleDateString().toString().split("/").map(Number),
         path: '/editProfile'
     });
 }
