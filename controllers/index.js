@@ -14,6 +14,9 @@ exports.getDashboard = (req,res,next) => {
 }
 
 exports.getProfile = (req,res,next) => {
+    if(req.user.dob!=null){
+        req.user.dob = req.user.dob.toLocaleDateString();
+    }
     res.render('profile',{
         pageTitle: 'Profile',
         user: req.user,
@@ -26,6 +29,9 @@ exports.postProfile = (req,res,next) => {
 }
 
 exports.getEditProfile = (req,res,next) => {
+    if(req.user.dob!=null){
+        req.user.dob = req.user.dob.toLocaleDateString();
+    }
     res.render('edit_profile',{
         pageTitle: 'Edit Profile',
         user: req.user,
