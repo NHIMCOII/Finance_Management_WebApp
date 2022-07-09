@@ -4,7 +4,98 @@
 
     <%- include('./includes/navigation.ejs') %> 
 <!-- main content -->
-    
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Sample Page</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="javascript:">Sample Page</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <div class="col-md-6 grid-margin stretch-card">
+                                    <div class="mt-card">
+                                      <div class="mt-card-body">
+                                        <h4 class="card-title mt-title">Money Transfer</h4>
+                                        <p class="card-description">
+                                          Choose wallet and amount of money to transfer
+                                        </p>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                              <div class="input-group-prepend">
+                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wallet</button>
+                                                <div class="dropdown-menu">
+                                                  <a class="dropdown-item" href="#">Techcombank</a>
+                                                  <a class="dropdown-item" href="#">Cash on hand</a>
+                                                  <a class="dropdown-item" href="#">Saving</a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="transfer-icon">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                              <div class="input-group-prepend">
+                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wallet</button>
+                                                <div class="dropdown-menu">
+                                                  <a class="dropdown-item" href="#">Techcombank</a>
+                                                  <a class="dropdown-item" href="#">Cash on hand</a>
+                                                  <a class="dropdown-item" href="#">Saving</a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text bg-primary text-white">$</span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Money" aria-label="Amount (to the nearest dollar)">
+                                          </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-primary text-white"><i class="fas fa-poll-h"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Note" aria-label="Recipient's username">
+                                            </div>
+                                          </div>
+                                          <div class="mt-submit">
+                                            <button class="mt-btn">Submit</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
 <!-- end of main -->
     <%- include('./includes/script.ejs') %> 
 </body>
