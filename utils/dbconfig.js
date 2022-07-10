@@ -1,5 +1,5 @@
 const config = {
-    server: "DESKTOP-0C831A9",
+    server: "LAPTOP-MGBH5QFP\SQLEXPRESS",
     user: "sa",
     password: "123456",
     database: "db-project",
