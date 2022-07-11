@@ -197,6 +197,14 @@ p.text-muted {
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
+
+.col-xl-12{
+  padding: 0;
+}
+
+.page-item{
+  color: #04a9f5 !important;
+}
 .card .card-header {
   background-color: transparent;
   border-bottom: 1px solid #f1f1f1;

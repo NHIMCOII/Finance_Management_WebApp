@@ -32,6 +32,9 @@
     color: #aeaeae;
 }
 
+.mt-form-group{
+    width: 400px;
+}
 .transfer-icon{
     margin-left: 50%;
     margin-bottom: 10px;
@@ -63,4 +66,8 @@
 
 .mt-btn:hover{
     background-color: rgb(194, 64, 64);
+}
+
+input-group-text{
+    background-color: #04a9f5;
 }

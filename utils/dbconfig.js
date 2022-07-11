@@ -1,10 +1,10 @@
 const config = {
-    server: "LAPTOP-MGBH5QFP\SQLEXPRESS",
+    server: "LAPTOP-MGBH5QFP",
     user: "sa",
     password: "123456",
     database: "db-project",
     driver: "msnodesqlv8",
-    port: 56542, // make sure to change port
+    port: 49713, // make sure to change port
     dialect: "mssql",
     options: {
         trustedconnection: true,

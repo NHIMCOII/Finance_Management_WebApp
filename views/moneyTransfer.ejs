@@ -30,63 +30,70 @@
                         <div class="page-wrapper">
                             <!-- [ Main Content ] start -->
                             <div class="row">
-                                <div class="col-md-6 grid-margin stretch-card">
-                                    <div class="mt-card">
-                                      <div class="mt-card-body">
-                                        <h4 class="card-title mt-title">Money Transfer</h4>
-                                        <p class="card-description">
-                                          Choose wallet and amount of money to transfer
-                                        </p>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                              <div class="input-group-prepend">
-                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wallet</button>
-                                                <div class="dropdown-menu">
-                                                  <a class="dropdown-item" href="#">Techcombank</a>
-                                                  <a class="dropdown-item" href="#">Cash on hand</a>
-                                                  <a class="dropdown-item" href="#">Saving</a>
-                                                </div>
-                                              </div>
-                                            </div>
-                                        </div>
-                                        <div class="transfer-icon">
-                                            <i class="fas fa-exchange-alt"></i>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                              <div class="input-group-prepend">
-                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wallet</button>
-                                                <div class="dropdown-menu">
-                                                  <a class="dropdown-item" href="#">Techcombank</a>
-                                                  <a class="dropdown-item" href="#">Cash on hand</a>
-                                                  <a class="dropdown-item" href="#">Saving</a>
-                                                </div>
-                                              </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                          <div class="input-group">
-                                            <div class="input-group-prepend">
-                                              <span class="input-group-text bg-primary text-white">$</span>
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="Money" aria-label="Amount (to the nearest dollar)">
-                                          </div>
-                                        </div>
-                                        <div class="form-group">
-                                          <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-primary text-white"><i class="fas fa-poll-h"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="Note" aria-label="Recipient's username">
-                                            </div>
-                                          </div>
-                                          <div class="mt-submit">
-                                            <button class="mt-btn">Submit</button>
-                                          </div>
-                                        </div>
-                                      </div>
+                              <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Money Transfer</h5>
                                     </div>
-                                  </div>
+                                    <div class="card-body">
+<!--                                            <h5>Enter your new earning</h5>-->
+<!--                                            <hr>-->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <form>
+                                                    <label>Choose Wallet 1</label>
+                                                    <select class="mb-3 form-control">
+                                                        <option>Select Wallet</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                    <label>Choose Wallet 2</label>
+                                                    <select class="mb-3 form-control">
+                                                        <option>Select Wallet</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                    
+                                                </form>
+                                            </div>
+                                            <div class="col-md-6">
+                                                
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label>Date</label>
+                                                        <input type="date" class="form-control" placeholder="Text">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Amount</label>
+                                                        <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                                        <div class="input-group-prepend">
+                                                          <span class="input-group-text" id="inputGroup-sizing-default">VND</span>
+                                                      </div>
+                                                  </div>
+                                                  </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Note</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                         <div class="col-md-5">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Input group -->
+                            </div>
                             </div>
                             <!-- [ Main Content ] end -->
                         </div>

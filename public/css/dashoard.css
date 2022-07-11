@@ -43,7 +43,7 @@
 }
 
 .budget{
-    color: rgb(93, 145, 248);
+    color: #04a9f5;
     margin: 5px;
     margin-top: 2px;
     font-size: 70px;
@@ -52,12 +52,12 @@
 .wallet{
     margin: 3px;
     font-size: 15px;
-    color: rgb(93, 145, 248);
+    color: #04a9f5;
 }
 
 .db-btn{
     border-radius: 15px;
-    background-color: rgb(172, 237, 255);
+    background-color: #04a9f5;
     /* opacity: 90%; */
     border: #fff;
     color: #fff;
@@ -67,12 +67,12 @@
 }
 
 .db-btn:hover{
-    background-color: rgb(96, 193, 235);
+    background-color: #0082be;
     border: #fff;
 }
 
 .db-btn:active{
-    background-color: rgb(172, 237, 255);
+    background-color: #04a9f5;
     border: #fff;
 }
 
@@ -176,9 +176,6 @@
 }
 
 .detail-content:hover{
-    color: rgb(81, 201, 238);
+    color: #04a9f5;
 }
 
-.detail-content:active{
-    color: rgb(28, 164, 202);
-}
