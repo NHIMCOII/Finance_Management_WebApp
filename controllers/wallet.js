@@ -1,12 +1,23 @@
-exports.getEditWallet = (req,res,next) => {
-    res.render('editWallet',{
+exports.getMyWallet = (req,res,next) => {
+    res.render('myWallet',{
         user: req.user,
-        pageTitle: 'Edit Wallet',
-        path: '/editWallet'
+        pageTitle: 'My Wallet',
+        path: '/myWallet'
     });
 }
 
-exports.postEditWallet = (req,res,next) => {}
+exports.getAddWallet = (req,res,next) => {
+    res.render('addWallet',{
+        user: req.user,
+        pageTitle: 'Add Wallet',
+        path: '/addWallet'
+    });
+}
+
+exports.postAddWallet = (req,res,next) => {
+    res.redirect('/myWallet');
+}
+
 
 exports.getMoneyTransfer = (req,res,next) => {
     res.render('moneyTransfer',{
@@ -16,4 +27,6 @@ exports.getMoneyTransfer = (req,res,next) => {
     });
 }
 
-exports.postMoneyTransfer = (req,res,next) => {}
+exports.postMoneyTransfer = (req,res,next) => {
+    res.redirect('/myWallet');
+}

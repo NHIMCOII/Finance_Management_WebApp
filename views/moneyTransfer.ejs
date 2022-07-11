@@ -15,11 +15,11 @@
                             <div class="row align-items-center">
                                 <div class="col-md-12">
                                     <div class="page-header-title">
-                                        <h5 class="m-b-10">Sample Page</h5>
+                                        <h5 class="m-b-10">Money Transfer</h5>
                                     </div>
                                     <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                                        <li class="breadcrumb-item"><a href="javascript:">Sample Page</a></li>
+                                        <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="#">Money Transfer</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                                     <div class="card-header">
                                         <h5>Money Transfer</h5>
                                     </div>
-                                    <div class="card-body">
+                                    <form class="card-body" action="/moneyTransfer" method="POST">
 <!--                                            <h5>Enter your new earning</h5>-->
 <!--                                            <hr>-->
                                         <div class="row">
@@ -84,16 +84,17 @@
                                                   </div>
                                                 </form>
                                             </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="exampleFormControlTextarea1">Note</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            </div>
 
+                                            <div class="col-md-5">
+                                               <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                               <button type="submit" class="btn btn-primary">Submit</button>
+                                           </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Note</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                        </div>
-                                         <div class="col-md-5">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                                 <!-- Input group -->
