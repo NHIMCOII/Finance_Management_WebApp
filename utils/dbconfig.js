@@ -4,7 +4,7 @@ const config = {
     password: "123456",
     database: "db-project",
     driver: "msnodesqlv8",
-    port: 49713, // make sure to change port
+    port: 49720, // make sure to change port
     dialect: "mssql",
     options: {
         trustedconnection: true,

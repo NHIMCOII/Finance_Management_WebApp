@@ -68,6 +68,14 @@
     background-color: rgb(194, 64, 64);
 }
 
-input-group-text{
-    background-color: #04a9f5;
+
+.transfer-arrow{
+    width: 400px;
+    justify-content: center;
+    margin-left: 50%;
+    font-size: 20px;
+}
+
+.mt-amount{
+    margin-top: 43px;
 }
