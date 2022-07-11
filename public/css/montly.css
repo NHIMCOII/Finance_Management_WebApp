@@ -1,0 +1,47 @@
+@import url('../css/fonts.css');
+
+.month-chart {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .month-chart-bar {
+    background-color: #ffffff;
+    margin-bottom: 70px;
+    padding: 15px;
+    box-sizing: border-box;
+    -webkit-column-break-inside: avoid;
+    border: 0px solid #d2d2d3;
+    border-radius: 10px;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 40px;
+    margin-left: 100px;
+    width: 600px;
+    height: 500px;
+  }
+  
+  .month-chart-pie {
+    background-color: #ffffff;
+    margin-bottom: 70px;
+    padding: 15px;
+    box-sizing: border-box;
+    -webkit-column-break-inside: avoid;
+    border: 0px solid #d2d2d3;
+    border-radius: 10px;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 40px;
+    margin-left: 20px;
+    width: 400px;
+    height: 300px;
+  }
+  
+.month-chart-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: black;
+}
+

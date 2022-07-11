@@ -4,7 +4,109 @@
 
     <%- include('./includes/navigation.ejs') %> 
 <!-- main content -->
-    
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Sample Page</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="javascript:">Sample Page</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="h-main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Money Transfer</h5>
+                                    </div>
+                                    <div class="card-body">
+<!--                                            <h5>Enter your new earning</h5>-->
+<!--                                            <hr>-->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <form>
+                                                    <div>
+                                                        <label>Choose Wallet 1</label>
+                                                        <select class="mb-3 form-control">
+                                                            <option>Select Wallet</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                        </select>
+                                                    </div>
+                                                    <span class="transfer-arrow"><i class="fas fa-arrow-down"></i></span>
+                                                    <div>
+                                                        <label>Choose Wallet 2</label>
+                                                        <select class="mb-3 form-control">
+                                                            <option>Select Wallet</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                        </select>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="col-md-6">
+                                                
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label>Date</label>
+                                                        <input type="date" class="form-control" placeholder="Text">
+                                                    </div>
+                                                    <div class="form-group mt-amount">
+                                                        <label>Amount</label>
+                                                        <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                                        <div class="input-group-prepend">
+                                                          <span class="input-group-text" id="inputGroup-sizing-default">VND</span>
+                                                      </div>
+                                                  </div>
+                                                  </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Note</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                         <div class="col-md-5">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Input group -->
+                            </div>
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
 <!-- end of main -->
     <%- include('./includes/script.ejs') %> 
 </body>

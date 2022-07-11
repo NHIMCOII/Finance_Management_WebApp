@@ -1,0 +1,81 @@
+.stretch-card{
+    width: 1000px;
+    display: flex;
+}
+
+.mt-card{
+    background-color: #ffffff;
+    padding: 25px;
+    box-sizing: border-box;
+    border: 0px solid #d2d2d3;
+    border-radius: 5px;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+    margin: 40px 60px;
+    margin-bottom: 70px;
+    width: 30rem;
+    height: 30rem;
+    margin-left: 50%;
+}
+
+.mt-card-body{
+    color: rgb(100, 93, 93);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.mt-title{
+    margin-bottom: 60px;
+}
+
+.card-description{
+    color: #aeaeae;
+}
+
+.mt-form-group{
+    width: 400px;
+}
+.transfer-icon{
+    margin-left: 50%;
+    margin-bottom: 10px;
+    transform: rotate(90deg);
+    width: 20px;
+}
+
+.fa-poll-h{
+    width: 10px;
+    margin-left: -3px;
+    margin-right: 3px;
+}
+
+.mt-submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.mt-btn{
+    border: none;
+    border-radius: 5px;
+    height: 100%;
+    width: 100px;
+    background-color: rgb(255, 91, 91);
+    color: #ffffff;
+}
+
+.mt-btn:hover{
+    background-color: rgb(194, 64, 64);
+}
+
+
+.transfer-arrow{
+    width: 400px;
+    justify-content: center;
+    margin-left: 50%;
+    font-size: 20px;
+}
+
+.mt-amount{
+    margin-top: 43px;
+}
