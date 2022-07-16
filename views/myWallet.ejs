@@ -48,47 +48,27 @@
                                                       <th>No</th>
                                                       <th>Wallet</th>
                                                       <th>Type</th>
-                                                      <th>Money</th>
+                                                      <th>Account Balance</th>
                                                       <th>Action</th>
                                                   </tr>
                                               </thead>
                                               <tbody>
-                                                  <tr>
-                                                      <th scope="row">1</th>
-                                                      <td>Techcombank</td>
-                                                      <td>Bank</td>
-                                                      <td>5000$</td>
-                                                      <td>
-                                                        <span class="action_btn">
-                                                          <a href="#">Edit</a>
-                                                          <a href="#">Remove</a>
-                                                        </span>
-                                                      </td>
-                                                  </tr>
-                                                  <tr>
-                                                      <th scope="row">2</th>
-                                                      <td>Cash</td>
-                                                      <td>Cash on hand</td>
-                                                      <td>200$</td>
-                                                      <td>
-                                                        <span class="action_btn">
-                                                          <a href="#">Edit</a>
-                                                          <a href="#">Remove</a>
-                                                        </span>
-                                                      </td>
-                                                  </tr>
-                                                  <tr>
-                                                      <th scope="row">3</th>
-                                                      <td>Saving</td>
-                                                      <td>Saving</td>
-                                                      <td>15000$</td>
-                                                      <td>
-                                                        <span class="action_btn">
-                                                          <a href="#">Edit</a>
-                                                          <a href="#">Remove</a>
-                                                        </span>
-                                                      </td>
-                                                  </tr>
+                                                    <% let i = 1%>
+                                                    <% for (let wallet of wallets) { %>
+                                                      <tr>
+                                                          <th scope="row"><%= i %></th>
+                                                          <td><%= wallet.name %></td>
+                                                          <td><%= wallet.type %></td>
+                                                          <td><%= wallet.account_balance %></td>
+                                                          <td>
+                                                            <span class="action_btn">
+                                                              <a href="#">Edit</a>
+                                                              <a href="#">Remove</a>
+                                                            </span>
+                                                          </td>
+                                                      </tr>
+                                                      <% i++ %>
+                                                    <% } %>
                                               </tbody>
                                           </table>
                                           <div class="container">
