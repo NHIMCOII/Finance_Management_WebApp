@@ -70,12 +70,12 @@ module.exports = class Expense {
         }
     }
 
-    static async fetchAll() {
+    static async fetchAll(user_id) {
         try{
             let pool = await sql.connect(config);
-            const sqlString = "SELECT * FROM expenses AS E, categories AS C WHERE E.category_id = C.category_id AND E.wallet_id = @wallet_id"
+            const sqlString = "SELECT * FROM expenses AS E, categories AS C, wallets AS W WHERE E.category_id = C.category_id AND E.wallet_id = W.wallet_id AND W.id = @user_id"
             let res = await pool.request()
-            .input('wallet_id', sql.Int, this.wallet_id)
+            .input('user_id', sql.Int, user_id)
             .query(sqlString);
             return res.recordsets;
         } catch (error){

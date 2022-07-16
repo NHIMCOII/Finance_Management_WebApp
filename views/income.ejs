@@ -16,12 +16,11 @@
                             <div class="row align-items-center">
                                 <div class="col-md-12">
                                     <div class="page-header-title">
-                                        <h5 class="m-b-10">INCOME MANAGEMENT</h5>
+                                        <h5 class="m-b-10">PERSONAL FINANCE</h5>
                                     </div>
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
-                                        <li class="breadcrumb-item"><a href="/dashboard">Personal Finance</a></li>
-                                        <li class="breadcrumb-item"><a href="javascript:">Income</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Income</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -35,7 +34,7 @@
                                 <div class="col-sm-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>ADD NEW INCOME</h5>
+                                            <h5>Add New Income</h5>
                                         </div>
                                         <form class="card-body" action="/income" method="POST">
                                             <div class="row">
@@ -47,8 +46,8 @@
                                                                 <option value="1">Salary</option>
                                                                 <option value="2">Bonus</option>
                                                                 <option value="3">Investment</option>
-                                                                <option value="4">Other</option>
-                                                                <option value="5">5</option>
+                                                                <option value="4">Others</option>
+                                                                <!-- <option value="5">5</option> -->
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -91,7 +90,7 @@
                                 <div class="col-xl-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>All Incomes</h5>
+                                            <h5>Recent Incomes</h5>
 <!--                                            <span class="d-block m-t-5">use class <code>table-hover</code> inside table element</span>-->
                                         </div>
                                         <div class="card-block table-border-style">
@@ -111,7 +110,7 @@
                                                         <% for (let income of incomes) { %>
                                                             <tr>
                                                                 <th scope="row"><%= i %></th>
-                                                                <td><%= income.name[1] %></td>
+                                                                <td><%= income.name[0] %></td>
                                                                 <td><%= income.amount %></td>
                                                                 <td><%= income.date.toLocaleDateString() %> </td>
                                                                 <td><a href="/incomeDetails"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>

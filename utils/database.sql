@@ -26,7 +26,7 @@ CREATE TABLE [wallets](
 	id INT,
 	name NVARCHAR(255),
 	type NVARCHAR(255),
-	account_balance INT,
+	acc_balance INT,
 	percentage FLOAT,
 	period INT,
 	CONSTRAINT PK_wallets PRIMARY KEY (wallet_id),

@@ -7,7 +7,6 @@ exports.getIncome = (req,res,next) => {
         .then(([rows, fieldData]) => {
             Income.fetchAll(req.user.id)
             .then(([rows_2, fieldData_2]) => {
-                console.log(rows_2)
                 res.render('income',{
                     user: req.user,
                     wallets: rows,
@@ -31,32 +30,43 @@ exports.postIncome = (req,res,next) => {
     const note = req.body.note
     const date = req.body.date
     const wallet_id = req.body.wallet_id
-    console.log(req.body.wallet_id)
     const income = new Income(category_id,null,amount,note,date,wallet_id)
-    res.redirect('/income')
-    return income.save()
+    income.save()
+
+    Wallet.findByPk(wallet_id)
+    .then(([thisWallet]) => {
+        const wallet = new Wallet(thisWallet[0].wallet_id,thisWallet[0].id,thisWallet[0].name,thisWallet[0].type,(Number(thisWallet[0].acc_balance) + Number(amount)),thisWallet[0].percentage,thisWallet[0].period)
+        return wallet
+    })
+    .then(wallet => {
+        return wallet.update()
+    })
+    .then(() => {
+        return res.redirect('/income');
+    })
+    .catch(err => console.log(err))
 }
 
 exports.getExpense = (req,res,next) => {
-    Wallet.fetchAll()
-        .then(([rows, fieldData]) => {
-            Expense.fetchAll()
-            .then(([rows_2, fieldData_2]) => {
-                res.render('expense',{
-                    user: req.user,
-                    wallets: rows,
-                    expenses: rows_2,
-                    pageTitle: 'Expense',
-                    path: '/expense'
-                });
-            })
-            .catch(err => {
-                console.log(err);
+    Wallet.fetchAll(req.user.id)
+    .then(([rows, fieldData]) => {
+        Expense.fetchAll(req.user.id)
+        .then(([rows_2, fieldData_2]) => {
+            res.render('expense',{
+                user: req.user,
+                wallets: rows,
+                expenses: rows_2,
+                pageTitle: 'Expense',
+                path: '/expense'
             });
         })
         .catch(err => {
             console.log(err);
         });
+    })
+    .catch(err => {
+        console.log(err);
+    });
 }
 
 exports.postExpense = (req,res,next) => {
@@ -66,8 +76,20 @@ exports.postExpense = (req,res,next) => {
     const date = req.body.date
     const wallet_id = req.body.wallet_id
     const expense = new Expense(category_id,null,amount,note,date,wallet_id)
-    res.redirect('/expense')
-    return expense.save()
+    expense.save()
+
+    Wallet.findByPk(wallet_id)
+    .then(([thisWallet]) => {
+        const wallet = new Wallet(thisWallet[0].wallet_id,thisWallet[0].id,thisWallet[0].name,thisWallet[0].type,(Number(thisWallet[0].acc_balance) - Number(amount)),thisWallet[0].percentage,thisWallet[0].period)
+        return wallet
+    })
+    .then(wallet => {
+        return wallet.update()
+    })
+    .then(() => {
+        return res.redirect('/expense');
+    })
+    .catch(err => console.log(err))
 }
 
 exports.getDetailsIncome = (req,res,next) => {

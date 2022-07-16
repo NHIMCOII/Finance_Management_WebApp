@@ -15,7 +15,7 @@ module.exports = class Wallet {
     async save() {
         try{
             let pool = await sql.connect(config);
-            const sqlString = "INSERT INTO wallets (id,name,type,account_balance,percentage,period) VALUES (@id,@name,@type,@acc_balance,@percentage,@period)"
+            const sqlString = "INSERT INTO wallets (id,name,type,acc_balance,percentage,period) VALUES (@id,@name,@type,@acc_balance,@percentage,@period)"
             let res = await pool.request()
             .input('id', sql.Int, this.id)
             .input('name', sql.NVarChar, this.name)
@@ -30,7 +30,7 @@ module.exports = class Wallet {
         }
     }
 
-    async update(wallet_id) {
+    async update() {
         try{
             let pool = await sql.connect(config);
             const sqlString = "UPDATE wallets SET name = @name, type = @type, acc_balance = @acc_balance, percentage = @percentage, period = @period  WHERE wallet_id = @wallet_id"

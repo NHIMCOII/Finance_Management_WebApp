@@ -16,12 +16,11 @@
                             <div class="row align-items-center">
                                 <div class="col-md-12">
                                     <div class="page-header-title">
-                                        <h5 class="m-b-10">EXPENSE MANAGEMENT</h5>
+                                        <h5 class="m-b-10">PERSONAL FINANCE</h5>
                                     </div>
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
-                                        <li class="breadcrumb-item"><a href="/dashboard">Personal Finance</a></li>
-                                        <li class="breadcrumb-item"><a href="javascript:">Expense</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Expense</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -35,7 +34,7 @@
                                 <div class="col-sm-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>ADD NEW EXPENSE</h5>
+                                            <h5>Add New Expense</h5>
                                         </div>
                                         <form class="card-body" action="/expense" method="POST">
                                             <div class="row">
@@ -44,11 +43,11 @@
                                                             <label>Category</label>
                                                             <select class="mb-3 form-control" name="category_id">
                                                                 <option>Select category</option>
-                                                                <option value="1">Electric</option>
-                                                                <option value="2">Water</option>
-                                                                <option value="3">Internet</option>
-                                                                <option value="4">Food</option>
-                                                                <option value="5">5</option>
+                                                                <option value="5">Electric</option>
+                                                                <option value="6">Water</option>
+                                                                <option value="7">Internet</option>
+                                                                <option value="8">Foods</option>
+                                                                <option value="4">Others</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -67,7 +66,7 @@
                                                             <input type="date" class="form-control" placeholder="Text" name="date">
                                                         </div>
                                                     <label>Choose Wallet</label>
-                                                            <select class="mb-3 form-control">
+                                                            <select class="mb-3 form-control" name="wallet_id">
                                                                 <option>Select Wallet</option>
                                                                 <% for (let wallet of wallets) { %>
                                                                     <option value="<%= wallet.wallet_id  %>"><%= wallet.name %></option>
@@ -91,7 +90,7 @@
                                 <div class="col-xl-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>All Expenses</h5>
+                                            <h5>Recent Expenses</h5>
 <!--                                            <span class="d-block m-t-5">use class <code>table-hover</code> inside table element</span>-->
                                         </div>
                                         <div class="card-block table-border-style">
@@ -111,7 +110,7 @@
                                                         <% for (let expense of expenses) { %>
                                                             <tr>
                                                                 <th scope="row"><%= i %></th>
-                                                                <td><%= expense.name %></td>
+                                                                <td><%= expense.name[0] %></td>
                                                                 <td><%= expense.amount %></td>
                                                                 <td><%= expense.date.toLocaleDateString() %> </td>
                                                                 <td><a href="/incomeDetails"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>

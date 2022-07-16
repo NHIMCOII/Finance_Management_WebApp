@@ -7,7 +7,7 @@ const isAuth = require('../midleware/is-auth');
 
 const router = express.Router();
 
-router.get('/myWallet',isAuth,walletController.getMyWallet);
+router.get('/myWallets',isAuth,walletController.getMyWallet);
 
 router.get('/addWallet',walletController.getAddWallet);
 
