@@ -43,7 +43,7 @@ module.exports = class User {
             .input('firstName', sql.NVarChar, this.firstName)
             .input('lastName', sql.NVarChar, this.lastName)
             .input('job', sql.NVarChar, this.job)
-            .input('address', sql.VarChar, this.address)
+            .input('address', sql.NVarChar, this.address)
             .input('phone', sql.VarChar, this.phone)
             .input('facebook', sql.VarChar, this.facebook)
             .input('linkedin', sql.VarChar, this.linkedin)

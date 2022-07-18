@@ -54,7 +54,8 @@
                                                         </div>
                                                         <div>
                                                             <label>Gender</label>
-                                                            <select class="mb-3 form-control" value="<%= user.gender%>" name="gender" >                                                                
+                                                            <select class="mb-3 form-control" value="<%= user.gender%>" name="gender" >
+                                                                <option>Select gender</option>                                                                
                                                                 <option value=1 <%if(user.gender == 1){ %>selected<% } %>>Male</option>
                                                                 <option value=''<%if(user.gender == ''){ %>selected<% } %>>Female</option>
                                                                 

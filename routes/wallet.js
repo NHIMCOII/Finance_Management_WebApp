@@ -7,9 +7,11 @@ const isAuth = require('../midleware/is-auth');
 
 const router = express.Router();
 
-router.get('/editWallet',isAuth,walletController.getEditWallet);
+router.get('/myWallets',isAuth,walletController.getMyWallet);
 
-router.post('/editWallet',walletController.postEditWallet);
+router.get('/addWallet',walletController.getAddWallet);
+
+router.post('/addWallet',walletController.postAddWallet);
 
 router.get('/moneyTransfer',isAuth,walletController.getMoneyTransfer);
 
