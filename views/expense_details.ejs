@@ -35,7 +35,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-cart-shopping"></i> Expense </h5>
-                                            <%= expense.name %>
+                                            <%= expense.name[0] %>
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-dollar-sign"></i> Amount </h5>
-                                            <%= expense.amount  %> 
+                                            <%= expense.amount %> 
                                             VND
                                         </div>
                                     </div>
@@ -60,17 +60,19 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-wallet"></i> Wallet </h5>
-                                            Cash - {2,000,000} VND left
+                                            <%= expense.name[1] %> 
+                                            - 
+                                            <%= expense.acc_balance %> VND left
                                         </div>
                                     </div>
                                 </div>
-                               <div class = "col-sm-12">
+                                <div class = "col-sm-12">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-pen-to-square"></i> Note </h5>
                                         </div>
                                         <div class="card-body">
-                                            {Example note | None}
+                                            <%= expense.note %>
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +82,7 @@
                                         </div>
                                         <div class="col-sm">
                                             <button type="button" class="btn btn-danger" title="Permanently delete the invoice" data-toggle="tooltip"><i class="fa-solid fa-eraser"></i>Remove</button>
-                                           <button type="button" class="btn btn-warning" title="Remove and add new invoice" data-toggle="tooltip"><i class="fa-solid fa-file-pen"></i>Edit</button>
+                                            <button type="button" class="btn btn-warning" title="Remove and add new invoice" data-toggle="tooltip"><i class="fa-solid fa-file-pen"></i>Edit</button>
 
                                         </div>
                                         <div class="col-sm-2">

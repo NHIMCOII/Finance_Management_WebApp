@@ -15,7 +15,7 @@ router.get('/expense',isAuth,userInputController.getExpense);
 
 router.post('/expense',userInputController.postExpense);
 
-router.get('/incomeDetails',isAuth,userInputController.getDetailsIncome);
+router.get('/incomeDetails/:income_id',isAuth,userInputController.getDetailsIncome);
 
 router.post('/incomeDetails',userInputController.postDetailsIncome);
 

@@ -93,10 +93,15 @@ exports.postExpense = (req,res,next) => {
 }
 
 exports.getDetailsIncome = (req,res,next) => {
-    res.render('income_details', {
-        pageTitle: 'Income Details',
-        user: req.user,
-        path: '/incomeDetails'
+    const income_id = req.params.income_id
+    Income.findByIncomeID(income_id)
+    .then(([income]) => {
+        res.render('income_details', {
+            pageTitle: 'Income Details',
+            user: req.user,
+            income: income[0],
+            path: '/incomeDetails'
+        })
     })
 }
 
@@ -104,12 +109,12 @@ exports.postDetailsIncome = (req,res,next) => {}
 
 exports.getDetailsExpense = (req,res,next) => {
     const expense_id = req.params.expense_id
-    Expense.findByExpense_id(expense_id, expense => {
-        console.log(expense)
+    Expense.findByExpenseID(expense_id)
+    .then(([expense]) => {
         res.render('expense_details', {
             pageTitle: 'Expense Details',
             user: req.user,
-            expense: expense,
+            expense: expense[0],
             path: '/expenseDetails'
         })
     })

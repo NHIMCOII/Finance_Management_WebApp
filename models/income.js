@@ -70,6 +70,19 @@ module.exports = class Income {
         }
     }
 
+    static async findByIncomeID(income_id) {
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "SELECT * FROM incomes AS I, categories AS C, wallets AS W WHERE I.income_id = @income_id AND I.category_id = C.category_id AND I.wallet_id = W.wallet_id"
+            let res = await pool.request()
+            .input('income_id', sql.Int, income_id)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
+    }
+
     static async fetchAll(user_id) {
         try{
             let pool = await sql.connect(config);
