@@ -103,10 +103,15 @@ exports.getDetailsIncome = (req,res,next) => {
 exports.postDetailsIncome = (req,res,next) => {}
 
 exports.getDetailsExpense = (req,res,next) => {
-    res.render('expense_details', {
-        pageTitle: 'Expense Details',
-        user: req.user,
-        path: '/expenseDetails'
+    const expense_id = req.params.expense_id
+    Expense.findByExpense_id(expense_id, expense => {
+        console.log(expense)
+        res.render('expense_details', {
+            pageTitle: 'Expense Details',
+            user: req.user,
+            expense: expense,
+            path: '/expenseDetails'
+        })
     })
 }
 

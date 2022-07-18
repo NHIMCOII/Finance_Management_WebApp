@@ -68,3 +68,31 @@ CREATE TABLE [expenses](
 	CONSTRAINT FK_expenses_categories FOREIGN KEY (category_id) REFERENCES categories(category_id)
 	ON UPDATE CASCADE ON DELETE CASCADE
 )
+
+INSERT INTO [categories]
+VALUES (1, 'Money transfer', 1),
+(2, 'Others', 2),
+(3, 'Salary', 3),
+(4, 'Bonus', 3),
+(5, 'Investment Interest', 5),
+(6, 'Gifts', 6),
+(7, 'Auto', 7),
+(8, 'Gas', 7),
+(9, 'Auto Service', 7),
+(10, 'Charity', 10),
+(11, 'Childcare', 11),
+(12, 'Education', 12),
+(13, 'Necessities', 13),
+(14, 'Clothing', 13),
+(15, 'Groceries', 13),
+(16, 'Household', 13),
+(17, 'Entertainment', 17),
+(18, 'Health', 18),
+(19, 'Medical', 18),
+(20, 'Health & Fitness', 18),
+(21, 'Utilities', 21),
+(22, 'Cable TV', 21),
+(23, 'Electric', 21),
+(24, 'Internet', 21),
+(25, 'Telephone', 21),
+(26, 'Water', 21)

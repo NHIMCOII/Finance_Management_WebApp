@@ -19,7 +19,7 @@ router.get('/incomeDetails',isAuth,userInputController.getDetailsIncome);
 
 router.post('/incomeDetails',userInputController.postDetailsIncome);
 
-router.get('/expenseDetails',isAuth,userInputController.getDetailsExpense);
+router.get('/expenseDetails/:expense_id',isAuth,userInputController.getDetailsExpense);
 
 router.post('/expenseDetails',userInputController.postDetailsExpense);
 

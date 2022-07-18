@@ -17,9 +17,9 @@
                                         <h5 class="m-b-10">Expense Details</h5>
                                     </div>
                                     <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                                        <li class="breadcrumb-item"><a href="javascript:">Expense</a></li>
-                                        <li class="breadcrumb-item"><a href="javascript:">{id}</a></li>
+                                        <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="/expense">Expense</a></li>
+                                        <li class="breadcrumb-item"><a href="#"><%= expense.expense_id %></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-cart-shopping"></i> Expense </h5>
-                                            Salary
+                                            <%= expense.name %>
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-dollar-sign"></i> Amount </h5>
-                                            10,000,000
+                                            <%= expense.amount  %> 
                                             VND
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-calendar-days"></i> Date </h5>
-                                            22/05/2016
+                                            <%= expense.date.toLocaleDateString() %> 
                                         </div>
                                     </div>
                                 </div>

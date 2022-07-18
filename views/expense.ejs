@@ -43,11 +43,22 @@
                                                             <label>Category</label>
                                                             <select class="mb-3 form-control" name="category_id">
                                                                 <option>Select category</option>
-                                                                <option value="5">Electric</option>
-                                                                <option value="6">Water</option>
-                                                                <option value="7">Internet</option>
-                                                                <option value="8">Foods</option>
-                                                                <option value="4">Others</option>
+                                                                <option value="8">Gas</option>
+                                                                <option value="9">Auto Service</option>
+                                                                <option value="10">Charity</option>
+                                                                <option value="11">Childcare</option>
+                                                                <option value="12">Education</option>
+                                                                <option value="14">Clothing</option>
+                                                                <option value="15">Groceries</option>
+                                                                <option value="16">Household</option>
+                                                                <option value="17">Entertainment</option>
+                                                                <option value="19">Medical</option>
+                                                                <option value="20">Health & Fitness</option>
+                                                                <option value="22">Cable TV</option>
+                                                                <option value="23">Electric</option>
+                                                                <option value="24">Internet</option>
+                                                                <option value="25">Telephone</option>
+                                                                <option value="26">Water</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -113,7 +124,7 @@
                                                                 <td><%= expense.name[0] %></td>
                                                                 <td><%= expense.amount %></td>
                                                                 <td><%= expense.date.toLocaleDateString() %> </td>
-                                                                <td><a href="/incomeDetails"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                                                                <td><a href="/expenseDetails/<%= expense.expense_id %>"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
                                                             </tr>
                                                         <% i++ %>
                                                         <% }  %>
