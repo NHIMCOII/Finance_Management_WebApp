@@ -1,10 +1,10 @@
 const sql = require('mssql');
 const config = require('../utils/dbconfig');
 
-module.exports = class Income {
-    constructor(category_id,income_id,amount,note,date,wallet_id) {
+module.exports = class Expense {
+    constructor(category_id,expense_id,amount,note,date,wallet_id) {
         this.category_id = category_id;
-        this.income_id = income_id;
+        this.expense_id = expense_id;
         this.amount = amount;
         this.note = note;
         this.date = date;
@@ -14,7 +14,7 @@ module.exports = class Income {
     async save() {
         try{
             let pool = await sql.connect(config);
-            const sqlString = "INSERT INTO incomes (amount,note,date,wallet_id,category_id) VALUES (@amount,@note,@date,@wallet_id,@category_id)"
+            const sqlString = "INSERT INTO expenses (amount,note,date,wallet_id,category_id) VALUES (@amount,@note,@date,@wallet_id,@category_id)"
             let res = await pool.request()
             .input('amount', sql.Int, this.amount)
             .input('note', sql.NVarChar, this.note)
@@ -31,7 +31,7 @@ module.exports = class Income {
     async update() {
         try{
             let pool = await sql.connect(config);
-            const sqlString = "UPDATE incomes SET amount = @amount, date = @date, wallet_id = @wallet_id, note = @note"
+            const sqlString = "UPDATE expenses SET amount = @amount, date = @date, wallet_id = @wallet_id, note = @note"
             let res = await pool.request()
             .input('amount', sql.Int, this.amount)
             .input('date', sql.Date, this.date)
@@ -70,12 +70,12 @@ module.exports = class Income {
         }
     }
 
-    static async findByIncomeID(income_id) {
+    static async findByExpenseID(expense_id) {
         try{
             let pool = await sql.connect(config);
-            const sqlString = "SELECT * FROM incomes AS I, categories AS C, wallets AS W WHERE I.income_id = @income_id AND I.category_id = C.category_id AND I.wallet_id = W.wallet_id"
+            const sqlString = "SELECT * FROM expenses AS E, categories AS C, wallets AS W WHERE E.expense_id = @expense_id AND E.category_id = C.category_id AND E.wallet_id = W.wallet_id"
             let res = await pool.request()
-            .input('income_id', sql.Int, income_id)
+            .input('expense_id', sql.Int, expense_id)
             .query(sqlString);
             return res.recordsets;
         } catch (error){
@@ -86,7 +86,7 @@ module.exports = class Income {
     static async fetchAll(user_id) {
         try{
             let pool = await sql.connect(config);
-            const sqlString = "SELECT * FROM incomes AS I, categories AS C, wallets AS W WHERE I.category_id = C.category_id AND I.wallet_id = W.wallet_id AND W.id = @user_id"
+            const sqlString = "SELECT * FROM expenses AS E, categories AS C, wallets AS W WHERE E.category_id = C.category_id AND E.wallet_id = W.wallet_id AND W.id = @user_id"
             let res = await pool.request()
             .input('user_id', sql.Int, user_id)
             .query(sqlString);
