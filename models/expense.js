@@ -83,6 +83,19 @@ module.exports = class Expense {
         }
     }
 
+    static async deleteByExpenseID(expense_id) {
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "DELETE FROM expenses WHERE expense_id=@expense_id"
+            let res = await pool.request()
+            .input('expense_id', sql.Int, expense_id)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
+    }
+
     static async fetchAll(user_id) {
         try{
             let pool = await sql.connect(config);

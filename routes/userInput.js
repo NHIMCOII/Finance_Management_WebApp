@@ -19,8 +19,12 @@ router.get('/incomeDetails/:income_id',isAuth,userInputController.getDetailsInco
 
 router.post('/incomeDetails',userInputController.postDetailsIncome);
 
+router.post('/removeIncome',userInputController.postDeleteIncome)
+
 router.get('/expenseDetails/:expense_id',isAuth,userInputController.getDetailsExpense);
 
 router.post('/expenseDetails',userInputController.postDetailsExpense);
+
+router.post('/removeExpense',userInputController.postDeleteExpense)
 
 module.exports = router;

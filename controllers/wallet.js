@@ -36,6 +36,26 @@ exports.postAddWallet = (req,res,next) => {
     return wallet.save()
 }
 
+exports.getEditWallet = (req,res,next) => {
+
+    res.render('editWallet',{
+        user: req.user,
+        pageTitle: 'Edit Wallet',
+        path: '/editWallet'
+    })
+}
+
+exports.postEditWallet = (req,res,next) => {
+    const type = req.body.type
+    const name = req.body.name
+    const acc_balance = req.body.acc_balance
+    const percentage = req.body.percentage
+    const period = req.body.period
+    const wallet = new Wallet(null,req.user.id,name,type,acc_balance,percentage,period)
+    res.redirect('/myWallets')
+    return wallet.update()
+}
+
 exports.getMoneyTransfer = (req,res,next) => {
     Wallet.fetchAll(req.user.id)
     .then(([rows, fieldData]) => {
@@ -83,6 +103,15 @@ exports.postMoneyTransfer = (req,res,next) => {
     })
     .then(() => {
         res.redirect('/myWallets')
+    })
+    .catch(err => console.log(err))
+}
+
+exports.postRemoveWallet = (req,res,next) => {
+    const wallet_id = req.body.wallet_id
+    Wallet.DeleteWallet(wallet_id)
+    .then(() => {
+        return res.redirect('/myWallets')
     })
     .catch(err => console.log(err))
 }
