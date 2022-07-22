@@ -45,7 +45,11 @@
                                     <div class='bottom-block'>
                                          <div class='balance'>
                                               <div class='card-balance'>
-                                                 <%=wallet.acc_balance%> VND
+                                                <% if(Math.abs(wallet.acc_balance) >=1000000){ %> 
+                                                 <%=wallet.acc_balance / 1000000%>M VND
+                                                 <% }else{ %>
+                                                 <%=wallet.acc_balance / 1000 %>K VND
+                                                  <% } %> 
                                               </div>
                                               <div><%=wallet.name%></div>
                                          </div>                                       
@@ -260,13 +264,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
 
     <script>
+  
       var areaChartOptions = {
         series: [{
             name: 'Income',
-            data: [31, 40, 58, 51, 42, 109, 100, 55, 70, 65, 60, 42]
+            data: [`<%= income[0]%>`, `<%= income[1]%>`, `<%= income[2]%>`, `<%= income[3]%>`, `<%= income[4]%>`, `<%= income[5]%>`, `<%= income[6]%>`, `<%= income[7]%>`, `<%= income[8]%>`, `<%= income[9]%>`, `<%= income[10]%>`, `<%= income[11]%>`]
             }, {
             name: 'Expense',
-            data: [11, 32, 45, 32, 34, 52, 41, 22, 25, 15, 29, 24]
+            data: [`<%= expense[0]%>`, `<%= expense[1]%>`, `<%= expense[2]%>`, `<%= expense[3]%>`, `<%= expense[4]%>`, `<%= expense[5]%>`, `<%= expense[6]%>`, `<%= expense[7]%>`, `<%= expense[8]%>`, `<%= expense[9]%>`, `<%= expense[10]%>`, `<%= expense[11]%>`]
         }],
 
         chart: {

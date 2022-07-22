@@ -110,7 +110,18 @@ module.exports = class User {
         }
     }
 
-    static async expense_per_month() {
-
+    static async expense_per_month(id, month) {
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "SELECT SUM(amount) AS amount FROM expenses AS E,wallets AS W,users AS U WHERE U.id=@id AND U.id = W.id AND E.wallet_id = W.wallet_id AND MONTH(E.date)=@month"
+            let res = await pool.request()
+            .input('id', sql.INT, id)
+            .input('month', sql.INT, month)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
     }
+
 };
