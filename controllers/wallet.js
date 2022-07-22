@@ -58,9 +58,9 @@ exports.postMoneyTransfer = (req,res,next) => {
     const date = req.body.date
     const amount = req.body.amount
     const note = req.body.note
-    const income = new Income(9,null,amount,note,date,wallet_id_B) // 9: money transfer in dbo.category
+    const income = new Income(1,null,amount,note,date,wallet_id_B) // 9: money transfer in dbo.category
     income.save()
-    const expense = new Expense(9,null,amount,note,date,wallet_id_A)
+    const expense = new Expense(1,null,amount,note,date,wallet_id_A)
     expense.save()
     // increase money in wallet B
     Wallet.findByPk(wallet_id_B)
