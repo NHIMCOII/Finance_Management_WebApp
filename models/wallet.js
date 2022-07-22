@@ -48,7 +48,7 @@ module.exports = class Wallet {
         }
     }
 
-    async DeleteWallet(wallet_id) {
+    static async DeleteWallet(wallet_id) {
         try{
             let pool = await sql.connect(config);
             const sqlString = "DELETE FROM wallets WHERE wallet_id=@wallet_id"

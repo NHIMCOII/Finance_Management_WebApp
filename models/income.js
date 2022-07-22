@@ -83,6 +83,19 @@ module.exports = class Income {
         }
     }
 
+    static async deleteByIncomeID(income_id) {
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "DELETE FROM incomes WHERE income_id=@income_id"
+            let res = await pool.request()
+            .input('income_id', sql.Int, income_id)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
+    }
+
     static async fetchAll(user_id) {
         try{
             let pool = await sql.connect(config);

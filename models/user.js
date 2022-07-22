@@ -82,4 +82,35 @@ module.exports = class User {
             console.log(" mathus-error :" + error);
         }
     }
+
+    static async findRecentTransactions(id){
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "SELECT * FROM users WHERE users.email = @email"
+            let res = await pool.request()
+            .input('email', sql.VarChar, email)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
+    }
+
+    static async income_per_month(id, month) {
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "SELECT SUM(amount) AS amount FROM incomes AS I,wallets AS W,users AS U WHERE U.id=@id AND U.id = W.id AND I.wallet_id = W.wallet_id AND MONTH(I.date)=@month"
+            let res = await pool.request()
+            .input('id', sql.INT, id)
+            .input('month', sql.INT, month)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
+    }
+
+    static async expense_per_month() {
+
+    }
 };

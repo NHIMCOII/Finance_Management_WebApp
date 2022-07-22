@@ -1,7 +1,6 @@
 .sass-cache/
 *.css.map
 /node_modules
-*.json
 Icon?
 .idea
 .DS_Store

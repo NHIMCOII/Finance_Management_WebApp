@@ -47,6 +47,27 @@ exports.postIncome = (req,res,next) => {
     .catch(err => console.log(err))
 }
 
+exports.postDeleteIncome = (req,res,next) => {
+    const income_id = req.body.income_id
+    const wallet_id = req.body.wallet_id
+    const amount = req.body.amount
+    Income.deleteByIncomeID(income_id)
+    .then(() => {
+        Wallet.findByPk(wallet_id[0])
+        .then(([thisWallet]) => {
+            const wallet = new Wallet(thisWallet[0].wallet_id,thisWallet[0].id,thisWallet[0].name,thisWallet[0].type,(Number(thisWallet[0].acc_balance) - Number(amount)),thisWallet[0].percentage,thisWallet[0].period)
+            return wallet
+        })
+        .then(wallet => {
+            return wallet.update()
+        })
+    })
+    .then(() => {
+        return res.redirect('/income')
+    })
+    .catch(err => console.log(err))
+}
+
 exports.getExpense = (req,res,next) => {
     Wallet.fetchAll(req.user.id)
     .then(([rows, fieldData]) => {
@@ -88,6 +109,27 @@ exports.postExpense = (req,res,next) => {
     })
     .then(() => {
         return res.redirect('/expense');
+    })
+    .catch(err => console.log(err))
+}
+
+exports.postDeleteExpense = (req,res,next) => {
+    const expense_id = req.body.expense_id
+    const wallet_id = req.body.wallet_id
+    const amount = req.body.amount
+    Expense.deleteByExpenseID(expense_id)
+    .then(() => {
+        Wallet.findByPk(wallet_id[0])
+        .then(([thisWallet]) => {
+            const wallet = new Wallet(thisWallet[0].wallet_id,thisWallet[0].id,thisWallet[0].name,thisWallet[0].type,(Number(thisWallet[0].acc_balance) + Number(amount)),thisWallet[0].percentage,thisWallet[0].period)
+            return wallet
+        })
+        .then(wallet => {
+            return wallet.update()
+        })
+    })
+    .then(() => {
+        return res.redirect('/expense')
     })
     .catch(err => console.log(err))
 }

@@ -9,12 +9,18 @@ const router = express.Router();
 
 router.get('/myWallets',isAuth,walletController.getMyWallet);
 
-router.get('/addWallet',walletController.getAddWallet);
+router.get('/addWallet',isAuth,walletController.getAddWallet);
 
 router.post('/addWallet',walletController.postAddWallet);
+
+router.get('/editWallet',isAuth,walletController.getEditWallet);
+
+router.post('/editWallet',walletController.postEditWallet);
 
 router.get('/moneyTransfer',isAuth,walletController.getMoneyTransfer);
 
 router.post('/moneyTransfer',walletController.postMoneyTransfer);
+
+router.post('/removeWallet',walletController.postRemoveWallet);
 
 module.exports = router;

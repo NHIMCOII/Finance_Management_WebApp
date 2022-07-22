@@ -6,10 +6,49 @@ exports.getIndex = (req,res,next) => {
 }
 
 exports.getDashboard = (req,res,next) => {
-    res.render('dashboard',{
-        pageTitle: 'Dashboard',
-        path: '/dashboard',
-        user: req.user,
+    User.income_per_month(req.user.id, 1)
+    .then(([Jan]) => {
+        User.income_per_month(req.user.id, 2)
+        .then(([Feb]) => {
+            User.income_per_month(req.user.id, 3)
+            .then(([Mar]) => {
+                User.income_per_month(req.user.id, 4)
+                .then(([Apr]) => {
+                    User.income_per_month(req.user.id, 5)
+                    .then(([May]) => {
+                        User.income_per_month(req.user.id, 6)
+                        .then(([Jun]) => {
+                            User.income_per_month(req.user.id, 7)
+                            .then(([Jul]) => {
+                                User.income_per_month(req.user.id, 8)
+                                .then(([Aug]) => {
+                                    User.income_per_month(req.user.id, 9)
+                                    .then(([Sep]) => {
+                                        User.income_per_month(req.user.id, 10)
+                                        .then(([Oct]) => {
+                                            User.income_per_month(req.user.id, 11)
+                                            .then(([Nov]) => {
+                                                User.income_per_month(req.user.id, 12)
+                                                .then(([Dec]) => {
+                                                    let month = []
+                                                    month.push(Jan[0].amount,Feb[0].amount,Mar[0].amount,Apr[0].amount,May[0].amount,Jun[0].amount,Jul[0].amount,Aug[0].amount,Sep[0].amount,Oct[0].amount,Nov[0].amount,Dec[0].amount)
+                                                    res.render('dashboard',{
+                                                        pageTitle: 'Dashboard',
+                                                        path: '/dashboard',
+                                                        user: req.user,
+                                                        month: month 
+                                                    })
+                                                })
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
     })
 }
 

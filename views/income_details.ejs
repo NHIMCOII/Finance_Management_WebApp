@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               <div class = "col-sm-12">
+                                <div class = "col-sm-12">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-pen-to-square"></i> Note </h5>
@@ -80,9 +80,14 @@
                                     <div class="row">
                                         <div class="col-sm-2">
                                         </div>
-                                        <div class="col-sm">                                    
-                                            <button type="button" class="btn btn-danger"  data-toggle="tooltip"><i class="fa-solid fa-eraser"></i>Remove</button>
-                                            <button type="button" class="btn btn-warning"  data-toggle="tooltip"><i class="fa-solid fa-file-pen"></i>Edit</button>                                           
+                                        <div class="col-sm">
+                                            <form action="/removeIncome" method="POST">
+                                                <input type="hidden" value="<%= income.amount %>" name="amount">
+                                                <input type="hidden" value="<%= income.wallet_id %>" name="wallet_id">
+                                                <input type="hidden" value="<%= income.income_id %>" name="income_id">
+                                                <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                                <button class="btn btn-danger" data-toggle="tooltip" type="submit"><i class="fa-solid fa-eraser"></i>Remove</button>
+                                            </form>                                                                              
                                         </div>
                                         <div class="col-sm-2">
                                         </div>
