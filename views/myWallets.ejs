@@ -62,7 +62,7 @@
                                                           <td><%= wallet.acc_balance %></td>
                                                           <td>
                                                             <span class="action_btn">
-                                                              <a href="/editWallet">Edit</a>
+                                                              <a href="/editWallet/<%=wallet.wallet_id%>">Edit</a>
                                                               
                                                               <form action="/removeWallet" method="POST">
                                                                   <input type="hidden" value="<%= wallet.wallet_id %>" name="wallet_id">

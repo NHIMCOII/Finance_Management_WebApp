@@ -80,6 +80,7 @@
                                     <div class="row">
                                         <div class="col-sm-2">
                                         </div>
+                                        <% if(income.name[0] != 'Money transfer'){ %> 
                                         <div class="col-sm">
                                             <form action="/removeIncome" method="POST">
                                                 <input type="hidden" value="<%= income.amount %>" name="amount">
@@ -89,6 +90,7 @@
                                                 <button class="btn btn-danger" data-toggle="tooltip" type="submit"><i class="fa-solid fa-eraser"></i>Remove</button>
                                             </form>                                                                              
                                         </div>
+                                        <% } %> 
                                         <div class="col-sm-2">
                                         </div>
                                     </div>

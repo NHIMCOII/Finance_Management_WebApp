@@ -27,33 +27,48 @@ exports.getAddWallet = (req,res,next) => {
 
 exports.postAddWallet = (req,res,next) => {
     const type = req.body.type
+    let acc_balance = req.body.acc_balance
+    if(type == 'Debts'){
+        acc_balance = -acc_balance
+    }
     const name = req.body.name
-    const acc_balance = req.body.acc_balance
     const percentage = req.body.percentage
     const period = req.body.period
     const wallet = new Wallet(null,req.user.id,name,type,acc_balance,percentage,period)
-    res.redirect('/myWallets')
-    return wallet.save()
+    wallet.save()
+    return res.redirect('/myWallets')
 }
 
 exports.getEditWallet = (req,res,next) => {
-
-    res.render('editWallet',{
-        user: req.user,
-        pageTitle: 'Edit Wallet',
-        path: '/editWallet'
+    const wallet_id = req.params.wallet_id
+    Wallet.findByPk(wallet_id)
+    .then(([wallet]) => {
+        res.render('editWallet',{
+            user: req.user,
+            pageTitle: 'Edit Wallet',
+            path: '/editWallet',
+            wallet: wallet[0]
+        })
     })
 }
 
 exports.postEditWallet = (req,res,next) => {
+    const wallet_id = req.body.wallet_id
     const type = req.body.type
     const name = req.body.name
     const acc_balance = req.body.acc_balance
     const percentage = req.body.percentage
     const period = req.body.period
     const wallet = new Wallet(null,req.user.id,name,type,acc_balance,percentage,period)
-    res.redirect('/myWallets')
-    return wallet.update()
+    Wallet.findByPk(wallet_id)
+    .then(([thisWallet]) => {
+        const wallet = new Wallet(thisWallet[0].wallet_id,thisWallet[0].id,thisWallet[0].name,thisWallet[0].type,(Number(thisWallet[0].acc_balance) + Number(amount)),thisWallet[0].percentage,thisWallet[0].period)
+        return wallet
+    })
+    .then(wallet => {
+        return wallet.update()
+    })
+    .catch(err => console.log(err))
 }
 
 exports.getMoneyTransfer = (req,res,next) => {

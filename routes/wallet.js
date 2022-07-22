@@ -13,7 +13,7 @@ router.get('/addWallet',isAuth,walletController.getAddWallet);
 
 router.post('/addWallet',walletController.postAddWallet);
 
-router.get('/editWallet',isAuth,walletController.getEditWallet);
+router.get('/editWallet/:wallet_id',isAuth,walletController.getEditWallet);
 
 router.post('/editWallet',walletController.postEditWallet);
 

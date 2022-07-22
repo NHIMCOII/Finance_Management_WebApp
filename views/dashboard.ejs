@@ -29,126 +29,29 @@
                         <!-- [ Main Content ] start -->
                           <div class="slide-content">
                               <div class="card-wrapper swiper-wrapper">
-                                  <div class="db-card swiper-slide">
+                                  
+                                <% for (let wallet of wallets) { %> 
+                                <div class="db-card swiper-slide">
                                     <div class='top-block'>
                                       <div class='card-chip'>
                                         <i class="fas fa-credit-card"></i>
                                       </div>
                                       <span class='card-name'>
-                                        Bank
+                                        <%= wallet.type%> 
                                       </span>
                                     </div>
                                     <div class='bottom-block'>
                                          <div class='balance'>
                                               <div class='card-balance'>
-                                                 $ 8619.98
+                                                 <%=wallet.acc_balance%> VND
                                               </div>
-                                              <div>Techcombank</div>
-                                         </div>
-                                         <!-- <div class='card-icon'>
-                                              <span class='circle-left'>
-                                                   <i class="icon-circle icon-3x "></i>
-                                              </span>
-                                              <i class="icon-circle icon-3x"></i>
-                                         </div> -->
+                                              <div><%=wallet.name%></div>
+                                         </div>                                       
                                     </div>
                                   </div>
-                                  <div class="db-card swiper-slide">
-                                    <div class='top-block'>
-                                      <div class='card-chip'>
-                                        <i class="fas fa-credit-card"></i>
-                                      </div>
-                                      <span class='card-name'>
-                                        Bank
-                                      </span>
-                                    </div>
-                                    <div class='bottom-block'>
-                                         <div class='balance'>
-                                              <div class='card-balance'>
-                                                 $ 500
-                                              </div>
-                                              <div>Vietcombank</div>
-                                         </div>
-                                         <!-- <div class='card-icon'>
-                                              <span class='circle-left'>
-                                                   <i class="icon-circle icon-3x "></i>
-                                              </span>
-                                              <i class="icon-circle icon-3x"></i>
-                                         </div> -->
-                                    </div>
-                                  </div>
-                                  <div class="db-card swiper-slide">
-                                    <div class='top-block'>
-                                      <div class='card-chip'>
-                                        <i class="fas fa-credit-card"></i>
-                                      </div>
-                                      <span class='card-name'>
-                                        Cash
-                                      </span>
-                                    </div>
-                                    <div class='bottom-block'>
-                                         <div class='balance'>
-                                              <div class='card-balance'>
-                                                 $ 200
-                                              </div>
-                                              <div>Cash on hand</div>
-                                         </div>
-                                         <!-- <div class='card-icon'>
-                                              <span class='circle-left'>
-                                                   <i class="icon-circle icon-3x "></i>
-                                              </span>
-                                              <i class="icon-circle icon-3x"></i>
-                                         </div> -->
-                                    </div>
-                                  </div>
-                                  <div class="db-card swiper-slide">
-                                    <div class='top-block'>
-                                      <div class='card-chip'>
-                                        <i class="fas fa-credit-card"></i>
-                                      </div>
-                                      <span class='card-name'>
-                                        Saving
-                                      </span>
-                                    </div>
-                                    <div class='bottom-block'>
-                                         <div class='balance'>
-                                              <div class='card-balance'>
-                                                 $ 10000
-                                              </div>
-                                              <div>Saving</div>
-                                         </div>
-                                         <!-- <div class='card-icon'>
-                                              <span class='circle-left'>
-                                                   <i class="icon-circle icon-3x "></i>
-                                              </span>
-                                              <i class="icon-circle icon-3x"></i>
-                                         </div> -->
-                                    </div>
-                                  </div>
-                                  <div class="db-card swiper-slide">
-                                    <div class='top-block'>
-                                      <div class='card-chip'>
-                                        <i class="fas fa-credit-card"></i>
-                                      </div>
-                                      <span class='card-name'>
-                                        Bank
-                                      </span>
-                                    </div>
-                                    <div class='bottom-block'>
-                                         <div class='balance'>
-                                              <div class='card-balance'>
-                                                 $ 12345
-                                              </div>
-                                              <div>BIDV</div>
-                                         </div>
-                                         <!-- <div class='card-icon'>
-                                              <span class='circle-left'>
-                                                   <i class="icon-circle icon-3x "></i>
-                                              </span>
-                                              <i class="icon-circle icon-3x"></i>
-                                         </div> -->
-                                    </div>
-                                  </div>
+                                <% } %> 
+                                  
+                                 
                               </div>
                           </div>
               
@@ -156,7 +59,7 @@
                           <div class="swiper-button-prev swiper-navBtn"></div>
                           <div class="swiper-pagination"></div>
                           <span class="db-add-wallet">
-                            <a href="#"> <i class="fas fa-plus-circle"></i></a>
+                            <a href="/addWallet"> <i class="fas fa-plus-circle"></i></a>
                             <div class="add-inf">Add Wallet</div>
                           </span>
                             
@@ -356,7 +259,13 @@
 
     <script>
       var areaChartOptions = {
-        series: [],
+        series: [{
+            name: 'Income',
+            data: [31, 40, 58, 51, 42, 109, 100, 55, 70, 65, 60, 42]
+            }, {
+            name: 'Expense',
+            data: [11, 32, 45, 32, 34, 52, 41, 22, 25, 15, 29, 24]
+        }],
 
         chart: {
           height: 350,

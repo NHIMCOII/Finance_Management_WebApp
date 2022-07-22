@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Wallet = require("../models/wallet");
 
 exports.getIndex = (req,res,next) => {
     res.render('index',{
@@ -30,13 +31,17 @@ exports.getDashboard = (req,res,next) => {
                                             .then(([Nov]) => {
                                                 User.income_per_month(req.user.id, 12)
                                                 .then(([Dec]) => {
-                                                    let month = []
-                                                    month.push(Jan[0].amount,Feb[0].amount,Mar[0].amount,Apr[0].amount,May[0].amount,Jun[0].amount,Jul[0].amount,Aug[0].amount,Sep[0].amount,Oct[0].amount,Nov[0].amount,Dec[0].amount)
-                                                    res.render('dashboard',{
-                                                        pageTitle: 'Dashboard',
-                                                        path: '/dashboard',
-                                                        user: req.user,
-                                                        month: month 
+                                                    Wallet.fetchAll(req.user.id)
+                                                    .then(([wallets]) => {
+                                                        let month = []
+                                                        month.push(Jan[0].amount,Feb[0].amount,Mar[0].amount,Apr[0].amount,May[0].amount,Jun[0].amount,Jul[0].amount,Aug[0].amount,Sep[0].amount,Oct[0].amount,Nov[0].amount,Dec[0].amount)
+                                                        res.render('dashboard',{
+                                                            pageTitle: 'Dashboard',
+                                                            path: '/dashboard',
+                                                            user: req.user,
+                                                            month: month,
+                                                            wallets: wallets
+                                                        })
                                                     })
                                                 })
                                             })
