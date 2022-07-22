@@ -241,66 +241,92 @@
             slidesPerView: 2,
         },
         950: {
-            slidesPerView: 3,
+          slidesPerView: 3,
         },
         },
       });
     </script>
-
- <!---------- Apexcharts ------->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
-
-
+    
+    <!---------- Apexcharts ------->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
     <script>
-        var areaChartOptions = {
-  series: [{
-    name: 'Income',
-    data: [31, 40, 58, 51, 42, 109, 100, 55, 70, 65, 60, 42]
-  }, {
-    name: 'Expense',
-    data: [11, 32, 45, 32, 34, 52, 41, 22, 25, 15, 29, 24]
-  }],
-  chart: {
-    height: 350,
-    type: 'area',
-    toolbar: {
-      show: false,
-    },
-  },
-  colors: ["#4f35a1", "#246dec"],
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: 'smooth'
-  },
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-  markers: {
-    size: 0
-  },
-  yaxis: [
-    {
-      title: {
-        text: 'Income',
-      },
-    },
-    {
-      opposite: true,
-      title: {
-        text: 'Expense',
-      },
-    },
-  ],
-  tooltip: {
-    shared: true,
-    intersect: false,
-  }
-};
+      $(document).ready(function(){
+        $.getJSON('incomes.json', function(response) {
+          console.log(response[0])
+          chart.updateSeries([
+            {
+              name: 'Income',
+              data: response
+            },
+            {
+              name: 'Expense',
+              data: []
+            }
+          ])
+        })
+        .fail(function(){
+          console.log("An error has occurred.");
+        });
+      });
+      
+    </script>
+    <script>
+      var areaChartOptions = {
+        series: [],
 
-var areaChart = new ApexCharts(document.querySelector("#area-chart"), areaChartOptions);
-areaChart.render();
+        chart: {
+          height: 350,
+          type: 'area',
+          toolbar: {
+            show: false,
+          },
+        },
+
+        colors: ["#4f35a1", "#246dec"],
+
+        dataLabels: {
+          enabled: false,
+        },
+
+        stroke: {
+          curve: 'smooth'
+        },
+
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+
+        markers: {
+          size: 0
+        },
+
+        yaxis: [
+          {
+            title: {
+              text: 'Income',
+            },
+          },
+          {
+            opposite: true,
+            title: {
+              text: 'Expense',
+            },
+          },
+        ],
+
+        tooltip: {
+          shared: true,
+          intersect: false,
+        },
+
+        noData: {
+          text: 'Loading...'
+        }
+      };    
+
+      var areaChart = new ApexCharts(document.querySelector("#area-chart"), areaChartOptions);
+      areaChart.render();
+    </script>
 
 
-</script>
 </body>
 </html>
