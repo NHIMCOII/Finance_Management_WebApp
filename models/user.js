@@ -109,7 +109,7 @@ module.exports = class User {
             console.log(" mathus-error :" + error);
         }
     }
-
+// except money transfer
     static async expense_per_month(id, month) {
         try{
             let pool = await sql.connect(config);
