@@ -29,8 +29,10 @@
                         <!-- [ Main Content ] start -->
                           <div class="slide-content">
                               <div class="card-wrapper swiper-wrapper">
-                                  
-                                <% for (let wallet of wallets) { %> 
+                                <% if(wallets.length === 0) {%> 
+                                  <div>-------------------------------------------------------- YOU DONT HAVE ANY WALLET, PLEASE ADD A NEW ONE -----------------------------------------------------</div>
+                                <% } %> 
+                                  <% for (let wallet of wallets) { %> 
                                 <div class="db-card swiper-slide">
                                     <div class='top-block'>
                                       <div class='card-chip'>
