@@ -1,41 +1,5 @@
 @import url('../css/fonts.css');
 
-.db-page-wrapper{
-    display: flex;
-    height: 250px;
-    box-sizing: border-box;
-    position: relative;
-}
-
-.swiper{
-    width: 900px;
-    height: 200px;
-}
-
-.swiper-wrapper{
-    width: 500px;
-}
-.db-card{
-    width: 250px !important;
-    border-radius: 10px;
-    background-color: #fff;
-    margin: 0 20px;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-}
-
-.db-card-content{
-    padding: 10px;
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-around;
-}
-
-
 .info{
     display: flex;
     align-items: center;
@@ -179,3 +143,147 @@
     color: #04a9f5;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+
+.slide-body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #EFEFEF;
+}
+.slide-container{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  max-width: 1120px;
+  width: 100%;
+  padding: 40px 0;
+  height: 270px;
+  display: flex;
+  align-items: center;
+}
+.slide-content{
+  margin: 0 40px;
+  overflow: hidden;
+  border-radius: 25px;
+  width: 900px;
+}
+.card-wrapper{
+    width: 100%;
+}
+.db-card {
+    
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+    height: 200px;
+    width: 300px !important;
+    background-image:linear-gradient(rgb(39, 72, 238),rgba(163, 53, 232, 0.8));
+    opacity: 85%;
+    border-radius: 20px;
+    color:white;
+    margin:30px;
+    font-size: 16px;
+    box-shadow: 2px 2px 20px #707070;
+  }
+  .top-block {
+    display: inline-block;
+    width:100%;
+    height:70px;
+  }
+   .bottom-block {
+    display:inline-block;
+
+    width:100%;
+    height:130px;
+  }
+  .card-chip {
+    float:left;
+    margin: 20px;
+    font-size: 30px;
+  }
+  .card-name {
+    float:right;
+    margin:20px;
+    position:relative;
+    font-size: 28px;
+    font-weight:550;
+  }
+  .balance {
+    float:left;
+    margin: 20px;
+    position:relative;
+
+  }
+  .card-balance {
+    font-weight:700;
+    font-size: 40px;
+    margin-top:10px;
+  }
+  .card-icon {
+    float:right;
+    margin: 0 20px 0 0;
+    margin-top:40px;
+  }
+  .circle-left {
+    margin-right: -15px;
+    opacity:0.7;
+  }
+  .swiper-navBtn{
+    color: #6E93f7;
+    transition: color 0.3s ease;
+  }
+  .swiper-navBtn:hover{
+    color: #4070F4;
+  }
+  .swiper-navBtn::before,
+  .swiper-navBtn::after{
+    font-size: 35px;
+  }
+  .swiper-button-next{
+    right: 0;
+    margin-right: 135px;
+}
+.swiper-button-prev{
+  left: 0;
+}
+.swiper-pagination{
+    margin-left: -90px;
+  }
+  .swiper-pagination-bullet{
+    background-color: #6E93f7;
+    opacity: 1;
+  }
+  .swiper-pagination-bullet-active{
+    background-color: #4070F4;
+  }
+  .db-add-wallet{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 30px;
+    margin-top: 30px;
+  }
+  .fa-plus-circle{
+    font-size: 100px;
+  }
+  .add-inf{
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 300;
+  }
+  @media screen and (max-width: 768px) {
+    .slide-content{
+      margin: 0 10px;
+    }
+    .swiper-navBtn{
+      display: none;
+    }
+}
