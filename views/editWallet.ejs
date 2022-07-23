@@ -44,7 +44,7 @@
                                                     <div>
                                                         <div>
                                                             <label>Type</label>
-                                                            <select value="<%= wallet.type  %> "class="mb-3 form-control" name="type">
+                                                            <select required value="<%= wallet.type  %> "class="mb-3 form-control" name="type">
                                                                 <option>Select type</option>
                                                                 <option <%if(wallet.type == 'Cash'){ %>selected<% } %>>Cash</option>
                                                                 <option <%if(wallet.type == 'Bank'){ %>selected<% } %>>Bank</option>
@@ -55,7 +55,7 @@
                                                         <div class="form-group">
                                                             <label>Account Balance</label>
                                                             <div class="input-group mb-3">
-                                                                <input value="<%= wallet.acc_balance %>" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="acc_balance">
+                                                                <input required value="<%= wallet.acc_balance %>" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="acc_balance">
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text" id="inputGroup-sizing-default">VND</span>
                                                                 </div>
@@ -68,7 +68,7 @@
                                                         <div class="form-group">
                                                             <label>Wallet name</label>
                                                             <div class="input-group mb-3">
-                                                                <input value="<%= wallet.name  %>" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name">
+                                                                <input required value="<%= wallet.name  %>" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name">
                                                             </div>
                                                         </div>
                                                     </div>

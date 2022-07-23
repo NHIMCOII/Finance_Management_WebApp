@@ -14,7 +14,7 @@
                             <div class="row align-items-center">
                                 <div class="col-md-12">
                                     <div class="page-header-title">
-                                        <h5 class="m-b-10">Monthly Balance</h5>
+                                        <h5 class="m-b-10">MONTHLY BALANCE</h5>
                                     </div>
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
@@ -34,13 +34,13 @@
                                     <p class="month-chart-title">Monthly Balance</p>
                                     <div id="barchart"></div>
                                   </div>                                  
-                                  <div class="month-chart-pie">
-                                    <p class="month-chart-title">Expense</p>
-                                    <div id="radialchart"></div>
-                                  </div>
-                                </div>
                                 </div>
                             </div>
+                              <div class="row">
+                                <div id="chartdiv"></div>
+                              </div>
+                        </div>
+                    </div>
                             <!-- [ Main Content ] end -->
                         </div>
                     </div>
@@ -52,7 +52,15 @@
 <!-- end of main -->
     <%- include('./includes/script.ejs') %>
     <!---------- Apexcharts ------->
+    <style>
+      #chartdiv {
+        width: 100%;
+        height: 500px;
+      }
+      </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script  src="https://cdn.amcharts.com/lib/5/percent.js"></script>
 
     <script>
       var option1 = {
@@ -87,7 +95,7 @@
         },
         yaxis: {
           title: {
-            text: 'VND'
+            text: 'Amount (VND)'
           }
         },
         fill: {
@@ -105,106 +113,66 @@
         var chart = new ApexCharts(document.querySelector("#barchart"), option1);
         chart.render();
     </script>
-
-    <script>
-        var option2 = {
-          series: [ 0, 0, 0, 0, 11000000, 0, 0, 420000, `<%= category[8]%>`],
-          labels: ['Auto', 'Charity', 'Childcare', 'Education', 'Necessities', 'Entertainment', 'Health', 'Utilities', 'Others'],
-          chart: {
-          width: 400,
-          type: 'donut',
-        },
-        plotOptions: {
-          pie: {
-            startAngle: -90,
-            endAngle: 270
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        fill: {
-          type: 'gradient',
-        },
-        legend: {
-          formatter: function(val, opts) {
-            return val + " - " + opts.w.globals.series[opts.seriesIndex]
-          }
-        },
-        
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }]
-        };
-
-        var chart = new ApexCharts(document.querySelector("#piechart"), option2);
-        chart.render();
-    </script>
-
-    <script>
-      var option3 = {
-        series: [ 0, 0, 0, 0, 11000000, 0, 0, 420000, `<%= category[8]%>`],
-        chart: {
-        width: 380,
-        type: 'pie',
+    
+<script>
+  // Create root and chart
+  var root = am5.Root.new("chartdiv");
+  var chart = root.container.children.push(
+  am5percent.PieChart.new(root, {
+    radius: am5.percent(70),
+    innerRadius: am5.percent(50)
+  })
+);
+  
+  // Define data
+  var data = [{
+        country: "Auto",
+        sales: `<%= category[0]%>`
+      }, {
+        country: "Charity",
+        sales: `<%= category[1]%>`
+      }, {
+        country: "Childcare",
+        sales: `<%= category[2]%>`
       },
-      labels: ['Auto', 'Charity', 'Childcare', 'Education', 'Necessities', 'Entertainment', 'Health', 'Utilities', 'Others'],
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200
-          },
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }]
-      };
-
-      var chart = new ApexCharts(document.querySelector("#simplechart"), option3);
-      chart.render();
-    </script>
-    <script>
-      var option4 = {
-        series: [ `<%= (Math.round(category[0]/category[9]*100 * 100) / 100).toFixed(2) %>`, `<%=(Math.round(category[1]/category[9]*100 * 100) / 100).toFixed(2) %>`, `<%= (Math.round(category[2]/category[9]*100 * 100) / 100).toFixed(2) %>`, `<%= (Math.round(category[3]/category[9]*100 * 100) / 100).toFixed(2)%>`, `<%=(Math.round(category[4]/category[9]*100 * 100) / 100).toFixed(2) %>`, `<%= (Math.round(category[5]/category[9]*100 * 100) / 100).toFixed(2)%>`, `<%= (Math.round(category[6]/category[9]*100 * 100) / 100).toFixed(2)%>`, `<%=  (Math.round(category[7]/category[9]*100 * 100) / 100).toFixed(2) %>`, `<%=  (Math.round(category[8]/category[9]*100 * 100) / 100).toFixed(2) %>`],
-        chart: {
-        height: 350,
-        type: 'radialBar',
-      },
-      plotOptions: {
-        radialBar: {
-          dataLabels: {
-            name: {
-              fontSize: '22px',
-            },
-            value: {
-              fontSize: '16px',
-            },
-            total: {
-              show: true,
-              label: 'Total',
-              formatter: function (w) {
-                // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                return `<%= category[9] %> `
-              }
-            }
-          }
-        }
-      },
-      labels: ['Auto', 'Charity', 'Childcare', 'Education', 'Necessities', 'Entertainment', 'Health', 'Utilities', 'Others'],
-      };
-
-      var chart = new ApexCharts(document.querySelector("#radialchart"), option4);
-      chart.render();
-    </script>
+      {
+        country: "Education",
+        sales: `<%= category[3]%>`
+      },{
+        country: "Necessities",
+        sales: `<%= category[4]%>`
+      },{
+        country: "Entertainment",
+        sales: `<%= category[5]%>`
+      },{
+        country: "Health",
+        sales: `<%= category[6]%>`
+      },{
+        country: "Utilities",
+        sales: `<%= category[7]%>`
+      },{
+        country: "Others",
+        sales: `<%= category[8]%>`
+      }];
+  
+  // Create series
+  var series = chart.series.push(
+    am5percent.PieSeries.new(root, {
+      name: "Series",
+      valueField: "sales",
+      categoryField: "country"
+    })
+  );
+  series.data.setAll(data);
+  
+  // Add legend
+  var legend = chart.children.push(am5.Legend.new(root, {
+    centerX: am5.percent(100),
+    x: am5.percent(95),
+    layout: root.verticalLayout
+  }));
+  
+  legend.data.setAll(series.dataItems);
+  </script>
 </body>
 </html>

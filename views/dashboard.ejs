@@ -73,12 +73,12 @@
                         </div>
                         <div class="db-charts">
                             <div class="db-charts-card">
-                                <p class="chart-title">Income and Expense</p>
+                                <p class="chart-title">Incomes and Expenses</p>
                                 <div id="area-chart"></div>
                             </div>
                             <div class="recent-card ">
                                 <div class="recent-card-body ">
-                                  <h4 class="card-title">Recent Transactions</h4>                               
+                                  <h4 class="card-title">Recent Expenses</h4>                               
                                   <% for (let recent of recents){ %>
                                   <div class="list align-items-center border-bottom py-2">
                                     <div class="wrapper w-100">
@@ -204,10 +204,10 @@
   
       var areaChartOptions = {
         series: [{
-            name: 'Income',
+            name: 'Incomes',
             data: [`<%= income[0]%>`, `<%= income[1]%>`, `<%= income[2]%>`, `<%= income[3]%>`, `<%= income[4]%>`, `<%= income[5]%>`, `<%= income[6]%>`, `<%= income[7]%>`, `<%= income[8]%>`, `<%= income[9]%>`, `<%= income[10]%>`, `<%= income[11]%>`]
             }, {
-            name: 'Expense',
+            name: 'Expenses',
             data: [`<%= expense[0]%>`, `<%= expense[1]%>`, `<%= expense[2]%>`, `<%= expense[3]%>`, `<%= expense[4]%>`, `<%= expense[5]%>`, `<%= expense[6]%>`, `<%= expense[7]%>`, `<%= expense[8]%>`, `<%= expense[9]%>`, `<%= expense[10]%>`, `<%= expense[11]%>`]
         }],
 
@@ -238,13 +238,13 @@
         yaxis: [
           {
             title: {
-              text: 'Income',
+              text: 'Incomes',
             },
           },
           {
             opposite: true,
             title: {
-              text: 'Expense',
+              text: 'Expenses',
             },
           },
         ],

@@ -41,7 +41,7 @@
                                                 <div class="col-md-6">
                                                         <div>
                                                             <label>Category</label>
-                                                            <select class="mb-3 form-control" name="category_id">
+                                                            <select class="mb-3 form-control" name="category_id" required>
                                                                 <option>Select category</option>
                                                                 <option value="3">Salary</option>
                                                                 <option value="4">Bonus</option>
@@ -53,7 +53,7 @@
                                                         <div class="form-group">
                                                             <label>Amount</label>
                                                             <div class="input-group mb-3">
-                                                            <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="amount">
+                                                            <input required type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="amount">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="inputGroup-sizing-default">VND</span>
                                                             </div>
@@ -63,13 +63,13 @@
                                                 <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Date</label>
-                                                            <input type="date" class="form-control" placeholder="Text" name="date">
+                                                            <input required type="date" class="form-control" placeholder="Text" name="date">
                                                         </div>
                                                     <label>Choose Wallet</label>
-                                                            <select class="mb-3 form-control" name="wallet_id">
+                                                            <select required class="mb-3 form-control" name="wallet_id">
                                                                 <option>Select Wallet</option>
                                                                 <% for (let wallet of wallets) { %>
-                                                                    <option value="<%= wallet.wallet_id  %>"><%= wallet.name %></option>
+                                                                    <option value="<%= wallet.wallet_id  %>"><%= wallet.name %>: <%= wallet.acc_balance  %> VND</option>
                                                                 <% } %>
                                                             </select>
                                                 </div>
