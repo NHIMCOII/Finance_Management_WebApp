@@ -235,29 +235,6 @@
     </script>
     
     <!---------- Apexcharts ------->
-    <script>
-      window.Promise ||
-        document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
-        )
-      window.Promise ||
-        document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
-        )
-      window.Promise ||
-        document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
-        )
-    </script>
-    <script>
-      // Replace Math.random() with a pseudo-random number generator to get reproducible results in e2e tests
-      // Based on https://gist.github.com/blixt/f17b47c62508be59987b
-      var _seed = 42;
-      Math.random = function() {
-        _seed = _seed * 16807 % 2147483647;
-        return (_seed - 1) / 2147483646;
-      };
-    </script>
     <script src="../../../dist/apexcharts.js"></script>
     <div id="areaChart"></div>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -325,22 +302,7 @@
       var areaChart = new ApexCharts(document.querySelector("#area-chart"), areaChartOptions);
       areaChart.render();
 
-        $.getJSON('https://github.com/NHIMCOII/Financial_Management_System/blob/thanhan-dev/incomes.json', function(response) {
-          console.log(response)
-          areaChart.updateSeries([
-            {
-              name: 'Income',
-              data: [1,2]
-            },
-            {
-              name: 'Expense',
-              data: [3,4]
-            }
-          ])
-        })
-        .fail(function(){
-          console.log("An error has occurred.");
-      });
+        
     </script>
 
 
