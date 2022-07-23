@@ -151,7 +151,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,8 +181,8 @@
     
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-    height: 200px;
-    width: 300px !important;
+    height: 100px;
+    width: 280px !important;
     background-image:linear-gradient(rgb(39, 72, 238),rgba(163, 53, 232, 0.8));
     opacity: 85%;
     border-radius: 20px;
@@ -223,7 +222,7 @@
   }
   .card-balance {
     font-weight:700;
-    font-size: 40px;
+    font-size: 30px;
     margin-top:10px;
   }
   .card-icon {
@@ -285,5 +284,8 @@
     }
     .swiper-navBtn{
       display: none;
+    }
+    .db-card{
+      height: 50px !important;
     }
 }
