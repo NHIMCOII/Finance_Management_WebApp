@@ -1,3 +1,4 @@
+const Expense = require('../models/expense')
 const User = require('../models/user')
 const Wallet = require('../models/wallet')
 
@@ -65,17 +66,78 @@ exports.getMonthlyBalance = (req,res,next) => {
                                                                                                             if (arr[i] == null ) {                                                                                                              
                                                                                                                 arr[i] = 0;
                                                                                                             }
+                                                                                                        })                                                                                                  
+
+                                                                                                        Expense.sumOfExpenseByCategory(req.user.id, 7)
+                                                                                                        .then(([auto]) => {
+                                                                                                            Expense.sumOfExpenseByCategory(req.user.id, 10)
+                                                                                                            .then(([charity]) => {
+                                                                                                                Expense.sumOfExpenseByCategory(req.user.id, 11)
+                                                                                                                .then(([childcare]) => {
+                                                                                                                    Expense.sumOfExpenseByCategory(req.user.id, 12)
+                                                                                                                    .then(([education]) => {
+                                                                                                                        Expense.sumOfExpenseByCategory(req.user.id, 13)
+                                                                                                                        .then(([necessities]) => {
+                                                                                                                            Expense.sumOfExpenseByCategory(req.user.id, 17)
+                                                                                                                            .then(([entertainment]) => {
+                                                                                                                                Expense.sumOfExpenseByCategory(req.user.id, 18)
+                                                                                                                                .then(([health]) => {
+                                                                                                                                    Expense.sumOfExpenseByCategory(req.user.id, 21)
+                                                                                                                                    .then(([utilities]) => {
+                                                                                                                                        Expense.sumOfExpenseByCategory(req.user.id, 2)
+                                                                                                                                        .then(([others]) => {
+                                                                                                                                            if(auto.length == 0){
+                                                                                                                                                auto.push({total: null})
+                                                                                                                                            }
+                                                                                                                                            if(charity.length == 0){
+                                                                                                                                                charity.push({total: null})
+                                                                                                                                            }
+                                                                                                                                            if(childcare.length == 0){
+                                                                                                                                                childcare.push({total: null})
+                                                                                                                                            }
+                                                                                                                                            if(education.length == 0){
+                                                                                                                                                education.push({total: null})
+                                                                                                                                            }
+                                                                                                                                            if(necessities.length == 0){
+                                                                                                                                                necessities.push({total: null})
+                                                                                                                                            }
+                                                                                                                                            if(entertainment.length == 0){
+                                                                                                                                                entertainment.push({total: null})
+                                                                                                                                            }
+                                                                                                                                            if(health.length == 0){
+                                                                                                                                                health.push({total: null})
+                                                                                                                                            }
+                                                                                                                                            if(utilities.length == 0){
+                                                                                                                                                utilities.push({total: null})
+                                                                                                                                            }
+                                                                                                                                            if(others.length == 0){
+                                                                                                                                                others.push({total: null})
+                                                                                                                                            }
+                                                                                                                                            let category = []
+                                                                                                                                            category.push(auto[0].total, charity[0].total, childcare[0].total, education[0].total, necessities[0].total, entertainment[0].total, health[0].total, utilities[0].total, others[0].total, auto[0].total + charity[0].total + childcare[0].total + education[0].total + necessities[0].total + entertainment[0].total + health[0].total + utilities[0].total + others[0].total)
+                                                                                                                                            category.forEach((value, i, arr) => {
+                                                                                                                                                if(arr[i] == null){
+                                                                                                                                                    arr[i] = 0
+                                                                                                                                                }
+                                                                                                                                            })
+                                                                                                                                            res.render('monthlyBalance',{
+                                                                                                                                                pageTitle: 'Monthly Balance',
+                                                                                                                                                path: '/monthlyBalance',
+                                                                                                                                                user: req.user,
+                                                                                                                                                income: income,
+                                                                                                                                                expense: expense,
+                                                                                                                                                category: category,
+                                                                                                                                                wallets: wallets
+                                                                                                                                            })
+                                                                                                                                        })
+                                                                                                                                    })
+                                                                                                                                })
+                                                                                                                            })
+                                                                                                                        })
+                                                                                                                    })
+                                                                                                                })
+                                                                                                            })
                                                                                                         })
-                                                                                                            
-                                                                                                        res.render('monthlyBalance',{
-                                                                                                            pageTitle: 'Monthly Balance',
-                                                                                                            path: '/monthlyBalance',
-                                                                                                            user: req.user,
-                                                                                                            income: income,
-                                                                                                            expense: expense,
-                                                                                                            wallets: wallets
-                                                                                                        })
-                                                                                                        
                                                                                                     })
                                                                                                 })
                                                                                             })

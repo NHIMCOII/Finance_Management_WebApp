@@ -33,12 +33,12 @@
                                   <div class="month-chart-bar">
                                     <p class="month-chart-title">Monthly Balance</p>
                                     <div id="barchart"></div>
-                                  </div>
+                                  </div>                                  
                                   <div class="month-chart-pie">
-                                      <p class="month-chart-title">Expense</p>
-                                      <div id="piechart"></div>
+                                    <p class="month-chart-title">Expense</p>
+                                    <div id="radialchart"></div>
                                   </div>
-                                  </div>
+                                </div>
                                 </div>
                             </div>
                             <!-- [ Main Content ] end -->
@@ -55,7 +55,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
 
     <script>
-       var option1 = {
+      var option1 = {
           series: [{
           name: 'Income',
           data: [`<%= income[0]%>`, `<%= income[1]%>`, `<%= income[2]%>`, `<%= income[3]%>`, `<%= income[4]%>`, `<%= income[5]%>`, `<%= income[6]%>`, `<%= income[7]%>`, `<%= income[8]%>`, `<%= income[9]%>`, `<%= income[10]%>`, `<%= income[11]%>`]
@@ -107,11 +107,11 @@
     </script>
 
     <script>
-         var option2 = {
-          series: [50, 20, 41, 17, 15],
-          labels: ['Bills', 'Foods', 'Wearing', 'Entertain', 'Others'],
+        var option2 = {
+          series: [ 0, 0, 0, 0, 11000000, 0, 0, 420000, `<%= category[8]%>`],
+          labels: ['Auto', 'Charity', 'Childcare', 'Education', 'Necessities', 'Entertainment', 'Health', 'Utilities', 'Others'],
           chart: {
-          width: 380,
+          width: 400,
           type: 'donut',
         },
         plotOptions: {
@@ -147,6 +147,64 @@
 
         var chart = new ApexCharts(document.querySelector("#piechart"), option2);
         chart.render();
+    </script>
+
+    <script>
+      var option3 = {
+        series: [ 0, 0, 0, 0, 11000000, 0, 0, 420000, `<%= category[8]%>`],
+        chart: {
+        width: 380,
+        type: 'pie',
+      },
+      labels: ['Auto', 'Charity', 'Childcare', 'Education', 'Necessities', 'Entertainment', 'Health', 'Utilities', 'Others'],
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }]
+      };
+
+      var chart = new ApexCharts(document.querySelector("#simplechart"), option3);
+      chart.render();
+    </script>
+    <script>
+      var option4 = {
+        series: [ `<%= (Math.round(category[0]/category[9]*100 * 100) / 100).toFixed(2) %>`, `<%=(Math.round(category[1]/category[9]*100 * 100) / 100).toFixed(2) %>`, `<%= (Math.round(category[2]/category[9]*100 * 100) / 100).toFixed(2) %>`, `<%= (Math.round(category[3]/category[9]*100 * 100) / 100).toFixed(2)%>`, `<%=(Math.round(category[4]/category[9]*100 * 100) / 100).toFixed(2) %>`, `<%= (Math.round(category[5]/category[9]*100 * 100) / 100).toFixed(2)%>`, `<%= (Math.round(category[6]/category[9]*100 * 100) / 100).toFixed(2)%>`, `<%=  (Math.round(category[7]/category[9]*100 * 100) / 100).toFixed(2) %>`, `<%=  (Math.round(category[8]/category[9]*100 * 100) / 100).toFixed(2) %>`],
+        chart: {
+        height: 350,
+        type: 'radialBar',
+      },
+      plotOptions: {
+        radialBar: {
+          dataLabels: {
+            name: {
+              fontSize: '22px',
+            },
+            value: {
+              fontSize: '16px',
+            },
+            total: {
+              show: true,
+              label: 'Total',
+              formatter: function (w) {
+                // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
+                return `<%= category[9] %> `
+              }
+            }
+          }
+        }
+      },
+      labels: ['Auto', 'Charity', 'Childcare', 'Education', 'Necessities', 'Entertainment', 'Health', 'Utilities', 'Others'],
+      };
+
+      var chart = new ApexCharts(document.querySelector("#radialchart"), option4);
+      chart.render();
     </script>
 </body>
 </html>

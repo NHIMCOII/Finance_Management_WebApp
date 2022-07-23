@@ -99,7 +99,7 @@ module.exports = class User {
     static async income_per_month(id, month) {
         try{
             let pool = await sql.connect(config);
-            const sqlString = "SELECT SUM(amount) AS amount FROM incomes AS I,wallets AS W,users AS U WHERE U.id=@id AND U.id = W.id AND I.wallet_id = W.wallet_id AND MONTH(I.date)=@month"
+            const sqlString = "SELECT SUM(amount) AS amount FROM incomes AS I,wallets AS W,users AS U WHERE U.id=@id AND U.id = W.id AND I.wallet_id = W.wallet_id AND I.category_id != 1 AND MONTH(I.date)=@month"
             let res = await pool.request()
             .input('id', sql.INT, id)
             .input('month', sql.INT, month)
@@ -113,7 +113,7 @@ module.exports = class User {
     static async expense_per_month(id, month) {
         try{
             let pool = await sql.connect(config);
-            const sqlString = "SELECT SUM(amount) AS amount FROM expenses AS E,wallets AS W,users AS U WHERE U.id=@id AND U.id = W.id AND E.wallet_id = W.wallet_id AND MONTH(E.date)=@month"
+            const sqlString = "SELECT SUM(amount) AS amount FROM expenses AS E,wallets AS W,users AS U WHERE U.id=@id AND U.id = W.id AND E.wallet_id = W.wallet_id AND E.category_id != 1 AND MONTH(E.date)=@month"
             let res = await pool.request()
             .input('id', sql.INT, id)
             .input('month', sql.INT, month)

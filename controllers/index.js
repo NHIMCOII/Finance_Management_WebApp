@@ -1,3 +1,5 @@
+const { recentExpenses } = require("../models/expense");
+const Expense = require("../models/expense");
 const User = require("../models/user");
 const Wallet = require("../models/wallet");
 
@@ -71,14 +73,17 @@ exports.getDashboard = (req,res,next) => {
                                                                                                                 arr[i] = 0;
                                                                                                             }
                                                                                                         })
-                                                                                                            
-                                                                                                        res.render('dashboard',{
-                                                                                                            pageTitle: 'Dashboard',
-                                                                                                            path: '/dashboard',
-                                                                                                            user: req.user,
-                                                                                                            income: income,
-                                                                                                            expense: expense,
-                                                                                                            wallets: wallets
+                                                                                                        Expense.recentExpenses(req.user.id)
+                                                                                                        .then(([recentExpenses]) => {
+                                                                                                            res.render('dashboard',{
+                                                                                                                pageTitle: 'Dashboard',
+                                                                                                                path: '/dashboard',
+                                                                                                                user: req.user,
+                                                                                                                income: income,
+                                                                                                                expense: expense,
+                                                                                                                recents: recentExpenses,
+                                                                                                                wallets: wallets
+                                                                                                            })
                                                                                                         })
                                                                                                     })
                                                                                                 })
