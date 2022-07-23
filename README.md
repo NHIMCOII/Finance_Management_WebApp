@@ -35,6 +35,8 @@ npm install --save csurf
 npm install --save connect-flash
 npm install --save express-validator
 ```
+ - Create database tables (in .utils/database.sql)
+
  - Configuration Database (in ./utils/dbconfig.js)
     Determine the dynamic port in your PC
     Change the attribute "port" in db.config.js to the port that your server is listening on
