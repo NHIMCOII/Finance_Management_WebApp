@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+
+.h-main-body{
+    display: flex;
+    flex-direction: column;
+}
+.ew-page-wrapper-2{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.addWallet{
+    background-color: #04a9f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    width: 70px;
+    height: 35px;
+}
+
+.addWallet:hover{
+    background-color: #0294d8;
+}
+
+.add-btn>a{
+    color: #fff !important;
+}
+
+table th,
+table td {
+    text-align: center;
+}
+
+.action_btn {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.action_btn>a {
+    text-decoration: none;
+    color: #444;
+    background: #fff;
+    border: 1px solid;
+    display: inline-block;
+    padding: 7px 20px;
+    font-weight: bold;
+    border-radius: 3px;
+    transition: 0.1s ease-in-out;
+}
+.action_btn>a:nth-child(1) {
+    border-color: #f4c22b;
+}
+.action_btn>a:nth-child(2) {
+    border-color: #f44236;
+}
+.action_btn>a:hover {
+    box-shadow: 0 3px 8px #0003;
+}
+
+table>tbody>tr {
+    background-color: #fff;
+    transition: 0.3s ease-in-out;
+}

@@ -54,6 +54,10 @@ File: style.css
 @import url("../fonts/feather/css/feather.css");
 @import url("../plugins/jquery-scrollbar/css/jquery.scrollbar.min.css");
 @import url("../fonts/datta/datta-icon.css");
+@import url("../css/dashoard.css");
+@import url("../css/montly.css");
+@import url("../css/editWallet.css");
+@import url("../css/moneyTransfer.css");
 /**  =====================
       Custom css start
 ==========================  **/
@@ -192,6 +196,14 @@ p.text-muted {
   margin-bottom: 30px;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
+}
+
+.col-xl-12{
+  padding: 0;
+}
+
+.page-item{
+  color: #04a9f5 !important;
 }
 .card .card-header {
   background-color: transparent;
@@ -10599,3 +10611,5 @@ div.code-toolbar > .toolbar span:hover {
 		box-shadow: 0 0 0 0 rgba(4, 169, 245, 0)
 	}
 }
+
+

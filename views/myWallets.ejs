@@ -1,0 +1,112 @@
+<%- include('./includes/head.ejs') %>
+
+<body>
+
+    <%- include('./includes/navigation.ejs') %> 
+<!-- main content -->
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">WALLETS MANAGEMENT</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="#">My Wallets</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="h-main-body">
+                        <div class="ew-page-wrapper-2">
+                            <!-- [ Main Content ] start -->
+                            <div class="addWallet">
+                                <span class="add-btn">
+                                    <a href="/addwallet"> <i class="fas fa-plus"></i> Add</a>
+                                </span>
+                            </div>
+                            <div class="col-xl-12">
+                              <div class="card">
+                                  <div class="card-header">
+                                      <h5>Wallets</h5>
+<!--                               <span class="d-block m-t-5">use class <code>table-hover</code> inside table element</span>-->
+                                  </div>
+                                  <div class="card-block table-border-style">
+                                      <div class="table-responsive">
+                                          <table class="table table-hover">
+                                              <thead>
+                                                  <tr>
+                                                      <th>No</th>
+                                                      <th>Name</th>
+                                                      <th>Type</th>
+                                                      <th>Account Balance</th>
+                                                      <th>Action</th>
+                                                  </tr>
+                                              </thead>
+                                              <tbody>
+                                                    <% let i = 1%>
+                                                    <% for (let wallet of wallets) { %>
+                                                      <tr>
+                                                          <th scope="row"><%= i %></th>
+                                                          <td><%= wallet.name %></td>
+                                                          <td><%= wallet.type %></td>
+                                                          <td><%= wallet.acc_balance %></td>
+                                                          <td>
+                                                            <span class="action_btn">
+                                                              <a href="/editWallet/<%=wallet.wallet_id%>">Edit</a>
+                                                              
+                                                              <form action="/removeWallet" method="POST">
+                                                                  <input type="hidden" value="<%= wallet.wallet_id %>" name="wallet_id">
+                                                                  <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                                                  <button class="btn" type="submit">Remove</button>
+                                                              </form>
+                                                            </span>
+                                                          </td>
+                                                      </tr>
+                                                      <% i++ %>
+                                                    <% } %>
+                                              </tbody>
+                                          </table>
+                                          <div class="container">
+                                            <div class="row">
+                                              <div class="col">
+                                              </div>
+                                              <div class="col">
+                                                  <nav aria-label="Page navigation example">
+                                                  <ul class="pagination">
+                                                      <li class="page-item"><a class="page-link" href="#!">Previous</a></li>
+                                                      <li class="page-item"><a class="page-link" href="#!">1</a></li>
+                                                      <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                                                      <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                                                      <li class="page-item"><a class="page-link" href="#!">Next</a></li>
+                                                  </ul>
+                                                  </nav>
+                                              </div>
+                                              <div class="col">
+                                              </div>
+                                            </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+<!-- end of main -->
+    <%- include('./includes/script.ejs') %> 
+</body>
+</html>

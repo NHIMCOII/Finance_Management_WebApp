@@ -9,12 +9,12 @@
 <nav class="pcoded-navbar">
     <div class="navbar-wrapper">
         <div class="navbar-brand header-logo">
-            <a href="index.html" class="b-brand">
+            <a href="#" class="b-brand">
                 <div class="b-bg">
 <!--                         <i class="feather icon-github"></i> -->
                          <img width=50px src="images/logo.png">
                 </div>
-                <span class="b-title"><a href = "/profile">Hello Minh</a></span>
+                <span class="b-title"><a href = "/profile">Hi <%= user.username %> </a></span>
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
         </div>
@@ -46,17 +46,17 @@
                 <li class="nav-item pcoded-menu-caption">
                     <label>Personal Finance</label>
                 </li>
-                <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item <% if (path === '/income') { %>active<% } %>">
+                <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item <% if (path === '/income'|| path === '/incomeDetails') { %>active<% } %>">
                     <a href="/income" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-money-bill-trend-up"></i></span><span class="pcoded-mtext">Income</span></a>
                 </li>
-                <li data-username="Table bootstrap datatable footable" class="nav-item <% if (path === '/expense') { %>active<% } %>">
+                <li data-username="Table bootstrap datatable footable" class="nav-item <% if (path === '/expense' || path === '/expenseDetails') { %>active<% } %>">
                     <a href="/expense" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-money-check-dollar"></i></span><span class="pcoded-mtext">Expense</span></a>
                 </li>
                 <li class="nav-item pcoded-menu-caption">
                     <label>Wallets</label>
                 </li>
-                <li data-username="Charts Morris" class="nav-item <% if (path === '/editWallet') { %>active<% } %>">
-                    <a href="/editWallet" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-wallet"></i></i></span><span class="pcoded-mtext">Edit Wallet</span></a>
+                <li data-username="Charts Morris" class="nav-item <% if (path === '/myWallets') { %>active<% } %>">
+                    <a href="/myWallets" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-wallet"></i></i></span><span class="pcoded-mtext">My Wallets</span></a>
                 </li>
                 <li data-username="Maps Google" class="nav-item <% if (path === '/moneyTransfer') { %>active<% } %>">
                     <a href="/moneyTransfer" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-money-bill-transfer"></i></span><span class="pcoded-mtext">Money Transfer</span></a>
@@ -78,12 +78,13 @@
 <!--                         </ul> -->
 <!--                     </li> -->
 <!--                     <li data-username="Sample Page" class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li> -->
-                <li data-username="Maps Google" class="nav-item <% if (path === '/profile') { %>active<% } %>">
+                <li data-username="Maps Google" class="nav-item <% if (path === '/profile' || path ==='/editProfile') { %>active<% } %>">
                     <a href="/profile" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-user"></i></span><span class="pcoded-mtext">Profile</span></a>
                 </li>
                 <form action="/logout" title="Logout" method="POST">
-                    <button type="submit" style="background-color:transparent;border-style:none;color:whitesmoke;padding: 0px">
-                <li  data-username="Disabled Menu" class="nav-item disabled"><a href="javascript:" class="nav-link"><span class="pcoded-micon"><i class="fa-solid fa-right-from-bracket"></i></span><span class="pcoded-mtext">Logout</span></a>
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                    <button type="submit" style="background-color:transparent;border-style:none;color:whitesmoke;padding: 0px;cursor:pointer;">
+                <li  data-username="Disabled Menu" class="nav-item disabled"><a href="javascript:" class="nav-link"  style="cursor: pointer;"><span class="pcoded-micon"><i class="fa-solid fa-right-from-bracket"></i></span><span class="pcoded-mtext">Logout</span></a>
                 </li>
                     </button>
                 </form>
@@ -192,19 +193,20 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-notification">
                         <div class="pro-head">
-                            <img src="/images/user/avatar-2.jpg" class="img-radius" alt="User-Profile-Image">
-                            <span>Minh Tran</span>
+                            <img <% if(user.gender == 1){ %> src="/images/user/avatar-2.jpg"<% }else{ %>src="/images/user/avatar-1.jpg"<% } %> class="img-radius" alt="User-Profile-Image">
+                            <span><%= user.username %></span>
                             <form action="/logout" class="dud-logout" title="Logout" method="POST">
-                                <button type="submit" style="background-color:transparent;border-style:none;color:whitesmoke;padding-right: 30px">
+                                <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                <button type="submit" style="background-color:transparent;border-style:none;color:whitesmoke;padding-right: 30px; cursor:pointer;">
                                     <i class="feather icon-log-out"></i>
                                 </button>                                       
                             </form>
                         </div>
                         <ul class="pro-body">
-                            <li><a href="javascript:" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
-                            <li><a href="javascript:" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-                            <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-                            <li><a href="/login" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
+                            <li><a href="/profile" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
                         </ul>
                     </div>
                 </div>
