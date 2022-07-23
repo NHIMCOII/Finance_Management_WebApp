@@ -29,8 +29,10 @@
                         <!-- [ Main Content ] start -->
                           <div class="slide-content">
                               <div class="card-wrapper swiper-wrapper">
-                                  
-                                <% for (let wallet of wallets) { %> 
+                                <% if(wallets.length === 0) {%> 
+                                  <div>-------------------------------------------------------- YOU DONT HAVE ANY WALLET, PLEASE ADD A NEW ONE -----------------------------------------------------</div>
+                                <% } %> 
+                                  <% for (let wallet of wallets) { %> 
                                 <div class="db-card swiper-slide">
                                     <div class='top-block'>
                                       <div class='card-chip'>
@@ -43,7 +45,11 @@
                                     <div class='bottom-block'>
                                          <div class='balance'>
                                               <div class='card-balance'>
-                                                 <%=wallet.acc_balance%> VND
+                                                <% if(Math.abs(wallet.acc_balance) >=1000000){ %> 
+                                                 <%=wallet.acc_balance / 1000000%>M VND
+                                                 <% }else{ %>
+                                                 <%=wallet.acc_balance / 1000 %>K VND
+                                                  <% } %> 
                                               </div>
                                               <div><%=wallet.name%></div>
                                          </div>                                       
@@ -60,7 +66,7 @@
                           <div class="swiper-pagination"></div>
                           <span class="db-add-wallet">
                             <a href="/addWallet"> <i class="fas fa-plus-circle"></i></a>
-                            <div class="add-inf">Add Wallet</div>
+                            <div >.</div>
                           </span>
                             
                             <!-- [ Main Content ] end -->
@@ -72,66 +78,26 @@
                             </div>
                             <div class="recent-card ">
                                 <div class="recent-card-body ">
-                                  <h4 class="card-title">Recent Transactions</h4>
+                                  <h4 class="card-title">Recent Transactions</h4>                               
+                                  <% for (let recent of recents){ %>
                                   <div class="list align-items-center border-bottom py-2">
                                     <div class="wrapper w-100">
                                         <div class="w-100-content">
-                                            <p class="mb-2 font-weight-medium">Foods</p>
-                                            <p class="expense">$20</p>
+                                            <p class="mb-2 font-weight-medium"><%= recent.name[0] %></p>
+                                            <p class="expense"><%= recent.amount %></p>
                                         </div>
                                       <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex align-items-center">
                                             <i class="fas fa-calendar-day"></i>
-                                          <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                          <p class="mb-0 text-small text-muted"><%= recent.date.toLocaleDateString() %> </p>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="list align-items-center border-bottom py-2">
-                                    <div class="wrapper w-100">
-                                        <div class="w-100-content">
-                                            <p class="mb-2 font-weight-medium">Bill</p>
-                                            <p class="expense">$100</p>
-                                        </div>
-                                      <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-calendar-day"></i>
-                                          <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="list align-items-center border-bottom py-2">
-                                    <div class="wrapper w-100">
-                                        <div class="w-100-content">
-                                            <p class="mb-2 font-weight-medium">Entertain</p>
-                                            <p class="expense">$50</p>
-                                        </div>
-                                      <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-calendar-day"></i>
-                                          <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="list align-items-center border-bottom py-2">
-                                    <div class="wrapper w-100">
-                                        <div class="w-100-content">
-                                            <p class="mb-2 font-weight-medium">Wearing</p>
-                                            <p class="expense">$80</p>
-                                        </div>
-                                      <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-calendar-day"></i>
-                                          <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
+                                  </div>                              
+                                  <% } %>
                                   <div class="detail">
                                     <p class="detail-content">
-                                        <a href="#" class="fw-bold text-primary">Show all <i class="fas fa-angle-right"></i></a>
+                                        <a href="/expense" class="fw-bold text-primary">Show all <i class="fas fa-angle-right"></i></a>
                                     </p>
                                 </div>
                                 </div>
@@ -229,42 +195,20 @@
     </script>
     
     <!---------- Apexcharts ------->
-    <script>
-      window.Promise ||
-        document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
-        )
-      window.Promise ||
-        document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
-        )
-      window.Promise ||
-        document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
-        )
-    </script>
-    <script>
-      // Replace Math.random() with a pseudo-random number generator to get reproducible results in e2e tests
-      // Based on https://gist.github.com/blixt/f17b47c62508be59987b
-      var _seed = 42;
-      Math.random = function() {
-        _seed = _seed * 16807 % 2147483647;
-        return (_seed - 1) / 2147483646;
-      };
-    </script>
     <script src="../../../dist/apexcharts.js"></script>
     <div id="areaChart"></div>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
 
     <script>
+  
       var areaChartOptions = {
         series: [{
             name: 'Income',
-            data: [31, 40, 58, 51, 42, 109, 100, 55, 70, 65, 60, 42]
+            data: [`<%= income[0]%>`, `<%= income[1]%>`, `<%= income[2]%>`, `<%= income[3]%>`, `<%= income[4]%>`, `<%= income[5]%>`, `<%= income[6]%>`, `<%= income[7]%>`, `<%= income[8]%>`, `<%= income[9]%>`, `<%= income[10]%>`, `<%= income[11]%>`]
             }, {
             name: 'Expense',
-            data: [11, 32, 45, 32, 34, 52, 41, 22, 25, 15, 29, 24]
+            data: [`<%= expense[0]%>`, `<%= expense[1]%>`, `<%= expense[2]%>`, `<%= expense[3]%>`, `<%= expense[4]%>`, `<%= expense[5]%>`, `<%= expense[6]%>`, `<%= expense[7]%>`, `<%= expense[8]%>`, `<%= expense[9]%>`, `<%= expense[10]%>`, `<%= expense[11]%>`]
         }],
 
         chart: {
@@ -318,22 +262,7 @@
       var areaChart = new ApexCharts(document.querySelector("#area-chart"), areaChartOptions);
       areaChart.render();
 
-        $.getJSON('https://github.com/NHIMCOII/Financial_Management_System/blob/thanhan-dev/incomes.json', function(response) {
-          console.log(response)
-          areaChart.updateSeries([
-            {
-              name: 'Income',
-              data: [1,2]
-            },
-            {
-              name: 'Expense',
-              data: [3,4]
-            }
-          ])
-        })
-        .fail(function(){
-          console.log("An error has occurred.");
-      });
+        
     </script>
 
 

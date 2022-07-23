@@ -96,6 +96,33 @@ module.exports = class Expense {
         }
     }
 
+    static async sumOfExpenseByCategory(user_id, parent_id){
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "SELECT SUM(E.amount) AS total FROM expenses AS E, categories AS C, wallets AS W WHERE E.category_id = C.category_id AND C.parent_id = @parent_id AND E.wallet_id = W.wallet_id AND W.id = @user_id GROUP BY C.parent_id"
+            let res = await pool.request()
+            .input('user_id', sql.Int, user_id)
+            .input('parent_id', sql.Int, parent_id)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
+    }
+
+    static async recentExpenses(user_id){
+        try{
+            let pool = await sql.connect(config);
+            const sqlString = "SELECT TOP 4 * FROM expenses AS E, categories AS C, wallets AS W WHERE E.category_id = C.category_id AND E.wallet_id = W.wallet_id AND W.id = @user_id AND E.category_id != 1 ORDER BY E.[date] DESC"
+            let res = await pool.request()
+            .input('user_id', sql.Int, user_id)
+            .query(sqlString);
+            return res.recordsets;
+        } catch (error){
+            console.log(" mathus-error :" + error);
+        }
+    }
+
     static async fetchAll(user_id) {
         try{
             let pool = await sql.connect(config);
