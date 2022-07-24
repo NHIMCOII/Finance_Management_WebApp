@@ -39,26 +39,6 @@ table td {
     justify-content: center;
     gap: 10px;
 }
-.action_btn>a {
-    text-decoration: none;
-    color: #444;
-    background: #fff;
-    border: 1px solid;
-    display: inline-block;
-    padding: 7px 20px;
-    font-weight: bold;
-    border-radius: 3px;
-    transition: 0.1s ease-in-out;
-}
-.action_btn>a:nth-child(1) {
-    border-color: #f4c22b;
-}
-.action_btn>a:nth-child(2) {
-    border-color: #f44236;
-}
-.action_btn>a:hover {
-    box-shadow: 0 3px 8px #0003;
-}
 
 table>tbody>tr {
     background-color: #fff;
