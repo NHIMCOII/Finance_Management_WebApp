@@ -1,186 +1,178 @@
 <%- include('./includes/head.ejs') %>
 <body>
 
-<%- include('./includes/navigation.ejs') %>
+    <%- include('./includes/navigation.ejs') %>
 <!-- main content -->
-<!-- [ Main Content ] start -->
-
-<div class="pcoded-main-container">
-    <div class="pcoded-wrapper">
-        <div class="pcoded-content">
-            <div class="pcoded-inner-content">
-                <!-- [ breadcrumb ] start -->
-                <div class="page-header">
-                    <div class="page-block">
-                        <div class="row align-items-center">
-                            <div class="col-md-12">
-                                <div class="page-header-title">
-                                    <h5 class="m-b-10">MONTHLY BALANCE</h5>
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">MONTHLY BALANCE</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="#">Monthly Balance</a></li>
+                                    </ul>
                                 </div>
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/dashboard"><i
-                                                    class="feather icon-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="#">Monthly Balance</a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- [ breadcrumb ] end -->
-                <div class="h-main-body">
-                    <div class="page-wrapper">
-                        <!-- [ Main Content ] start -->
-                        <div class="row">
-                            <div class="month-chart">
-                                <div class="month-chart-bar">
+                    <!-- [ breadcrumb ] end -->
+                    <div class="h-main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <div class="month-chart">
+                                  <div class="month-chart-bar">
                                     <p class="month-chart-title">Monthly Balance</p>
                                     <div id="barchart"></div>
+                                  </div>                                  
                                 </div>
                             </div>
+                              <div class="row">
+                                <div id="chartdiv"></div>
+                              </div>
                         </div>
-                        <div class="row">
-                            <div id="chartdiv"></div>
+                    </div>
+                            <!-- [ Main Content ] end -->
                         </div>
                     </div>
                 </div>
-                <!-- [ Main Content ] end -->
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
-<!-- [ Main Content ] end -->
+    <!-- [ Main Content ] end -->
 <!-- end of main -->
-<%- include('./includes/script.ejs') %>
-<!---------- Apexcharts ------->
-<style>
-    #chartdiv {
+    <%- include('./includes/script.ejs') %>
+    <!---------- Apexcharts ------->
+    <style>
+      #chartdiv {
         width: 100%;
         height: 500px;
-    }
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+      }
+      </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script  src="https://cdn.amcharts.com/lib/5/percent.js"></script>
 
-<script>
-    var option1 = {
-        series: [{
-            name: 'Income',
-            data: [`<%= income[0] %>`, `<%= income[1] %>`, `<%= income[2] %>`, `<%= income[3] %>`, `<%= income[4] %>`, `<%= income[5] %>`, `<%= income[6] %>`, `<%= income[7] %>`, `<%= income[8] %>`, `<%= income[9] %>`, `<%= income[10] %>`, `<%= income[11] %>`]
+    <script>
+      var option1 = {
+          series: [{
+          name: 'Income',
+          data: [`<%= income[0]%>`, `<%= income[1]%>`, `<%= income[2]%>`, `<%= income[3]%>`, `<%= income[4]%>`, `<%= income[5]%>`, `<%= income[6]%>`, `<%= income[7]%>`, `<%= income[8]%>`, `<%= income[9]%>`, `<%= income[10]%>`, `<%= income[11]%>`]
         }, {
-            name: 'Expense',
-            data: [`<%= expense[0] %>`, `<%= expense[1] %>`, `<%= expense[2] %>`, `<%= expense[3] %>`, `<%= expense[4] %>`, `<%= expense[5] %>`, `<%= expense[6] %>`, `<%= expense[7] %>`, `<%= expense[8] %>`, `<%= expense[9] %>`, `<%= expense[10] %>`, `<%= expense[11] %>`]
+          name: 'Expense',
+          data: [`<%= expense[0]%>`, `<%= expense[1]%>`, `<%= expense[2]%>`, `<%= expense[3]%>`, `<%= expense[4]%>`, `<%= expense[5]%>`, `<%= expense[6]%>`, `<%= expense[7]%>`, `<%= expense[8]%>`, `<%= expense[9]%>`, `<%= expense[10]%>`, `<%= expense[11]%>`]
         }],
-        chart: {
-            type: 'bar',
-            height: 350
+          chart: {
+          type: 'bar',
+          height: 350
         },
         plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
+          bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
+          },
         },
         dataLabels: {
-            enabled: false
+          enabled: false
         },
         stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+          show: true,
+          width: 2,
+          colors: ['transparent']
         },
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          categories: ['Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct','Nov','Dec'],
         },
         yaxis: {
-            title: {
-                text: 'Amount (VND)'
-            }
+          title: {
+            text: 'Amount (VND)'
+          }
         },
         fill: {
-            opacity: 1
+          opacity: 1
         },
         tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " VND"
-                }
+          y: {
+            formatter: function (val) {
+              return  val + " VND"
             }
-        },
-    };
+          }
+        }
+        };
 
-    var chart = new ApexCharts(document.querySelector("#barchart"), option1);
-    chart.render();
-</script>
-
+        var chart = new ApexCharts(document.querySelector("#barchart"), option1);
+        chart.render();
+    </script>
+    
 <script>
-    // Create root and chart
-    var root = am5.Root.new("chartdiv");
-    var chart = root.container.children.push(
-        am5percent.PieChart.new(root, {
-            radius: am5.percent(70),
-            innerRadius: am5.percent(50),
-            layout: root.verticalLayout
-        })
-    );
-
-    // Define data
-    var data = [{
+  // Create root and chart
+  var root = am5.Root.new("chartdiv");
+  var chart = root.container.children.push(
+  am5percent.PieChart.new(root, {
+    radius: am5.percent(70),
+    innerRadius: am5.percent(50)
+  })
+);
+  
+  // Define data
+  var data = [{
         country: "Auto",
-        sales: `<%= category[0] %>`
-    }, {
+        sales: `<%= category[0]%>`
+      }, {
         country: "Charity",
-        sales: `<%= category[1] %>`
-    }, {
+        sales: `<%= category[1]%>`
+      }, {
         country: "Childcare",
-        sales: `<%= category[2] %>`
-    },
-        {
-            country: "Education",
-            sales: `<%= category[3] %>`
-        }, {
-            country: "Necessities",
-            sales: `<%= category[4] %>`
-        }, {
-            country: "Entertainment",
-            sales: `<%= category[5] %>`
-        }, {
-            country: "Health",
-            sales: `<%= category[6] %>`
-        }, {
-            country: "Utilities",
-            sales: `<%= category[7] %>`
-        }, {
-            country: "Others",
-            sales: `<%= category[8] %>`
-        }];
-
-    // Create series
-    var series = chart.series.push(
-        am5percent.PieSeries.new(root, {
-            name: "Series",
-            valueField: "sales",
-            categoryField: "country"
-        })
-    );
-    series.data.setAll(data);
-
-    // Add legend
-    var legend = chart.children.push(am5.Legend.new(root, {
-        x: am5.percent(50),
-        centerX: am5.percent(50),
-        layout: root.verticalLayout
-        // centerX: am5.percent(10),
-        // y: am5.percent(88),
-        // x: am5.percent(0),
-        // layout: root.verticalLayout,
-        // responsive: True
-    }));
-
-    legend.data.setAll(series.dataItems);
-</script>
+        sales: `<%= category[2]%>`
+      },
+      {
+        country: "Education",
+        sales: `<%= category[3]%>`
+      },{
+        country: "Necessities",
+        sales: `<%= category[4]%>`
+      },{
+        country: "Entertainment",
+        sales: `<%= category[5]%>`
+      },{
+        country: "Health",
+        sales: `<%= category[6]%>`
+      },{
+        country: "Utilities",
+        sales: `<%= category[7]%>`
+      },{
+        country: "Others",
+        sales: `<%= category[8]%>`
+      }];
+  
+  // Create series
+  var series = chart.series.push(
+    am5percent.PieSeries.new(root, {
+      name: "Series",
+      valueField: "sales",
+      categoryField: "country"
+    })
+  );
+  series.data.setAll(data);
+  
+  // Add legend
+  var legend = chart.children.push(am5.Legend.new(root, {
+    centerX: am5.percent(100),
+    x: am5.percent(95),
+    layout: root.verticalLayout
+  }));
+  
+  legend.data.setAll(series.dataItems);
+  </script>
 </body>
 </html>
