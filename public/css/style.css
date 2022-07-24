@@ -74,6 +74,10 @@ body {
   outline: none;
 }
 
+.errorMessage{
+  color: red;
+  margin-bottom: 20px;
+}
 a:hover {
   outline: none;
   text-decoration: none;
@@ -7846,6 +7850,10 @@ a.btn-theme.active {
   color: #fff;
   background-color: #e0ab0c;
   border-color: #d4a20b;
+}
+
+.btn-sb{
+float: right;
 }
 
 .btn-danger {
