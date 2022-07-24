@@ -59,14 +59,13 @@ exports.postEditWallet = (req,res,next) => {
     const acc_balance = req.body.acc_balance
     const percentage = req.body.percentage
     const period = req.body.period
-    const wallet = new Wallet(null,req.user.id,name,type,acc_balance,percentage,period)
     Wallet.findByPk(wallet_id)
     .then(([thisWallet]) => {
-        const wallet = new Wallet(thisWallet[0].wallet_id,thisWallet[0].id,thisWallet[0].name,thisWallet[0].type,(Number(thisWallet[0].acc_balance) + Number(amount)),thisWallet[0].percentage,thisWallet[0].period)
-        return wallet
-    })
-    .then(wallet => {
+        const wallet = new Wallet(thisWallet[0].wallet_id,thisWallet[0].id,name,type,acc_balance,percentage,period)
         return wallet.update()
+    })
+    .then(() => {
+        res.redirect('/myWallets')
     })
     .catch(err => console.log(err))
 }
