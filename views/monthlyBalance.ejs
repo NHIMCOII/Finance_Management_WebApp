@@ -109,7 +109,7 @@
                     return val + " VND"
                 }
             }
-        }
+        },
     };
 
     var chart = new ApexCharts(document.querySelector("#barchart"), option1);
@@ -122,7 +122,8 @@
     var chart = root.container.children.push(
         am5percent.PieChart.new(root, {
             radius: am5.percent(70),
-            innerRadius: am5.percent(50)
+            innerRadius: am5.percent(50),
+            layout: root.verticalLayout
         })
     );
 
@@ -169,9 +170,14 @@
 
     // Add legend
     var legend = chart.children.push(am5.Legend.new(root, {
-        centerX: am5.percent(100),
-        x: am5.percent(95),
+        x: am5.percent(50),
+        centerX: am5.percent(50),
         layout: root.verticalLayout
+        // centerX: am5.percent(10),
+        // y: am5.percent(88),
+        // x: am5.percent(0),
+        // layout: root.verticalLayout,
+        // responsive: True
     }));
 
     legend.data.setAll(series.dataItems);
