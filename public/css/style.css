@@ -74,6 +74,11 @@ body {
   outline: none;
 }
 
+.errorMessage{
+  color: red;
+  margin-bottom: 20px;
+}
+
 a:hover {
   outline: none;
   text-decoration: none;
