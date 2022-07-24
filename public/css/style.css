@@ -10554,13 +10554,26 @@ div.code-toolbar > .toolbar span:hover {
 .fixed-button {
 	position: fixed;
 	bottom: -50px;
-	right: 30px;
+	right: 200px;
 	opacity: 0;
 	z-index: 9;
 	-webkit-transition: all 0.5s ease;
 	transition: all 0.5s ease;
 	-webkit-animation: pulse 2s infinite;
 	animation: pulse 2s infinite;
+	border-radius: 0.25rem
+}
+
+.fixed-button2 {
+	position: fixed;
+	bottom: -50px;
+	right: 30px;
+	opacity: 0;
+	z-index: 9;
+	-webkit-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	-webkit-animation: pulse1 2s infinite;
+	animation: pulse1 2s infinite;
 	border-radius: 0.25rem
 }
 
@@ -10574,10 +10587,26 @@ div.code-toolbar > .toolbar span:hover {
 	font-size: 16px
 }
 
+.fixed-button2 .btn {
+	margin: 0;
+	background: #ec0808;
+	border: none;
+	border-bottom: 2px solid #f1456c;
+	text-transform: capitalize;
+	font-weight: bold;
+	font-size: 16px
+}
+
 .fixed-button .btn:hover {
 	background: #79b530;
 	border: none;
 	border-bottom: 2px solid #5e8d25
+}
+
+.fixed-button2 .btn:hover {
+	background: #f50202;
+	border: none;
+	border-bottom: 2px solid #ea5163
 }
 
 .fixed-button:hover {
@@ -10585,7 +10614,17 @@ div.code-toolbar > .toolbar span:hover {
 	animation: none
 }
 
+.fixed-button2:hover {
+	-webkit-animation: none;
+	animation: none
+}
+
 .fixed-button.active {
+	bottom: 50px;
+	opacity: 1
+}
+
+.fixed-button2.active {
 	bottom: 50px;
 	opacity: 1
 }
@@ -10605,10 +10644,40 @@ div.code-toolbar > .toolbar span:hover {
 	}
 }
 
+@-webkit-keyframes pulse1 {
+	0% {
+		-webkit-box-shadow: 0 0 0 0 rgba(181, 48, 48, 0.3);
+		box-shadow: 0 0 0 0 rgba(181, 48, 48, 0.3)
+	}
+	70% {
+		-webkit-box-shadow: 0 0 0 20px rgba(4, 169, 245, 0);
+		box-shadow: 0 0 0 20px rgba(4, 169, 245, 0)
+	}
+	100% {
+		-webkit-box-shadow: 0 0 0 0 rgba(4, 169, 245, 0);
+		box-shadow: 0 0 0 0 rgba(4, 169, 245, 0)
+	}
+}
+
 @keyframes pulse {
 	0% {
 		-webkit-box-shadow: 0 0 0 0 rgba(121, 181, 48, 0.3);
 		box-shadow: 0 0 0 0 rgba(121, 181, 48, 0.3)
+	}
+	70% {
+		-webkit-box-shadow: 0 0 0 20px rgba(4, 169, 245, 0);
+		box-shadow: 0 0 0 20px rgba(4, 169, 245, 0)
+	}
+	100% {
+		-webkit-box-shadow: 0 0 0 0 rgba(4, 169, 245, 0);
+		box-shadow: 0 0 0 0 rgba(4, 169, 245, 0)
+	}
+}
+
+@keyframes pulse1 {
+	0% {
+		-webkit-box-shadow: 0 0 0 0 rgba(181, 48, 48, 0.3);
+		box-shadow: 0 0 0 0 rgba(181, 48, 48, 0.3)
 	}
 	70% {
 		-webkit-box-shadow: 0 0 0 20px rgba(4, 169, 245, 0);

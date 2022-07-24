@@ -91,7 +91,8 @@
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label for="exampleFormControlTextarea1">Note</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                        <input required value="<%= wallet.note  %>" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name">
+<!--                                                    <textarea value="Xin chào thế giới" class="form-control" id="exampleFormControlTextarea1" rows="3" aria-label="Default" aria-describedby="inputGroup-sizing-default"></textarea>-->
                                                 </div>
                                                 <div class="col-md-5">
                                                     <input type="hidden" value="<%= wallet.wallet_id%>" name="wallet_id">

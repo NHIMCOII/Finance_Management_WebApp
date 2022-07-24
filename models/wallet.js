@@ -2,7 +2,7 @@ const sql = require('mssql');
 const config = require('../utils/dbconfig');
 
 module.exports = class Wallet {
-    constructor(wallet_id,id,name,type,acc_balance,percentage,period) {
+    constructor(wallet_id,id,name,type,acc_balance,percentage,period, note) {
         this.wallet_id = wallet_id;
         this.id = id;
         this.name = name;
@@ -10,12 +10,13 @@ module.exports = class Wallet {
         this.acc_balance = acc_balance;
         this.percentage = percentage;
         this.period = period;
+        this.note = note;
     }
 
     async save() {
         try{
             let pool = await sql.connect(config);
-            const sqlString = "INSERT INTO wallets (id,name,type,acc_balance,percentage,period) VALUES (@id,@name,@type,@acc_balance,@percentage,@period)"
+            const sqlString = "INSERT INTO wallets (id,name,type,acc_balance,percentage,period,note) VALUES (@id,@name,@type,@acc_balance,@percentage,@period,@note)"
             let res = await pool.request()
             .input('id', sql.Int, this.id)
             .input('name', sql.NVarChar, this.name)
@@ -23,6 +24,7 @@ module.exports = class Wallet {
             .input('acc_balance', sql.Int, this.acc_balance)
             .input('percentage', sql.Float, this.percentage)
             .input('period', sql.Int, this.period)
+            .input('note', sql.NVarChar, this.note)
             .query(sqlString);
             return res.recordsets;
         } catch (error){
@@ -33,7 +35,7 @@ module.exports = class Wallet {
     async update() {
         try{
             let pool = await sql.connect(config);
-            const sqlString = "UPDATE wallets SET name = @name, type = @type, acc_balance = @acc_balance, percentage = @percentage, period = @period  WHERE wallet_id = @wallet_id"
+            const sqlString = "UPDATE wallets SET name = @name, type = @type, acc_balance = @acc_balance, percentage = @percentage, period = @period, note=@note  WHERE wallet_id = @wallet_id"
             let res = await pool.request()
             .input('name', sql.NVarChar, this.name)
             .input('type', sql.NVarChar, this.type)
@@ -41,6 +43,7 @@ module.exports = class Wallet {
             .input('percentage', sql.Float, this.percentage)
             .input('period', sql.Int, this.period)
             .input('wallet_id', sql.Int, this.wallet_id)
+            .input('note', sql.NVarChar, this.note)
             .query(sqlString);
             return res.recordsets;
         } catch (error){
