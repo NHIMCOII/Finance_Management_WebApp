@@ -57,7 +57,7 @@
 <style>
     #chartdiv {
         width: 100%;
-        height: 800px;
+        height: 500px;
     }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
@@ -170,13 +170,13 @@
 
     // Add legend
     var legend = chart.children.push(am5.Legend.new(root, {
-        x: am5.percent(85),
+        x: am5.percent(50),
         centerX: am5.percent(50),
-        // layout: root.horizontalLayout,
+        layout: root.verticalLayout
         // centerX: am5.percent(10),
-        y: am5.percent(15),
+        // y: am5.percent(88),
         // x: am5.percent(0),
-        layout: root.verticalLayout,
+        // layout: root.verticalLayout,
         // responsive: True
     }));
 
