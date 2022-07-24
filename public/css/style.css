@@ -70,8 +70,18 @@ body {
   position: relative;
 }
 
+.errorMessage{
+  color: red;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
 *:focus {
   outline: none;
+}
+
+.errorMessage{
+  color: red;
+  margin-bottom: 20px;
 }
 
 a:hover {
@@ -7852,6 +7862,7 @@ a.btn-theme.active {
   color: #fff;
   background-color: #f44236;
   border-color: #f44236;
+  margin-left: 40%;
 }
 .btn-danger:hover {
   color: #fff;

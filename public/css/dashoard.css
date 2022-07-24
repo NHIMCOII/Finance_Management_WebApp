@@ -151,7 +151,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,8 +181,8 @@
     
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-    height: 200px;
-    width: 300px !important;
+    height: 100px;
+    width: 280px !important;
     background-image:linear-gradient(rgb(39, 72, 238),rgba(163, 53, 232, 0.8));
     opacity: 85%;
     border-radius: 20px;
@@ -222,8 +221,13 @@
 
   }
   .card-balance {
+<<<<<<< HEAD
+    font-weight:700;
+    font-size: 30px;
+=======
     font-weight:600;
     font-size: 35px;
+>>>>>>> 7cbdef8d0ea0580889d6a02a8d0aedf7e3263385
     margin-top:10px;
   }
   .card-icon {
@@ -263,16 +267,16 @@
   .swiper-pagination-bullet-active{
     background-color: #4070F4;
   }
-  .db-add-wallet{
-    /*display: flex;*/
-    /*flex-direction: column;*/
+  /* .db-add-wallet{
+    display: flex;*/
+    /* flex-direction: column; */
     /*align-items: center;*/
     /*justify-content: center;*/
     /*!*margin-left: 100px;*!*/
-    /*!*margin-top: 100px;*!*/
-  }
+    /*!*margin-top: 100px;*!
+  } */
   .fa-plus-circle{
-    font-size: 50px;
+    font-size: 80px;
   }
   .add-inf{
     margin-top: 10px;
@@ -285,5 +289,8 @@
     }
     .swiper-navBtn{
       display: none;
+    }
+    .db-card{
+      height: 50px !important;
     }
 }
