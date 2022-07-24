@@ -1,13 +1,13 @@
 const config = {
-    server: "localhost",
+    server: "DESKTOP-62N9FIC",
     // DESKTOP-62N9FIC port: 54568
     // ANDIEZS-LAP port: 62617
     // DESKTOP-0C831A9: 56542
     user: "sa",
-    password: "Docker@123",
-    database: "master",
+    password: "123456",
+    database: "db-project",
     driver: "msnodesqlv8",
-    port: 1433, // make sure to change port
+    port: 54568, // make sure to change port
     dialect: "mssql",
     options: {
         trustedconnection: true,
