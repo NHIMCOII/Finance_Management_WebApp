@@ -34,8 +34,7 @@ exports.postAddWallet = (req,res,next) => {
     const name = req.body.name
     const percentage = req.body.percentage
     const period = req.body.period
-    const note = req.body.note
-    const wallet = new Wallet(null,req.user.id,name,type,acc_balance,percentage,period,note)
+    const wallet = new Wallet(null,req.user.id,name,type,acc_balance,percentage,period)
     wallet.save()
     return res.redirect('/myWallets')
 }
@@ -92,10 +91,9 @@ exports.postMoneyTransfer = (req,res,next) => {
     const wallet_id_B = req.body.wallet_id_B
     const date = req.body.date
     const amount = req.body.amount
-    const note = "Transfer from wallet " + wallet_id_A + " to wallet " + wallet_id_B + '.Note: ' + req.body.note
-    const income = new Income(1,null,amount,note,date,wallet_id_B) // 9: money transfer in dbo.category
+    const income = new Income(1,null,amount,date,wallet_id_B) // 9: money transfer in dbo.category
     income.save()
-    const expense = new Expense(1,null,amount,note,date,wallet_id_A)
+    const expense = new Expense(1,null,amount,date,wallet_id_A)
     expense.save()
     // increase money in wallet B
     Wallet.findByPk(wallet_id_B)
