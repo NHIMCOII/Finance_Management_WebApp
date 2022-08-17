@@ -5,7 +5,6 @@ const express = require("express");
 
 const authController = require("../controllers/auth");
 const User = require("../models/user");
-const { promiseImpl } = require("ejs");
 
 const router = express.Router();
 
@@ -23,7 +22,7 @@ router.post(
         // }
         // return true;
         return User.findByEmail(value).then((userDoc) => {
-          if (userDoc[0].length != 0) {
+          if (userDoc) {
             return Promise.reject(
               "Email exists already, please pick a different one."
             );

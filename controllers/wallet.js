@@ -16,7 +16,7 @@ exports.getMyWallet = (req,res,next) => {
         console.log(err);
     });
 }
-
+ 
 exports.getAddWallet = (req,res,next) => {   
     res.render('addWallet',{
         user: req.user,

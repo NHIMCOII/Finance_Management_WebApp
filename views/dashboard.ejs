@@ -29,33 +29,33 @@
                         <!-- [ Main Content ] start -->
                           <div class="slide-content">
                               <div class="card-wrapper swiper-wrapper">
-                                <% if(wallets.length === 0) {%> 
-                                  <div>-------------------------------------------------------- YOU DONT HAVE ANY WALLET, PLEASE ADD A NEW ONE -----------------------------------------------------</div>
-                                <% } %> 
-                                  <% for (let wallet of wallets) { %> 
+                                <% //if(wallets.length === 0) {%> 
+                                  <!-- <div>-------------------------------------------------------- YOU DONT HAVE ANY WALLET, PLEASE ADD A NEW ONE -----------------------------------------------------</div> -->
+                                <% //} %> 
+                                  <% //for (let wallet of wallets) { %> 
                                 <div class="db-card swiper-slide">
                                     <div class='top-block'>
                                       <div class='card-chip'>
                                         <i class="fas fa-credit-card"></i>
                                       </div>
                                       <span class='card-name'>
-                                        <%= wallet.type%> 
+                                        <%= //wallet.type%> 
                                       </span>
                                     </div>
                                     <div class='bottom-block'>
                                          <div class='balance'>
                                               <div class='card-balance'>
-                                                <% if(Math.abs(wallet.acc_balance) >=1000000){ %> 
-                                                 <%=wallet.acc_balance / 1000000%>M VND
-                                                 <% }else{ %>
-                                                 <%=wallet.acc_balance / 1000 %>K VND
-                                                  <% } %> 
+                                                <% //if(Math.abs(wallet.acc_balance) >=1000000){ %> 
+                                                 <%=//wallet.acc_balance / 1000000%>M VND
+                                                 <% //}else{ %>
+                                                 <%=//wallet.acc_balance / 1000 %>K VND
+                                                  <% //} %> 
                                               </div>
-                                              <div><%=wallet.name%></div>
+                                              <div><%=//wallet.name%></div>
                                          </div>                                       
                                     </div>
                                   </div>
-                                <% } %> 
+                                <%// } %> 
                                   
                                  
                               </div>
@@ -78,22 +78,22 @@
                             <div class="recent-card ">
                                 <div class="recent-card-body ">
                                   <h4 class="card-title">Recent Expenses</h4>                               
-                                  <% for (let recent of recents){ %>
+                                  <% //for (let recent of recents){ %>
                                   <div class="list align-items-center border-bottom py-2">
                                     <div class="wrapper w-100">
                                         <div class="w-100-content">
-                                            <p class="mb-2 font-weight-medium"><%= recent.name[0] %></p>
-                                            <p class="expense"><%= recent.amount %></p>
+                                            <p class="mb-2 font-weight-medium"><%= //recent.name[0] %></p>
+                                            <p class="expense"><%= //recent.amount %></p>
                                         </div>
                                       <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex align-items-center">
                                             <i class="fas fa-calendar-day"></i>
-                                          <p class="mb-0 text-small text-muted"><%= recent.date.toLocaleDateString() %> </p>
+                                          <p class="mb-0 text-small text-muted"><%= //recent.date.toLocaleDateString() %> </p>
                                         </div>
                                       </div>
                                     </div>
                                   </div>                              
-                                  <% } %>
+                                  <% //} %>
                                   <div class="detail">
                                     <p class="detail-content">
                                         <a href="/expense" class="fw-bold text-primary">Show all <i class="fas fa-angle-right"></i></a>
@@ -204,10 +204,10 @@
       var areaChartOptions = {
         series: [{
             name: 'Incomes',
-            data: [`<%= income[0]%>`, `<%= income[1]%>`, `<%= income[2]%>`, `<%= income[3]%>`, `<%= income[4]%>`, `<%= income[5]%>`, `<%= income[6]%>`, `<%= income[7]%>`, `<%= income[8]%>`, `<%= income[9]%>`, `<%= income[10]%>`, `<%= income[11]%>`]
+            data: [`<%=45// income[0]%>`, `<%=66// income[1]%>`, `<%=85// income[2]%>`, `<%=47// income[3]%>`, `<%=26// income[4]%>`, `<%=76// income[5]%>`, `<%=36// income[6]%>`, `<%=78// income[7]%>`, `<%=25// income[8]%>`, `<%=88// income[9]%>`, `<%=25// income[10]%>`, `<%=36// income[11]%>`]
             }, {
             name: 'Expenses',
-            data: [`<%= expense[0]%>`, `<%= expense[1]%>`, `<%= expense[2]%>`, `<%= expense[3]%>`, `<%= expense[4]%>`, `<%= expense[5]%>`, `<%= expense[6]%>`, `<%= expense[7]%>`, `<%= expense[8]%>`, `<%= expense[9]%>`, `<%= expense[10]%>`, `<%= expense[11]%>`]
+            data: [`<%=57// expense[0]%>`, `<%=25// expense[1]%>`, `<%=66// expense[2]%>`, `<%=78// expense[3]%>`, `<%=35// expense[4]%>`, `<%=87// expense[5]%>`, `<%=46// expense[6]%>`, `<%=55// expense[7]%>`, `<%=57// expense[8]%>`, `<%=57// expense[9]%>`, `<%=36// expense[10]%>`, `<%=57// expense[11]%>`]
         }],
 
         chart: {
