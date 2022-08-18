@@ -1,23 +1,23 @@
-const mongodb = require('mongodb');
-
-const ObjectId = mongodb.ObjectId;
-
 const User = require('../models/user');
-
+const Wallet = require('../models/wallet');
 exports.getIndex = (req,res,next) => {
     res.render('index');
 }
 
 exports.getDashboard = (req,res,next) => {
-    res.render('dashboard',{
-        pageTitle: 'Dashboard',
-        path: '/dashboard',
-        user: req.user,
-        // income: income,
-        // expense: expense,
-        // recents: recentExpenses,
-        // wallets: wallets
+    Wallet.fetchAll(req.user._id)
+    .then(wallets => {
+        res.render('dashboard',{
+            pageTitle: 'Dashboard',
+            path: '/dashboard',
+            user: req.user,
+            // income: income,
+            // expense: expense,
+            // recents: recentExpenses,
+            wallets: wallets
+        })
     })
+    .catch(err => console.log(err));
 }
 
 exports.getProfile = (req,res,next) => {
@@ -58,8 +58,7 @@ exports.postEditProfile = (req,res,next) => {
         updatedDob = null;
     }
     const user = new User(updatedUsername,updatedEmail,req.user.password,updatedFirstName,updatedLastName,updatedGender,updatedDob,updatedPhone,updatedJob,updatedFacebook,updatedLinkedin,updatedAddress);
-    console.log(user);
-    user.update(new ObjectId(req.user._id))
+    user.update(req.user._id)
     .then(result => {
         res.redirect('/profile');
     })

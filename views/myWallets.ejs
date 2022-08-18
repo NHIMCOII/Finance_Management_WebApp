@@ -62,10 +62,10 @@
                                                           <td><%= wallet.acc_balance %></td>
                                                           <td>
                                                             <span class="action_btn">
-                                                              <a href="/editWallet/<%=wallet.wallet_id%>"><button class="btn btn-warning" type="submit">Edit</button></a>
+                                                              <a href="/editWallet/<%=wallet._id.toString()%>"><button class="btn btn-warning" type="submit">Edit</button></a>
                                                               
                                                               <form action="/removeWallet" method="POST">
-                                                                  <input type="hidden" value="<%= wallet.wallet_id %>" name="wallet_id">
+                                                                  <input type="hidden" value="<%= wallet._id %>" name="wallet_id">
                                                                   <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                                                                   <button class="btn btn-danger" type="submit">Remove</button>
                                                               </form>

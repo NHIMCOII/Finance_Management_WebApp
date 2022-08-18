@@ -45,7 +45,7 @@
                                                         <select required class="mb-3 form-control" name="wallet_id_A">
                                                             <option>Select Wallet</option>
                                                             <% for (let wallet of wallets) { %>
-                                                                <option value="<%= wallet.wallet_id  %>"><%= wallet.name %>: <%= wallet.acc_balance %> VND</option>
+                                                                <option value="<%= wallet._id  %>"><%= wallet.name %>: <%= wallet.acc_balance %> VND</option>
                                                             <% } %>
                                                         </select>
                                                     </div>
@@ -55,7 +55,7 @@
                                                         <select required class="mb-3 form-control" name="wallet_id_B">
                                                             <option>Select Wallet</option>
                                                             <% for (let wallet of wallets) { %>
-                                                                <option value="<%= wallet.wallet_id  %>"><%= wallet.name %>: <%= wallet.acc_balance %> VND</option>
+                                                                <option value="<%= wallet._id  %>"><%= wallet.name %>: <%= wallet.acc_balance %> VND</option>
                                                             <% } %>
                                                         </select>
                                                     </div>                                               

@@ -15,7 +15,7 @@ router.post('/addWallet',walletController.postAddWallet);
 
 router.get('/editWallet/:wallet_id',isAuth,walletController.getEditWallet);
 
-router.post('/editWallet',walletController.postEditWallet);
+router.post('/editWallet/:wallet_id',walletController.postEditWallet);
 
 router.get('/moneyTransfer',isAuth,walletController.getMoneyTransfer);
 

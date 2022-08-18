@@ -30,7 +30,7 @@ app.set('views', 'views');
 const indexRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth');
 // const userInputRoutes = require('./routes/userInput');
-// const walletRoutes = require('./routes/wallet');
+const walletRoutes = require('./routes/wallet');
 // const reportRoutes = require('./routes/report');
 
 
@@ -56,7 +56,6 @@ app.use((req,res,next) => {
 	}
     User.findByPk(req.session.user._id)
     .then(user => {
-        // console.log(user);
         req.user = user;
         next();
     })
@@ -72,7 +71,7 @@ app.use((req,res,next) => {
 app.use(indexRoutes);
 app.use(authRoutes);
 // app.use(userInputRoutes);
-// app.use(walletRoutes); 
+app.use(walletRoutes); 
 // app.use(reportRoutes);
 
 app.use(errorController.get404);

@@ -19,7 +19,7 @@
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
                                         <li class="breadcrumb-item"><a href="#">Edit Wallet</a></li>
-                                        <li class="breadcrumb-item"><a href="#"><%= wallet.wallet_id%></a></li>
+                                        <li class="breadcrumb-item"><a href="#"><%= wallet.name%></a></li>
                                         
                                     </ul>
                                 </div>
@@ -36,7 +36,7 @@
                                         <div class="card-header">
                                             <h5>Wallet's Info</h5>
                                         </div>
-                                        <form class="card-body" action="/editWallet" method="POST">
+                                        <form class="card-body" action="/editWallet/<%= wallet._id.toString() %> " method="POST">
 <!--                                            <h5>Enter your new earning</h5>-->
 <!--                                            <hr>-->
                                             <div class="row">
@@ -94,7 +94,7 @@
                                                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 </div>
                                                 <div class="col-md-5">
-                                                    <input type="hidden" value="<%= wallet.wallet_id%>" name="wallet_id">
+                                                    <input type="hidden" value="<%= wallet._id%>" name="wallet_id">
                                                     <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                 </div>

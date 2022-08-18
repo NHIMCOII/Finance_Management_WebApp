@@ -29,33 +29,33 @@
                         <!-- [ Main Content ] start -->
                           <div class="slide-content">
                               <div class="card-wrapper swiper-wrapper">
-                                <% //if(wallets.length === 0) {%> 
-                                  <!-- <div>-------------------------------------------------------- YOU DONT HAVE ANY WALLET, PLEASE ADD A NEW ONE -----------------------------------------------------</div> -->
-                                <% //} %> 
-                                  <% //for (let wallet of wallets) { %> 
+                                <% if(wallets.length === 0) {%> 
+                                  <div>-------------------------------------------------------- YOU DONT HAVE ANY WALLET, PLEASE ADD A NEW ONE -----------------------------------------------------</div>
+                                <% } %> 
+                                  <% for (let wallet of wallets) { %> 
                                 <div class="db-card swiper-slide">
                                     <div class='top-block'>
                                       <div class='card-chip'>
                                         <i class="fas fa-credit-card"></i>
                                       </div>
                                       <span class='card-name'>
-                                        <%= //wallet.type%> 
+                                        <%= wallet.type%> 
                                       </span>
                                     </div>
                                     <div class='bottom-block'>
                                          <div class='balance'>
                                               <div class='card-balance'>
-                                                <% //if(Math.abs(wallet.acc_balance) >=1000000){ %> 
-                                                 <%=//wallet.acc_balance / 1000000%>M VND
-                                                 <% //}else{ %>
-                                                 <%=//wallet.acc_balance / 1000 %>K VND
-                                                  <% //} %> 
+                                                <% if(Math.abs(wallet.acc_balance) >=1000000){ %> 
+                                                 <%=wallet.acc_balance / 1000000%>M VND
+                                                 <% }else{ %>
+                                                 <%=wallet.acc_balance / 1000 %>K VND
+                                                  <% } %> 
                                               </div>
-                                              <div><%=//wallet.name%></div>
+                                              <div><%=wallet.name%></div>
                                          </div>                                       
                                     </div>
                                   </div>
-                                <%// } %> 
+                                <%} %> 
                                   
                                  
                               </div>

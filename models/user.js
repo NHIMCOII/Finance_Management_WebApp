@@ -1,5 +1,3 @@
-const mongodb = require('mongodb');
-
 const getDb = require('../utils/database').getDb;
 
 class User {
@@ -30,30 +28,19 @@ class User {
     update(id) {
         const db = getDb();
         return db.collection('users')
-        .updateOne({_id: new mongodb.ObjectId(id)}, {$set: this })
-        .catch(err => console.log(err));
+        .updateOne({_id: id}, {$set: this })
     }
 
     static findByPk(id) {
         const db = getDb();
         return db.collection('users')
-        .find({_id: id})
-        .next()
-        .then(user => {
-            return user;
-        })
-        .catch(err => console.log(err));
+        .findOne({_id: id});
     }
 
     static findByEmail(email) {
         const db = getDb();
         return db.collection('users')
-        .find({email: email})
-        .next()
-        .then(user => {
-            return user;
-        })
-        .catch(err => console.log(err));
+        .findOne({email: email});
     }
 
 //     static async findRecentTransactions(id){
