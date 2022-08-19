@@ -1,14 +1,18 @@
 const getDb = require('../utils/database').getDb;
-const mongodb = require('mongodb')
+const { ObjectId } = require('mongodb');
+
 
 module.exports = class Wallet {
-    constructor(user_id,name,type,acc_balance,percentage,period) {
+    constructor(user_id,name,type,acc_balance,percentage,period,incomes,expenses,id) {
         this.user_id = user_id;
         this.name = name;
         this.type = type;
         this.acc_balance = acc_balance;
         this.percentage = percentage;
         this.period = period;
+        this.incomes = incomes;
+        this.expenses = expenses;
+        this._id = id;
     }
 
     save() {
@@ -20,15 +24,15 @@ module.exports = class Wallet {
         .catch(err => console.log(err));
     }
 
-    update(id) {
+    update() {
         const db = getDb();
         return db.collection('wallets')
-        .updateOne({_id: new mongodb.ObjectId(id)}, {$set: this })
+        .updateOne({_id: new ObjectId(this._id)}, {$set: {name: this.name,type: this.type,acc_balance: this.acc_balance, percentage: this.percentage, period: this.period, incomes: this.incomes, expenses: this.expenses} })
     }
 
     static DeleteWallet(id) {
         const db = getDb();
-        return db.collection('wallets').deleteOne({_id: new mongodb.ObjectId(id)})
+        return db.collection('wallets').deleteOne({_id: new ObjectId(id)})
         .then(() => {
             console.log('Deleted')
         })
@@ -38,7 +42,7 @@ module.exports = class Wallet {
     static findByPk(id) {
         const db = getDb();
         return db.collection('wallets')
-        .findOne({_id: new mongodb.ObjectId(id)})
+        .findOne({_id: new ObjectId(id)})
         .then(wallet => {
             return wallet;
         })

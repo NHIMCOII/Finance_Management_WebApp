@@ -57,8 +57,8 @@ exports.postEditProfile = (req,res,next) => {
     if(updatedDob === ''){
         updatedDob = null;
     }
-    const user = new User(updatedUsername,updatedEmail,req.user.password,updatedFirstName,updatedLastName,updatedGender,updatedDob,updatedPhone,updatedJob,updatedFacebook,updatedLinkedin,updatedAddress);
-    user.update(req.user._id)
+    const user = new User(updatedUsername,updatedEmail,req.user.password,updatedFirstName,updatedLastName,updatedGender,updatedDob,updatedPhone,updatedJob,updatedFacebook,updatedLinkedin,updatedAddress,null,req.user._id);
+    user.update()
     .then(result => {
         res.redirect('/profile');
     })

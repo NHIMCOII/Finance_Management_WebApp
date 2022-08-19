@@ -55,13 +55,13 @@ app.use((req,res,next) => {
 		return next(); 
 	}
     User.findByPk(req.session.user._id)
-    .then(user => {
-        req.user = user;
+    .then(user => { 
+        req.user = new User(user.username,user.email,user.password,user.firstName,user.lastName,user.gender,user.dob,user.phone,user.job,user.facebook,user.linkedin,user.address,user.myWallets,user._id);
         next();
     })
     .catch(err => console.log(err));
 })
-
+ 
 app.use((req,res,next) => {
 	res.locals.isAuthenticated = req.session.isLoggedIn;
 	res.locals.csrfToken = req.csrfToken();

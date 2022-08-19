@@ -1,7 +1,9 @@
+const { ObjectId } = require('mongodb');
+
 const getDb = require('../utils/database').getDb;
 
 class User {
-    constructor(username,email,password,firstName,lastName,gender,dob,phone,job,facebook,linkedin,address) {
+    constructor(username,email,password,firstName,lastName,gender,dob,phone,job,facebook,linkedin,address,myWallets,id) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -14,6 +16,8 @@ class User {
         this.facebook = facebook;
         this.linkedin = linkedin;
         this.address = address;
+        this.myWallets = myWallets;
+        this._id = id;
     }
 
     save() {
@@ -25,12 +29,29 @@ class User {
         .catch(err => console.log(err));
     }
 
-    update(id) {
+    update() {
         const db = getDb();
         return db.collection('users')
-        .updateOne({_id: id}, {$set: this })
+        .updateOne({_id: new ObjectId(this._id)}, {$set: this })
     }
 
+    addToMyWallets(wallet) {
+        let result = null
+        if(!this.myWallets || this.myWallets.length == 0){
+            const myWallets = []
+            myWallets.push(new ObjectId(wallet._id))   
+            result = myWallets;
+        } else {
+            const myWallets = [... this.myWallets]
+            myWallets.push(new ObjectId(wallet._id))
+            result = myWallets;
+        }
+
+        const db = getDb();
+        return db.collection('users')
+        .updateOne({_id: new ObjectId(this._id)}, {$set: { myWallets: result} })    
+    }
+    
     static findByPk(id) {
         const db = getDb();
         return db.collection('users')
@@ -42,6 +63,7 @@ class User {
         return db.collection('users')
         .findOne({email: email});
     }
+
 
 //     static async findRecentTransactions(id){
 //         try{

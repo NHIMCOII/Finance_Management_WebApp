@@ -1,3 +1,5 @@
+const { result } = require("lodash");
+const User = require("../models/user");
 const Wallet = require("../models/wallet");
 // const Income = require("../models/income");
 // const Expense = require("../models/expense");
@@ -27,7 +29,7 @@ exports.getAddWallet = (req,res,next) => {
 
 exports.postAddWallet = (req,res,next) => {
     const type = req.body.type
-    let acc_balance = req.body.acc_balance
+    let acc_balance = Number(req.body.acc_balance)
     if(type == 'Debts'){
         acc_balance = -acc_balance
     }
@@ -37,6 +39,7 @@ exports.postAddWallet = (req,res,next) => {
     const wallet = new Wallet(req.user._id,name,type,acc_balance,percentage,period)
     wallet.save()
     .then(result => {
+        req.user.addToMyWallets(wallet)
         res.redirect('/myWallets')
     })
     .catch(err => console.log(err))
@@ -64,8 +67,8 @@ exports.postEditWallet = (req,res,next) => {
     const period = req.body.period
     Wallet.findByPk(wallet_id)
     .then((thisWallet) => {
-        const wallet = new Wallet(req.user._id,name,type,acc_balance,percentage,period)
-        return wallet.update(wallet_id)
+        const wallet = new Wallet(req.user._id,name,type,acc_balance,percentage,period,this.incomes,this.expenses,wallet_id)
+        return wallet.update()
     })
     .then(result => {
         res.redirect('/myWallets')
@@ -102,21 +105,21 @@ exports.postMoneyTransfer = (req,res,next) => {
     // increase money in wallet B
     Wallet.findByPk(wallet_id_B)
     .then(thisWallet => {
-        const wallet = new Wallet(thisWallet.user_id,thisWallet.name,thisWallet.type,(Number(thisWallet.acc_balance) + Number(amount)),thisWallet.percentage,thisWallet.period)
+        const wallet = new Wallet(thisWallet.user_id,thisWallet.name,thisWallet.type,(Number(thisWallet.acc_balance) + Number(amount)),thisWallet.percentage,thisWallet.period,thisWallet.incomes,thisWallet.expenses,wallet_id_B)
         return wallet
     })
     .then(wallet => {
-        return wallet.update(wallet_id_B)
+        return wallet.update()
     })
     .catch(err => console.log(err))
     // reduce money in wallet A
     Wallet.findByPk(wallet_id_A)
     .then(thisWallet => {
-        const wallet = new Wallet(thisWallet.user_id,thisWallet.name,thisWallet.type,(Number(thisWallet.acc_balance) - Number(amount)),thisWallet.percentage,thisWallet.period)
+        const wallet = new Wallet(thisWallet.user_id,thisWallet.name,thisWallet.type,(Number(thisWallet.acc_balance) - Number(amount)),thisWallet.percentage,thisWallet.period,thisWallet.incomes,thisWallet.expenses,wallet_id_A)
         return wallet
     })
     .then(wallet => {
-        return wallet.update(wallet_id_A)
+        return wallet.update()
     })
     .then(() => {
         res.redirect('/myWallets')
@@ -127,6 +130,19 @@ exports.postMoneyTransfer = (req,res,next) => {
 exports.postRemoveWallet = (req,res,next) => {
     const wallet_id = req.body.wallet_id
     Wallet.DeleteWallet(wallet_id)
+    .then(() => {
+        // delete wallet in users first
+        Wallet.fetchAll(req.user._id)
+        .then(arr => {
+            const id_arr = []
+            arr.map(wal => {
+                id_arr.push(wal._id)
+            })
+            const user = new User(req.user.username,req.user.email,req.user.password,req.user.firstName,req.user.lastName,req.user.gender,req.user.dob,req.user.phone,req.user.job,req.user.facebook,req.user.linkedin,req.user.address,id_arr,req.user._id) 
+            user.update()
+        })
+        .catch(err => console.log(err))
+    })
     .then(() => {
         res.redirect('/myWallets')
     })
