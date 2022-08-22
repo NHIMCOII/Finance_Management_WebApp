@@ -29,7 +29,7 @@ app.set('views', 'views');
 
 const indexRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth');
-// const userInputRoutes = require('./routes/userInput');
+const transactionRoutes = require('./routes/transaction');
 const walletRoutes = require('./routes/wallet');
 // const reportRoutes = require('./routes/report');
 
@@ -70,7 +70,7 @@ app.use((req,res,next) => {
 
 app.use(indexRoutes);
 app.use(authRoutes);
-// app.use(userInputRoutes);
+app.use(transactionRoutes);
 app.use(walletRoutes); 
 // app.use(reportRoutes);
 

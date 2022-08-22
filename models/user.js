@@ -2,7 +2,7 @@ const { ObjectId } = require('mongodb');
 
 const getDb = require('../utils/database').getDb;
 
-class User {
+module.exports = class User {
     constructor(username,email,password,firstName,lastName,gender,dob,phone,job,facebook,linkedin,address,myWallets,id) {
         this.username = username;
         this.password = password;
@@ -33,23 +33,6 @@ class User {
         const db = getDb();
         return db.collection('users')
         .updateOne({_id: new ObjectId(this._id)}, {$set: this })
-    }
-
-    addToMyWallets(wallet) {
-        let result = null
-        if(!this.myWallets || this.myWallets.length == 0){
-            const myWallets = []
-            myWallets.push(new ObjectId(wallet._id))   
-            result = myWallets;
-        } else {
-            const myWallets = [... this.myWallets]
-            myWallets.push(new ObjectId(wallet._id))
-            result = myWallets;
-        }
-
-        const db = getDb();
-        return db.collection('users')
-        .updateOne({_id: new ObjectId(this._id)}, {$set: { myWallets: result} })    
     }
     
     static findByPk(id) {
@@ -105,7 +88,32 @@ class User {
 //             console.log(" mathus-error :" + error);
 //         }
 //     }
+// ==================== Wallet Method ===================
 
+    addToMyWallets(wallet) {
+        let result = null
+        if(!this.myWallets){
+            const myWallets = []
+            myWallets.push(new ObjectId(wallet._id))   
+            result = myWallets;
+
+        } else {
+            const myWallets = [... this.myWallets.list]
+            myWallets.push(new ObjectId(wallet._id))
+            result = myWallets;
+        }
+
+        const db = getDb();
+        return db.collection('users')
+        .updateOne({_id: new ObjectId(this._id)}, {$set: { myWallets: {list: result}} })    
+    }
+
+    deleteFromMyWallets(wallet_id) {
+        const updatedMyWallets = this.myWallets.list.filter(wallet => {
+            return new ObjectId(wallet_id).toString() !== wallet.toString()
+        })
+        const db = getDb();
+        return db.collection('users')
+        .updateOne({_id: this._id}, {$set: { myWallets: {list: updatedMyWallets}} })
+    }
 };
-
-module.exports = User;

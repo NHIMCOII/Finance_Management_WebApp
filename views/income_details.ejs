@@ -14,12 +14,12 @@
                             <div class="row align-items-center">
                                 <div class="col-md-12">
                                     <div class="page-header-title">
-                                        <h5 class="m-b-10">Income Details</h5>
+                                        <h5 class="m-b-10">INCOME DETAILS</h5>
                                     </div>
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
                                         <li class="breadcrumb-item"><a href="/income">Income</a></li>
-                                        <li class="breadcrumb-item"><a href="#"><%= income.income_id %></a></li>
+                                        <li class="breadcrumb-item"><a href="#">Details</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-cart-arrow-down"></i> Income </h5>
-                                            <%= income.name[0] %>
+                                            <%= income.category %>
                                         </div>
                                     </div>
                                 </div>
@@ -52,17 +52,15 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-calendar-days"></i> Date </h5>
-                                            <%= income.date.toLocaleDateString() %> 
+                                            <%= income.date %> 
                                         </div>
                                     </div>
                                 </div>
                                 <div class = "col-sm-6">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5><i class="fa-solid fa-wallet"></i> Wallet </h5>
-                                            <%= income.name[1] %> 
-                                            - 
-                                            <%= income.acc_balance %> VND left
+                                            <h5><i class="fa-solid fa-wallet"></i> <%= wallet.name  %> </h5>
+                                            <%= wallet.acc_balance %> VND 
                                         </div>
                                     </div>
                                 </div>
@@ -77,18 +75,16 @@
                                     </div>
                                 </div>
                                 <div class="container">
-                                    <div class="row">
-                                        <% if(income.name[0] != 'Money transfer'){ %> 
+                                    <div class="row">                                     
                                         <div class="col-sm">
                                             <form action="/removeIncome" method="POST">
                                                 <input type="hidden" value="<%= income.amount %>" name="amount">
                                                 <input type="hidden" value="<%= income.wallet_id %>" name="wallet_id">
-                                                <input type="hidden" value="<%= income.income_id %>" name="income_id">
+                                                <input type="hidden" value="<%= income._id %>" name="income_id">
                                                 <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                                                 <button class="btn btn-danger btn-sb" data-toggle="tooltip" type="submit"><i class="fa-solid fa-eraser"></i>Remove</button>
                                             </form>                                                                              
                                         </div>
-                                        <% } %> 
                                     </div>
                                 </div>
                                 <!-- [ Breadcrumbs & Pagination ] end -->

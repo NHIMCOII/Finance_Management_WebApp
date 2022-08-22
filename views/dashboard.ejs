@@ -77,28 +77,26 @@
                             </div>
                             <div class="recent-card ">
                                 <div class="recent-card-body ">
-                                  <h4 class="card-title">Recent Expenses</h4>                               
-                                  <% //for (let recent of recents){ %>
+                                  <h4 class="card-title">Recent Transactions</h4>     
+                                  <% let i = 0 %>                           
+                                  <% for (let recent of recents){ %>
                                   <div class="list align-items-center border-bottom py-2">
                                     <div class="wrapper w-100">
                                         <div class="w-100-content">
-                                            <p class="mb-2 font-weight-medium"><%= //recent.name[0] %></p>
-                                            <p class="expense"><%= //recent.amount %></p>
+                                            <p class="mb-2 font-weight-medium"><%= recent.category %></p>
+                                            <p class="expense"><%= recent.amount %></p>
                                         </div>
                                       <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex align-items-center">
                                             <i class="fas fa-calendar-day"></i>
-                                          <p class="mb-0 text-small text-muted"><%= //recent.date.toLocaleDateString() %> </p>
+                                          <p class="mb-0 text-small text-muted"><%= recent.date %> </p>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>                              
-                                  <% //} %>
-                                  <div class="detail">
-                                    <p class="detail-content">
-                                        <a href="/expense" class="fw-bold text-primary">Show all <i class="fas fa-angle-right"></i></a>
-                                    </p>
-                                </div>
+                                  </div>   
+                                  <% i++ %>
+                                  <%if(i == 4){ break } %>                            
+                                  <% } %>
                                 </div>
                             </div>
                         </div>

@@ -14,12 +14,12 @@
                             <div class="row align-items-center">
                                 <div class="col-md-12">
                                     <div class="page-header-title">
-                                        <h5 class="m-b-10">Expense Details</h5>
+                                        <h5 class="m-b-10">EXPENSE DETAILS</h5>
                                     </div>
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="/dashboard"><i class="feather icon-home"></i></a></li>
                                         <li class="breadcrumb-item"><a href="/expense">Expense</a></li>
-                                        <li class="breadcrumb-item"><a href="#"><%= expense.expense_id %></a></li>
+                                        <li class="breadcrumb-item"><a href="#">Details</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-cart-shopping"></i> Expense </h5>
-                                            <%= expense.name[0] %>
+                                            <%= expense.category %>
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-dollar-sign"></i> Amount </h5>
-                                            <%= expense.amount %> 
+                                            <%= -expense.amount %> 
                                             VND
                                         </div>
                                     </div>
@@ -52,17 +52,16 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-calendar-days"></i> Date </h5>
-                                            <%= expense.date.toLocaleDateString() %> 
+                                            <%= expense.date %> 
                                         </div>
                                     </div>
                                 </div>
                                 <div class = "col-sm-6">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5><i class="fa-solid fa-wallet"></i> Wallet </h5>
-                                            <%= expense.name[1] %> 
-                                            - 
-                                            <%= expense.acc_balance %> VND left
+                                            <h5><i class="fa-solid fa-wallet"></i> <%= wallet.name %> </h5>    
+                                            <%= wallet.acc_balance %> VND 
+
                                         </div>
                                     </div>
                                 </div>
@@ -79,15 +78,13 @@
                                 <div class="container">
                                     <div class="row ">
                                         <div class="col-sm">
-                                            <% if(expense.name[0] != 'Money transfer'){ %> 
                                             <form action="/removeExpense" method="POST">
                                                 <input type="hidden" value="<%= expense.amount %>" name="amount">
                                                 <input type="hidden" value="<%= expense.wallet_id %>" name="wallet_id">
-                                                <input type="hidden" value="<%= expense.expense_id %>" name="expense_id">
+                                                <input type="hidden" value="<%= expense._id %>" name="expense_id">
                                                 <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                                                 <button class="btn btn-danger btn-sb" data-toggle="tooltip" type="submit"><i class="fa-solid fa-eraser"></i>Remove</button>
                                             </form> 
-                                            <% } %> 
                                         </div>
                                     </div>
                                 </div>

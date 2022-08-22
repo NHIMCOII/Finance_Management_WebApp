@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const Wallet = require('../models/wallet');
+const Transaction = require('../models/transactions')
+
 exports.getIndex = (req,res,next) => {
     res.render('index');
 }
@@ -7,15 +9,19 @@ exports.getIndex = (req,res,next) => {
 exports.getDashboard = (req,res,next) => {
     Wallet.fetchAll(req.user._id)
     .then(wallets => {
-        res.render('dashboard',{
-            pageTitle: 'Dashboard',
-            path: '/dashboard',
-            user: req.user,
-            // income: income,
-            // expense: expense,
-            // recents: recentExpenses,
-            wallets: wallets
+        Transaction.getRecentTransactions(req.user._id)
+        .then(recents => {
+            res.render('dashboard',{
+                pageTitle: 'Dashboard',
+                path: '/dashboard',
+                user: req.user,
+                // income: income,
+                // expense: expense,
+                recents: recents,
+                wallets: wallets
+            })
         })
+        .catch(err => console.log(err))
     })
     .catch(err => console.log(err));
 }

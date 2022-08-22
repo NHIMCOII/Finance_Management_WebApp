@@ -43,11 +43,11 @@
                                                             <label>Category</label>
                                                             <select class="mb-3 form-control" name="category_id" required>
                                                                 <option>Select category</option>
-                                                                <option value="3">Salary</option>
-                                                                <option value="4">Bonus</option>
-                                                                <option value="5">Investment Interest</option>
-                                                                <option value="6">Gifts</option>
-                                                                <option value="2">Others</option>
+                                                                <option value="Salary">Salary</option>
+                                                                <option value="Bonus">Bonus</option>
+                                                                <option value="Investment Interest">Investment Interest</option>
+                                                                <option value="Gifts">Gifts</option>
+                                                                <option value="Others">Others</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -69,7 +69,7 @@
                                                             <select required class="mb-3 form-control" name="wallet_id">
                                                                 <option>Select Wallet</option>
                                                                 <% for (let wallet of wallets) { %>
-                                                                    <option value="<%= wallet.wallet_id  %>"><%= wallet.name %>: <%= wallet.acc_balance  %> VND</option>
+                                                                    <option value="<%= wallet._id  %>"><%= wallet.name %>: <%= wallet.acc_balance  %> VND</option>
                                                                 <% } %>
                                                             </select>
                                                 </div>
@@ -110,10 +110,10 @@
                                                         <% for (let income of incomes) { %>
                                                             <tr>
                                                                 <th scope="row"><%= i %></th>
-                                                                <td><%= income.name[0] %></td>
+                                                                <td><%= income.category %></td>
                                                                 <td><%= income.amount %></td>
-                                                                <td><%= income.date.toLocaleDateString() %> </td>
-                                                                <td><a href="/incomeDetails/<%= income.income_id %>"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                                                                <td><%= income.date %> </td>
+                                                                <td><a href="/incomeDetails/<%= income._id %>"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
                                                             </tr>
                                                         <% i++ %>
                                                         <% }  %>

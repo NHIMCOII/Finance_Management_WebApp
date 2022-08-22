@@ -27,9 +27,8 @@ npm install --save express
 npm install --save body-parser
 npm install --save ejs
 npm install --save express-session
-npm install --save mssql
-npm install --save msnodesqlv8
-npm install --save connect-mssql-v2
+npm install --save mongodb
+npm install --save connect-mongodb-session
 npm install --save bcryptjs
 npm install --save csurf
 npm install --save connect-flash
