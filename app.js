@@ -14,8 +14,8 @@ const errorController = require('./controllers/error');
 const mongoConnect = require('./utils/database').mongoConnect;
 
 const MONGODB_URI = 
-    // 'mongodb+srv://DuyAnh:Nhimcoi2002@cluster0.lbaw2w3.mongodb.net/fms';
-    'mongodb://127.0.0.1:27017/fms';
+    'mongodb+srv://DuyAnh:Nhimcoi2002@cluster0.lbaw2w3.mongodb.net/fms';
+    // 'mongodb://127.0.0.1:27017/fms';
 
 const app = express();
 const store = new MongoDBStore({
@@ -31,7 +31,7 @@ const indexRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth');
 const transactionRoutes = require('./routes/transaction');
 const walletRoutes = require('./routes/wallet');
-// const reportRoutes = require('./routes/report');
+const reportRoutes = require('./routes/report');
 
 
 
@@ -72,7 +72,7 @@ app.use(indexRoutes);
 app.use(authRoutes);
 app.use(transactionRoutes);
 app.use(walletRoutes); 
-// app.use(reportRoutes);
+app.use(reportRoutes);
 
 app.use(errorController.get404);
 

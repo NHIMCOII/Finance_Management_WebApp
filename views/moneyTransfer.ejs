@@ -76,7 +76,7 @@
                                                   </div>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="exampleFormControlTextarea1">Note</label>
+                                                <label for="exampleFormControlTextarea1" name="note">Note</label>
                                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="note"></textarea>
                                             </div>
 
@@ -111,17 +111,17 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <% let i = 1 %>
-                                                    
+                                                    <% let i = 1 %> 
+                                                    <% for( let transfer of transfers){ %>
                                                         <tr>
                                                             <th scope="row"><%= i %></th>
-                                                            <td>-</td>
-                                                            <td>-</td>
-                                                            <td>-</td>
-                                                            <td>-</td>
-                                                            <td>-</td>
+                                                            <td><%= transfer.transferWallet.A %> </td>
+                                                            <td><%= transfer.transferWallet.B %></td>
+                                                            <td><%= transfer.date.toDateString() %> </td>
+                                                            <td><%= transfer.amount %> </td>
+                                                            <td><a href="/incomeDetails/<%= transfer._id %>"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
                                                         </tr>
-                                                    <% i++ %>
+                                                    <% i++ } %>
                                                         
                                                 </tbody>
                                             </table>

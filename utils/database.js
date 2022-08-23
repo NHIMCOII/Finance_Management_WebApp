@@ -5,8 +5,8 @@ let _db;
 
 const mongoConnect = (callback) => {
   MongoClient.connect(
-    // "mongodb+srv://DuyAnh:Nhimcoi2002@cluster0.lbaw2w3.mongodb.net/fms?retryWrites=true&w=majority"
-    "mongodb://127.0.0.1:27017/fms"
+    "mongodb+srv://DuyAnh:Nhimcoi2002@cluster0.lbaw2w3.mongodb.net/fms?retryWrites=true&w=majority"
+    // "mongodb://127.0.0.1:27017/fms"
   )
     .then((client) => {
       console.log("======================== Connected =========================");

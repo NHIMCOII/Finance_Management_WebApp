@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const Wallet = require('../models/wallet');
-const Transaction = require('../models/transactions')
+const Transaction = require('../models/transaction')
 
 exports.getIndex = (req,res,next) => {
     res.render('index');
@@ -11,14 +11,20 @@ exports.getDashboard = (req,res,next) => {
     .then(wallets => {
         Transaction.getRecentTransactions(req.user._id)
         .then(recents => {
-            res.render('dashboard',{
-                pageTitle: 'Dashboard',
-                path: '/dashboard',
-                user: req.user,
-                // income: income,
-                // expense: expense,
-                recents: recents,
-                wallets: wallets
+            Transaction.getTotalIncomeByMonth(req.user._id)
+            .then(incomes => {
+                Transaction.getTotalExpenseByMonth(req.user._id)
+                .then(expenses => {
+                    res.render('dashboard',{
+                        pageTitle: 'Dashboard',
+                        path: '/dashboard',
+                        user: req.user,
+                        income: incomes,
+                        expense: expenses,
+                        recents: recents,
+                        wallets: wallets
+                    })
+                })
             })
         })
         .catch(err => console.log(err))

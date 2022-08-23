@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const Wallet = require("../models/wallet");
-const Transaction = require('../models/transactions');
+const Transaction = require('../models/transaction');
 
 exports.getMyWallet = (req,res,next) => {
     Wallet.fetchAll(req.user._id)
@@ -79,11 +79,15 @@ exports.postEditWallet = (req,res,next) => {
 exports.getMoneyTransfer = (req,res,next) => {
     Wallet.fetchAll(req.user._id)
     .then((wallets) => {
-        res.render('moneyTransfer',{
-            user: req.user,
-            wallets: wallets,
-            pageTitle: 'Money Transfer',
-            path: '/moneyTransfer'
+        Transaction.getMoneyTransfer(req.user._id)
+        .then(transfers => {
+            res.render('moneyTransfer',{
+                user: req.user,
+                wallets: wallets,
+                transfers: transfers,
+                pageTitle: 'Money Transfer',
+                path: '/moneyTransfer'
+            })
         })
     })
     .catch(err => {
@@ -96,13 +100,21 @@ exports.postMoneyTransfer = (req,res,next) => {
     const wallet_id_A = req.body.wallet_id_A
     const wallet_id_B = req.body.wallet_id_B
     const amount = Number(req.body.amount)
+    const date = req.body.date
+    const note = req.body.note
     if(wallet_id_A == wallet_id_B){
         return res.redirect('/moneyTransfer')
     }
-    // const income = new Income(1,null,amount,note,date,wallet_id_B) 
-    // income.save()
-    // const expense = new Expense(1,null,amount,note,date,wallet_id_A)
-    // expense.save()
+    Wallet.findByPk(wallet_id_A)
+    .then( walletA => {
+        Wallet.findByPk(wallet_id_B)
+        .then(walletB => {
+            const transferWallet = {A: walletA.name, B: walletB.name}
+            const transfer = new Transaction(req.user._id,wallet_id_B,'Money Transfer',amount,date,note,null,transferWallet) 
+            transfer.save()
+        })
+    })
+    
     // increase money in wallet B
     Wallet.findByPk(wallet_id_B)
     .then(thisWallet => {
@@ -123,7 +135,7 @@ exports.postMoneyTransfer = (req,res,next) => {
         return wallet.update()
     })
     .then(() => {
-        res.redirect('/myWallets')
+        res.redirect('/moneyTransfer')
     })
     .catch(err => console.log(err))
 }

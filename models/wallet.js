@@ -49,19 +49,6 @@
         .catch(err => console.log(err));
     }
 
-    // static async findRecentTransactions(wallet_id){
-    //     try{
-    //         let pool = await sql.connect(config);
-    //         const sqlString = "SELECT * FROM wallets AS W,categories AS C,incomes AS I,expenses AS E WHERE I.wallet_id = W.wallet_id AND E.wallet_id = W.wallet_id AND (I.category_id = C.category_id OR E.category_id = C.category_id)"
-    //         let res = await pool.request()
-    //         .input('wallet_id', sql.Int, wallet_id)
-    //         .query(sqlString);
-    //         return res.recordsets;
-    //     } catch (error){
-    //         console.log(" mathus-error :" + error);
-    //     }
-    // }
-
     static fetchAll(user_id){
         const db = getDb();
         return db.collection('wallets').find({user_id: user_id}).toArray()
@@ -75,11 +62,11 @@
         let result = null
         if(!this.transactions){
             const myTransactions = []
-            myTransactions.push(new ObjectId(transaction._id))
+            myTransactions.push(transaction._id)
             result = myTransactions;
         } else {
             const myTransactions = [... this.transactions.list]
-            myTransactions.push(new ObjectId(transaction._id))
+            myTransactions.push(transaction._id)
             result = myTransactions;
         }
     

@@ -89,7 +89,7 @@
                                       <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex align-items-center">
                                             <i class="fas fa-calendar-day"></i>
-                                          <p class="mb-0 text-small text-muted"><%= recent.date %> </p>
+                                          <p class="mb-0 text-small text-muted"><%= recent.date.toDateString() %> </p>
                                         </div>
                                       </div>
                                     </div>
@@ -202,10 +202,10 @@
       var areaChartOptions = {
         series: [{
             name: 'Incomes',
-            data: [`<%=45// income[0]%>`, `<%=66// income[1]%>`, `<%=85// income[2]%>`, `<%=47// income[3]%>`, `<%=26// income[4]%>`, `<%=76// income[5]%>`, `<%=36// income[6]%>`, `<%=78// income[7]%>`, `<%=25// income[8]%>`, `<%=88// income[9]%>`, `<%=25// income[10]%>`, `<%=36// income[11]%>`]
+            data: [`<%= income[0]%>`, `<%= income[1]%>`, `<%= income[2]%>`, `<%= income[3]%>`, `<%= income[4]%>`, `<%= income[5]%>`, `<%= income[6]%>`, `<%= income[7]%>`, `<%= income[8]%>`, `<%= income[9]%>`, `<%= income[10]%>`, `<%= income[11]%>`]
             }, {
             name: 'Expenses',
-            data: [`<%=57// expense[0]%>`, `<%=25// expense[1]%>`, `<%=66// expense[2]%>`, `<%=78// expense[3]%>`, `<%=35// expense[4]%>`, `<%=87// expense[5]%>`, `<%=46// expense[6]%>`, `<%=55// expense[7]%>`, `<%=57// expense[8]%>`, `<%=57// expense[9]%>`, `<%=36// expense[10]%>`, `<%=57// expense[11]%>`]
+            data: [`<%= expense[0]%>`, `<%= expense[1]%>`, `<%= expense[2]%>`, `<%= expense[3]%>`, `<%= expense[4]%>`, `<%= expense[5]%>`, `<%= expense[6]%>`, `<%= expense[7]%>`, `<%= expense[8]%>`, `<%= expense[9]%>`, `<%= expense[10]%>`, `<%= expense[11]%>`]
         }],
 
         chart: {

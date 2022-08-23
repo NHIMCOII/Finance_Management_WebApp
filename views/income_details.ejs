@@ -14,11 +14,11 @@
                             <div class="row align-items-center">
                                 <div class="col-md-12">
                                     <div class="page-header-title">
-                                        <h5 class="m-b-10">INCOME DETAILS</h5>
+                                        <h5 class="m-b-10"><% if(income.category == 'Money Transfer'){ %> Money Transfer <% }else { %>  INCOME DETAILS <% } %> </h5>
                                     </div>
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                                        <li class="breadcrumb-item"><a href="/income">Income</a></li>
+                                        <li class="breadcrumb-item"><a href="<% if(income.category == 'Money Transfer'){ %>/moneyTransfer<% }else { %>/income<% } %>"><% if(income.category == 'Money Transfer'){ %> Money Transfer <% }else { %>  Money Transfer <% } %></a></li>
                                         <li class="breadcrumb-item"><a href="#">Details</a></li>
                                     </ul>
                                 </div>
@@ -39,6 +39,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class = "col-sm-6">
                                     <div class="card">
                                         <div class="card-header">
@@ -48,11 +49,28 @@
                                         </div>
                                     </div>
                                 </div>
+                                <% if(income.category == 'Money Transfer') { %> 
+                                <div class = "col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5><i class="fa-solid fa-money-bill-transfer"></i> From </h5>
+                                            <%= income.transferWallet.A %> 
+                                        </div>
+                                    </div>
+                                </div><div class = "col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5><i class="fa-solid fa-money-bill-transfer"></i> To </h5>
+                                            <%= income.transferWallet.B %> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %> 
                                 <div class = "col-sm-6">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5><i class="fa-solid fa-calendar-days"></i> Date </h5>
-                                            <%= income.date %> 
+                                            <%= income.date.toDateString() %> 
                                         </div>
                                     </div>
                                 </div>

@@ -108,11 +108,13 @@
                                                     <tbody>
                                                         <% let i = 1 %>
                                                         <% for (let income of incomes) { %>
+                                                            <% if(income.category == 'Money Transfer') {%>
+                                                            <% break} %>  
                                                             <tr>
                                                                 <th scope="row"><%= i %></th>
                                                                 <td><%= income.category %></td>
                                                                 <td><%= income.amount %></td>
-                                                                <td><%= income.date %> </td>
+                                                                <td><%= income.date.toDateString() %> </td>
                                                                 <td><a href="/incomeDetails/<%= income._id %>"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
                                                             </tr>
                                                         <% i++ %>
