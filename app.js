@@ -14,8 +14,8 @@ const errorController = require('./controllers/error');
 const mongoConnect = require('./utils/database').mongoConnect;
 
 const MONGODB_URI = 
-    'mongodb+srv://DuyAnh:Nhimcoi2002@cluster0.lbaw2w3.mongodb.net/fms';
-    // 'mongodb://127.0.0.1:27017/fms';
+    // 'mongodb+srv://DuyAnh:Nhimcoi2002@cluster0.lbaw2w3.mongodb.net/fms';
+    'mongodb://127.0.0.1:27017/fms';
 
 const app = express();
 const store = new MongoDBStore({

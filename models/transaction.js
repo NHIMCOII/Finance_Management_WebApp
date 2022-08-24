@@ -69,7 +69,7 @@ module.exports = class Transaction {
 
     static getMoneyTransfer(user_id) {
         const db = getDb();
-        return db.collection('transactions').find({user_id: user_id, transferWallet:{$ne: null}}).toArray()
+        return db.collection('transactions').find({user_id: user_id, transferWallet:{$ne: null},amount:{$gte: 0}}).toArray()
         .then(transfers => {
             return transfers
         })

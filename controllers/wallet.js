@@ -110,29 +110,25 @@ exports.postMoneyTransfer = (req,res,next) => {
         Wallet.findByPk(wallet_id_B)
         .then(walletB => {
             const transferWallet = {A: walletA.name, B: walletB.name}
-            const transfer = new Transaction(req.user._id,wallet_id_B,'Money Transfer',amount,date,note,null,transferWallet) 
-            transfer.save()
+            const transferB = new Transaction(req.user._id,wallet_id_B,'Money Transfer',amount,date,note,null,transferWallet) 
+            transferB.save()
+            const transferA = new Transaction(req.user._id,wallet_id_B,'Money Transfer',-amount,date,note,null,transferWallet) 
+            transferA.save()
+            const result = {
+                wallets:{A: walletA,B: walletB},
+                transfers: {A: transferA, B:transferB}
+            }
+            return result
         })
-    })
-    
-    // increase money in wallet B
-    Wallet.findByPk(wallet_id_B)
-    .then(thisWallet => {
-        const wallet = new Wallet(thisWallet.user_id,thisWallet.name,thisWallet.type,thisWallet.acc_balance + amount,thisWallet.percentage,thisWallet.period,this.note,thisWallet.transactions,wallet_id_B)
-        return wallet
-    })
-    .then(wallet => {
-        return wallet.update()
-    })
-    .catch(err => console.log(err))
-    // reduce money in wallet A
-    Wallet.findByPk(wallet_id_A)
-    .then(thisWallet => {
-        const wallet = new Wallet(thisWallet.user_id,thisWallet.name,thisWallet.type,thisWallet.acc_balance - amount,thisWallet.percentage,thisWallet.period,this.note,thisWallet.transactions,wallet_id_A)
-        return wallet
-    })
-    .then(wallet => {
-        return wallet.update()
+        .then(result => {
+            const wallet_a = new Wallet(result.wallets.B.user_id,result.wallets.B.name,result.wallets.B.type,result.wallets.B.acc_balance + amount,result.wallets.B.percentage,result.wallets.B.period,this.note,result.wallets.B.transactions,wallet_id_B)
+            wallet_a.update()
+            wallet_a.addToTransactions(result.transfers.B)
+
+            const wallet_b = new Wallet(result.wallets.A.user_id,result.wallets.A.name,result.wallets.A.type,result.wallets.A.acc_balance - amount,result.wallets.A.percentage,result.wallets.A.period,this.note,result.wallets.A.transactions,wallet_id_A)
+            wallet_b.update()
+            wallet_b.addToTransactions(result.transfers.A)
+        })
     })
     .then(() => {
         res.redirect('/moneyTransfer')

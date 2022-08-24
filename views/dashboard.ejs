@@ -80,6 +80,7 @@
                                   <h4 class="card-title">Recent Transactions</h4>     
                                   <% let i = 0 %>                           
                                   <% for (let recent of recents){ %>
+                                    <% if(recent.category == 'Money Transfer' && recent.amount < 0){ continue} %> 
                                   <div class="list align-items-center border-bottom py-2">
                                     <div class="wrapper w-100">
                                         <div class="w-100-content">
