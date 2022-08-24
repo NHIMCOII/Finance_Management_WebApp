@@ -26,7 +26,7 @@ exports.postLogin = (req, res, next) => {
   const password = req.body.password;
 
   const errors = validationResult(req);
-
+  
   if (!errors.isEmpty()) {
     return res.status(422).render("auth-login", {
       pageTitle: "Login",
@@ -38,7 +38,7 @@ exports.postLogin = (req, res, next) => {
       },
     });
   }
-  User.findByEmail(email)
+  User.findOne({'email': email})
     .then((user) => { 
       if (!user) {
         req.flash("error", "Invalid email");
@@ -122,7 +122,7 @@ exports.postSignup = (req, res, next) => {
   }
 
   bcrypt.hash(password, 12).then((hashedPassword) => {
-    const user = new User(username,email,hashedPassword,null,null,null,null,null,null,null,null,null);
+    const user = new User({username: username,email: email,password: hashedPassword,myWallets:{list: []}});
     user
       .save()
       .then((result) => {

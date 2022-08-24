@@ -1,6 +1,6 @@
-const Transaction  = require('../models/transaction');
-const Wallet = require('../models/wallet');
-const Category = require('../models/category')
+// const Transaction  = require('../models/transaction');
+// const Wallet = require('../models/wallet');
+// const Category = require('../models/category')
 
 // ================== INCOMES ================
 

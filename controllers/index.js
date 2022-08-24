@@ -1,35 +1,35 @@
 const User = require('../models/user');
-const Wallet = require('../models/wallet');
-const Transaction = require('../models/transaction')
+// const Wallet = require('../models/wallet');
+// const Transaction = require('../models/transaction')
 
 exports.getIndex = (req,res,next) => {
     res.render('index');
 }
 
 exports.getDashboard = (req,res,next) => {
-    Wallet.fetchAll(req.user._id)
-    .then(wallets => {
-        Transaction.getRecentTransactions(req.user._id)
-        .then(recents => {
-            Transaction.getTotalIncomeByMonth(req.user._id)
-            .then(incomes => {
-                Transaction.getTotalExpenseByMonth(req.user._id)
-                .then(expenses => {
-                    res.render('dashboard',{
+    // Wallet.fetchAll(req.user._id)
+    // .then(wallets => {
+    //     Transaction.getRecentTransactions(req.user._id)
+    //     .then(recents => {
+    //         Transaction.getTotalIncomeByMonth(req.user._id)
+    //         .then(incomes => {
+    //             Transaction.getTotalExpenseByMonth(req.user._id)
+    //             .then(expenses => {
+                        res.render('dashboard',{
                         pageTitle: 'Dashboard',
                         path: '/dashboard',
                         user: req.user,
-                        income: incomes,
-                        expense: expenses,
-                        recents: recents,
-                        wallets: wallets
-                    })
-                })
-            })
-        })
-        .catch(err => console.log(err))
-    })
-    .catch(err => console.log(err));
+                        income: [],
+                        expense: [],
+                        recents: [],
+                        wallets: []
+                        })
+    //             })
+    //         })
+    //     })
+    //     .catch(err => console.log(err))
+    // })
+    // .catch(err => console.log(err));
 }
 
 exports.getProfile = (req,res,next) => {
@@ -57,7 +57,7 @@ exports.postEditProfile = (req,res,next) => {
     const updatedEmail = req.body.email;
     const updatedFirstName = req.body.firstName;
     const updatedLastName = req.body.lastName;
-    const updatedGender = req.body.gender;
+    const updatedGender = Boolean(req.body.gender);
     const updatedJob = req.body.job ;
     const updatedPhone = req.body.phone;
     let updatedDob = req.body.dob;
@@ -65,12 +65,24 @@ exports.postEditProfile = (req,res,next) => {
     const updatedLinkedin = req.body.linkedin;
     const updatedAddress = req.body.address;
     
-    // console.log(req.body);
     if(updatedDob === ''){
         updatedDob = null;
     }
-    const user = new User(updatedUsername,updatedEmail,req.user.password,updatedFirstName,updatedLastName,updatedGender,updatedDob,updatedPhone,updatedJob,updatedFacebook,updatedLinkedin,updatedAddress,null,req.user._id);
-    user.update()
+    User.findById(req.user._id)
+    .then(user => {
+        user.username = updatedUsername
+        user.email = updatedEmail
+        user.firstName = updatedFirstName
+        user.lastName = updatedLastName
+        user.gender = updatedGender
+        user.job = updatedJob
+        user.phone = updatedPhone
+        user.dob = updatedDob
+        user.facebook = updatedFacebook
+        user.linkedin = updatedLinkedin
+        user.address = updatedAddress
+        return user.save()
+    })
     .then(result => {
         res.redirect('/profile');
     })

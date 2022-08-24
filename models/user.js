@@ -1,119 +1,164 @@
-const { ObjectId } = require('mongodb');
+const mongoose = require('mongoose')
 
-const getDb = require('../utils/database').getDb;
+const Schema = mongoose.Schema
 
-module.exports = class User {
-    constructor(username,email,password,firstName,lastName,gender,dob,phone,job,facebook,linkedin,address,myWallets,id) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.dob = new Date(dob) ;
-        this.phone = phone;
-        this.job = job;
-        this.facebook = facebook;
-        this.linkedin = linkedin;
-        this.address = address;
-        this.myWallets = myWallets;
-        this._id = id;
+const userSchema = new Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    email:{
+        type: String,
+        required: true
+    },
+    password:{
+        type: String,
+        required: true
+    },
+    firstName:{
+        type: String,
+        required: false
+    },
+    lastName:{
+        type: String,
+        required: false
+    },
+    gender:{
+        type: Boolean,
+        required: false
+    },
+    dob:{
+        type: Date,
+        required: false
+    },
+    phone:{
+        type: String,
+        required: false
+    },
+    job:{
+        type: String,
+        required: false
+    },
+    facebook:{
+        type: String,
+        required: false
+    },
+    linkedin:{
+        type: String,
+        required: false
+    },
+    address:{
+        type: String,
+        required: false
+    },
+    myWallets:{
+        list: [
+            {wallet_id: {type: Schema.Types.ObjectId, ref: 'Wallet',required: false},}
+        ]
     }
+});
 
-    save() {
-        const db = getDb();
-        return db.collection('users').insertOne(this)
-        .then(result => {
-            return result;
-        })
-        .catch(err => console.log(err));
+userSchema.methods.addToMyWallets = function(wallet) {
+    let result = null
+    if(!this.myWallets.list.length){
+        const myWallets = []
+        myWallets.push({_id: wallet._id})  
+        result = myWallets;
+    } else {
+        const myWallets = [... this.myWallets.list]
+        myWallets.push({_id: wallet._id})
+        result = myWallets;
     }
+    this.myWallets.list = result
+    return this.save()
+}
 
-    update() {
-        const db = getDb();
-        return db.collection('users')
-        .updateOne({_id: new ObjectId(this._id)}, {$set: this })
-    }
+userSchema.methods.deleteFromMyWallets = function(wallet_id) {
+    const updatedMyWallets = this.myWallets.list.filter(wallet => {
+        return wallet_id.toString() !== wallet._id.toString()
+    })
+    this.myWallets.list =  updatedMyWallets   
+    return this.save()    
+}
+
+module.exports = mongoose.model('User',userSchema);
+
+
+// const { ObjectId } = require('mongodb');
+
+// const getDb = require('../utils/database').getDb;
+
+// module.exports = class User {
+//     constructor(username,email,password,firstName,lastName,gender,dob,phone,job,facebook,linkedin,address,myWallets,id) {
+//         this.username = username;
+//         this.password = password;
+//         this.email = email;
+//         this.firstName = firstName;
+//         this.lastName = lastName;
+//         this.gender = gender;
+//         this.dob = new Date(dob) ;
+//         this.phone = phone;
+//         this.job = job;
+//         this.facebook = facebook;
+//         this.linkedin = linkedin;
+//         this.address = address;
+//         this.myWallets = myWallets;
+//         this._id = id;
+//     }
+
+//     save() {
+//         const db = getDb();
+//         return db.collection('users').insertOne(this)
+//         .then(result => {
+//             return result;
+//         })
+//         .catch(err => console.log(err));
+//     }
+
+//     update() {
+//         const db = getDb();
+//         return db.collection('users')
+//         .updateOne({_id: new ObjectId(this._id)}, {$set: this })
+//     }
     
-    static findByPk(id) {
-        const db = getDb();
-        return db.collection('users')
-        .findOne({_id: id});
-    }
-
-    static findByEmail(email) {
-        const db = getDb();
-        return db.collection('users')
-        .findOne({email: email});
-    }
-
-
-//     static async findRecentTransactions(id){
-//         try{
-//             let pool = await sql.connect(config);
-//             const sqlString = "SELECT * FROM users WHERE users.email = @email"
-//             let res = await pool.request()
-//             .input('email', sql.VarChar, email)
-//             .query(sqlString);
-//             return res.recordsets;
-//         } catch (error){
-//             console.log(" mathus-error :" + error);
-//         }
+//     static findByPk(id) {
+//         const db = getDb();
+//         return db.collection('users')
+//         .findOne({_id: id});
 //     }
 
-//     static async income_per_month(id, month) {
-//         try{
-//             let pool = await sql.connect(config);
-//             const sqlString = "SELECT SUM(amount) AS amount FROM incomes AS I,wallets AS W,users AS U WHERE U.id=@id AND U.id = W.id AND I.wallet_id = W.wallet_id AND I.category_id != 1 AND MONTH(I.date)=@month"
-//             let res = await pool.request()
-//             .input('id', sql.INT, id)
-//             .input('month', sql.INT, month)
-//             .query(sqlString);
-//             return res.recordsets;
-//         } catch (error){
-//             console.log(" mathus-error :" + error);
-//         }
+//     static findByEmail(email) {
+//         const db = getDb();
+//         return db.collection('users')
+//         .findOne({email: email});
 //     }
-// // except money transfer
-//     static async expense_per_month(id, month) {
-//         try{
-//             let pool = await sql.connect(config);
-//             const sqlString = "SELECT SUM(amount) AS amount FROM expenses AS E,wallets AS W,users AS U WHERE U.id=@id AND U.id = W.id AND E.wallet_id = W.wallet_id AND E.category_id != 1 AND MONTH(E.date)=@month"
-//             let res = await pool.request()
-//             .input('id', sql.INT, id)
-//             .input('month', sql.INT, month)
-//             .query(sqlString);
-//             return res.recordsets;
-//         } catch (error){
-//             console.log(" mathus-error :" + error);
+
+// // ==================== Wallet Method ===================
+
+//     addToMyWallets(wallet) {
+//         let result = null
+//         if(!this.myWallets){
+//             const myWallets = []
+//             myWallets.push(new ObjectId(wallet._id))   
+//             result = myWallets;
+
+//         } else {
+//             const myWallets = [... this.myWallets.list]
+//             myWallets.push(new ObjectId(wallet._id))
+//             result = myWallets;
 //         }
+
+//         const db = getDb();
+//         return db.collection('users')
+//         .updateOne({_id: new ObjectId(this._id)}, {$set: { myWallets: {list: result}} })    
 //     }
-// ==================== Wallet Method ===================
 
-    addToMyWallets(wallet) {
-        let result = null
-        if(!this.myWallets){
-            const myWallets = []
-            myWallets.push(new ObjectId(wallet._id))   
-            result = myWallets;
-
-        } else {
-            const myWallets = [... this.myWallets.list]
-            myWallets.push(new ObjectId(wallet._id))
-            result = myWallets;
-        }
-
-        const db = getDb();
-        return db.collection('users')
-        .updateOne({_id: new ObjectId(this._id)}, {$set: { myWallets: {list: result}} })    
-    }
-
-    deleteFromMyWallets(wallet_id) {
-        const updatedMyWallets = this.myWallets.list.filter(wallet => {
-            return new ObjectId(wallet_id).toString() !== wallet.toString()
-        })
-        const db = getDb();
-        return db.collection('users')
-        .updateOne({_id: this._id}, {$set: { myWallets: {list: updatedMyWallets}} })
-    }
-};
+//     deleteFromMyWallets(wallet_id) {
+//         const updatedMyWallets = this.myWallets.list.filter(wallet => {
+//             return new ObjectId(wallet_id).toString() !== wallet.toString()
+//         })
+//         const db = getDb();
+//         return db.collection('users')
+//         .updateOne({_id: this._id}, {$set: { myWallets: {list: updatedMyWallets}} })
+//     }
+// };

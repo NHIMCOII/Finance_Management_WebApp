@@ -3,7 +3,7 @@ const Wallet = require("../models/wallet");
 const Transaction = require('../models/transaction');
 
 exports.getMyWallet = (req,res,next) => {
-    Wallet.fetchAll(req.user._id)
+    Wallet.find({user_id: req.user._id})
     .then((result) => {
         res.render('myWallets',{
             user: req.user,
@@ -35,7 +35,7 @@ exports.postAddWallet = (req,res,next) => {
     const percentage = req.body.percentage
     const period = req.body.period
     const note = req.body.note
-    const wallet = new Wallet(req.user._id,name,type,acc_balance,percentage,period,note)
+    const wallet = new Wallet({user_id: req.user,name: name,type: type ,acc_balance: acc_balance,percentage: percentage,period: period,note: note,transactions: {list: []}})
     wallet.save()
     .then(result => {
         req.user.addToMyWallets(wallet)
@@ -46,7 +46,7 @@ exports.postAddWallet = (req,res,next) => {
 
 exports.getEditWallet = (req,res,next) => {
     const wallet_id = req.params.wallet_id // wallet_id from routes
-    Wallet.findByPk(wallet_id)
+    Wallet.findById(wallet_id)
     .then((wallet) => {
         res.render('editWallet',{
             user: req.user,
@@ -65,10 +65,15 @@ exports.postEditWallet = (req,res,next) => {
     const percentage = req.body.percentage
     const period = req.body.period
     const note = req.body.note
-    Wallet.findByPk(wallet_id)
+    Wallet.findById(wallet_id)
     .then((thisWallet) => {
-        const wallet = new Wallet(req.user._id,name,type,acc_balance,percentage,period,note,this.transactions,wallet_id)
-        return wallet.update()
+        thisWallet.type = type
+        thisWallet.name = name
+        thisWallet.acc_balance = acc_balance
+        thisWallet.percentage = percentage
+        thisWallet.period = period
+        thisWallet.note = note
+        return thisWallet.save()
     })
     .then(result => {
         res.redirect('/myWallets')
@@ -77,18 +82,18 @@ exports.postEditWallet = (req,res,next) => {
 }
 
 exports.getMoneyTransfer = (req,res,next) => {
-    Wallet.fetchAll(req.user._id)
+    Wallet.find({user_id: req.user._id})
     .then((wallets) => {
-        Transaction.getMoneyTransfer(req.user._id)
-        .then(transfers => {
+        // Transaction.getMoneyTransfer(req.user._id)
+        // .then(transfers => {
             res.render('moneyTransfer',{
                 user: req.user,
                 wallets: wallets,
-                transfers: transfers,
+                transfers: [],
                 pageTitle: 'Money Transfer',
                 path: '/moneyTransfer'
             })
-        })
+        // })
     })
     .catch(err => {
         console.log(err);
@@ -138,15 +143,15 @@ exports.postMoneyTransfer = (req,res,next) => {
 
 exports.postRemoveWallet = (req,res,next) => {
     const wallet_id = req.body.wallet_id
-    Wallet.deleteWallet(wallet_id)
+    Wallet.findByIdAndRemove(wallet_id)
     .then(() => {
         // delete all transactions from this wallet
-        Transaction.fetchAllTransactionsFromWallet(wallet_id)
-        .then(transaction => {
-            transaction.map(item => {
-                Transaction.deleteTransaction(item._id)
-            })
-        })
+        // Transaction.fetchAllTransactionsFromWallet(wallet_id)
+        // .then(transaction => {
+        //     transaction.map(item => {
+        //         Transaction.deleteTransaction(item._id)
+        //     })
+        // })
         // delete wallet in users      
         req.user.deleteFromMyWallets(wallet_id)
         .catch(err => console.log(err))

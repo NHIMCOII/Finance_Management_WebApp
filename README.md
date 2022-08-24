@@ -29,6 +29,7 @@ npm install --save ejs
 npm install --save express-session
 npm install --save mongodb
 npm install --save connect-mongodb-session
+npm install --save mongoose
 npm install --save bcryptjs
 npm install --save csurf
 npm install --save connect-flash

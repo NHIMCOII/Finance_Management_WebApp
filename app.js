@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+
+const mongoose = require('mongoose')
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session); 
 
@@ -11,7 +13,7 @@ const csrf = require('csurf');
 const flash = require('connect-flash');
 
 const errorController = require('./controllers/error');
-const mongoConnect = require('./utils/database').mongoConnect;
+// const mongoConnect = require('./utils/database').mongoConnect;
 
 const MONGODB_URI = 
     // 'mongodb+srv://DuyAnh:Nhimcoi2002@cluster0.lbaw2w3.mongodb.net/fms';
@@ -54,9 +56,9 @@ app.use((req,res,next) => {
 	if(!req.session.user){
 		return next(); 
 	}
-    User.findByPk(req.session.user._id)
+    User.findById(req.session.user._id)
     .then(user => { 
-        req.user = new User(user.username,user.email,user.password,user.firstName,user.lastName,user.gender,user.dob,user.phone,user.job,user.facebook,user.linkedin,user.address,user.myWallets,user._id);
+        req.user = user;
         next();
     })
     .catch(err => console.log(err));
@@ -76,8 +78,10 @@ app.use(reportRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect(() => {
-    app.listen(3000); 
+mongoose.connect(MONGODB_URI)
+.then(result => {
+    app.listen(3000)
 })
+.catch(err => console.log(err))
 
  
