@@ -7,7 +7,32 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session); 
 
 const User = require("./models/user");
-
+// const Category = require('./models/category')
+// Category.insertMany([
+//                 {category: "Money Transfer", parent: 0},
+//                 {category: "Others", parent: 9},
+//                 {category: "Salary", parent: 0},
+//                 {category: "Bonus", parent: 0},
+//                 {category: "Investment Interest", parent: 0},
+//                 {category: "Gifts", parent: 0},       
+//                 {category: "Gas", parent: 1},
+//                 {category: "Auto Service", parent: 1},
+//                 {category: "Charity", parent: 2},
+//                 {category: "Childcare", parent: 3},
+//                 {category: "Education", parent: 4},
+//                 {category: "Clothing", parent: 5},
+//                 {category: "Groceries", parent: 5},
+//                 {category: "Household", parent: 5},
+//                 {category: "Entertainment", parent: 6},
+//                 {category: "Medical", parent: 7},
+//                 {category: "Health & Fitness", parent: 7},
+//                 {category: "Cable TV", parent: 8},
+//                 {category: "Electric", parent: 8},
+//                 {category: "Internet", parent: 8},
+//                 {category: "Telephone", parent: 8},
+//                 {category: "Water", parent: 8},
+// ])
+        
 
 const csrf = require('csurf');
 const flash = require('connect-flash');

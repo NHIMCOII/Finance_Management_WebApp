@@ -40,7 +40,22 @@ const transactionSchema = new Schema({
     }
 })
 
-
+transactionSchema.statics.getRecentTransactions = function(user_id) {
+    // return this.aggregate([
+    //     // Stage 1: Filter transactions by user_id
+    //     {
+    //        $match: { user_id: user_id }
+    //     },
+    //     // Stage 2: Sort by date
+    //     {
+    //        $sort: {date: -1}
+    //     }
+    //  ]).toArray()
+    // .then(transactions => {
+    //     return transactions;
+    // })
+    // .catch(err => console.log(err));
+}
 
 
 module.exports = mongoose.model('Transaction',transactionSchema);

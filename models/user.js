@@ -62,11 +62,11 @@ userSchema.methods.addToMyWallets = function(wallet) {
     let result = null
     if(!this.myWallets.list.length){
         const myWallets = []
-        myWallets.push({_id: wallet._id})  
+        myWallets.push({wallet_id: wallet._id})  
         result = myWallets;
     } else {
         const myWallets = [... this.myWallets.list]
-        myWallets.push({_id: wallet._id})
+        myWallets.push({wallet_id: wallet._id})
         result = myWallets;
     }
     this.myWallets.list = result
@@ -75,7 +75,7 @@ userSchema.methods.addToMyWallets = function(wallet) {
 
 userSchema.methods.deleteFromMyWallets = function(wallet_id) {
     const updatedMyWallets = this.myWallets.list.filter(wallet => {
-        return wallet_id.toString() !== wallet._id.toString()
+        return wallet_id.toString() !== wallet.wallet_id.toString()
     })
     this.myWallets.list =  updatedMyWallets   
     return this.save()    

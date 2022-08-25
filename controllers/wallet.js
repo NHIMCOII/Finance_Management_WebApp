@@ -3,11 +3,11 @@ const Wallet = require("../models/wallet");
 const Transaction = require('../models/transaction');
 
 exports.getMyWallet = (req,res,next) => {
-    Wallet.find({user_id: req.user._id})
-    .then((result) => {
+    req.user.populate('myWallets.list.wallet_id')
+    .then((wallets) => {
         res.render('myWallets',{
             user: req.user,
-            wallets: result,
+            wallets: wallets.myWallets.list,
             pageTitle: 'My Wallet',
             path: '/myWallets'
         })
@@ -27,7 +27,7 @@ exports.getAddWallet = (req,res,next) => {
 
 exports.postAddWallet = (req,res,next) => {
     const type = req.body.type
-    let acc_balance = req.body.acc_balance
+    let acc_balance = Number(req.body.acc_balance)
     if(type == 'Debts'){
         acc_balance = -acc_balance
     }
@@ -84,16 +84,16 @@ exports.postEditWallet = (req,res,next) => {
 exports.getMoneyTransfer = (req,res,next) => {
     Wallet.find({user_id: req.user._id})
     .then((wallets) => {
-        // Transaction.getMoneyTransfer(req.user._id)
-        // .then(transfers => {
+        Transaction.find({user_id: req.user._id,category: 'Money Transfer',amount: {$gte: 0}})
+        .then(transfers => {
             res.render('moneyTransfer',{
                 user: req.user,
                 wallets: wallets,
-                transfers: [],
+                transfers: transfers,
                 pageTitle: 'Money Transfer',
                 path: '/moneyTransfer'
             })
-        // })
+        })
     })
     .catch(err => {
         console.log(err);
@@ -105,19 +105,19 @@ exports.postMoneyTransfer = (req,res,next) => {
     const wallet_id_A = req.body.wallet_id_A
     const wallet_id_B = req.body.wallet_id_B
     const amount = Number(req.body.amount)
-    const date = req.body.date
+    const date = Date(req.body.date)
     const note = req.body.note
     if(wallet_id_A == wallet_id_B){
         return res.redirect('/moneyTransfer')
     }
-    Wallet.findByPk(wallet_id_A)
+    Wallet.findById(wallet_id_A)
     .then( walletA => {
-        Wallet.findByPk(wallet_id_B)
+        Wallet.findById(wallet_id_B)
         .then(walletB => {
             const transferWallet = {A: walletA.name, B: walletB.name}
-            const transferB = new Transaction(req.user._id,wallet_id_B,'Money Transfer',amount,date,note,null,transferWallet) 
+            const transferB = new Transaction({user_id: req.user._id,wallet_id: wallet_id_B,category: 'Money Transfer',amount: amount,date: date,note: note,parent: 0, transferWallet: transferWallet}) 
             transferB.save()
-            const transferA = new Transaction(req.user._id,wallet_id_B,'Money Transfer',-amount,date,note,null,transferWallet) 
+            const transferA = new Transaction({user_id: req.user._id,wallet_id: wallet_id_A,category: 'Money Transfer',amount: -amount,date: date,note: note,parent: 0, transferWallet: transferWallet}) 
             transferA.save()
             const result = {
                 wallets:{A: walletA,B: walletB},
@@ -126,13 +126,13 @@ exports.postMoneyTransfer = (req,res,next) => {
             return result
         })
         .then(result => {
-            const wallet_a = new Wallet(result.wallets.B.user_id,result.wallets.B.name,result.wallets.B.type,result.wallets.B.acc_balance + amount,result.wallets.B.percentage,result.wallets.B.period,this.note,result.wallets.B.transactions,wallet_id_B)
-            wallet_a.update()
-            wallet_a.addToTransactions(result.transfers.B)
+            result.wallets.B.acc_balance += amount
+            // result.wallets.B.save()
+            result.wallets.B.addToTransactions(result.transfers.B)
 
-            const wallet_b = new Wallet(result.wallets.A.user_id,result.wallets.A.name,result.wallets.A.type,result.wallets.A.acc_balance - amount,result.wallets.A.percentage,result.wallets.A.period,this.note,result.wallets.A.transactions,wallet_id_A)
-            wallet_b.update()
-            wallet_b.addToTransactions(result.transfers.A)
+            result.wallets.A.acc_balance -= amount
+            // result.wallets.A.save()
+            result.wallets.A.addToTransactions(result.transfers.A)
         })
     })
     .then(() => {
@@ -146,15 +146,17 @@ exports.postRemoveWallet = (req,res,next) => {
     Wallet.findByIdAndRemove(wallet_id)
     .then(() => {
         // delete all transactions from this wallet
-        // Transaction.fetchAllTransactionsFromWallet(wallet_id)
-        // .then(transaction => {
-        //     transaction.map(item => {
-        //         Transaction.deleteTransaction(item._id)
-        //     })
-        // })
-        // delete wallet in users      
-        req.user.deleteFromMyWallets(wallet_id)
-        .catch(err => console.log(err))
+        Transaction.find({wallet_id: wallet_id})
+        .then(transactions => {
+            transactions.map(item => {
+                Transaction.findByIdAndRemove(item._id)
+                .then(() => {
+                    // delete wallet in users      
+                    req.user.deleteFromMyWallets(wallet_id)
+                    .catch(err => console.log(err))
+                })
+            })
+        })
     })
     .then(() => {
         res.redirect('/myWallets')

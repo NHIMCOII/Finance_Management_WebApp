@@ -39,19 +39,19 @@
                                         <i class="fas fa-credit-card"></i>
                                       </div>
                                       <span class='card-name'>
-                                        <%= wallet.type%> 
+                                        <%= wallet.wallet_id.type%> 
                                       </span>
                                     </div>
                                     <div class='bottom-block'>
                                          <div class='balance'>
                                               <div class='card-balance'>
-                                                <% if(Math.abs(wallet.acc_balance) >=1000000){ %> 
-                                                 <%=wallet.acc_balance / 1000000%>M VND
+                                                <% if(Math.abs(wallet.wallet_id.acc_balance) >=1000000){ %> 
+                                                 <%=wallet.wallet_id.acc_balance / 1000000%>M VND
                                                  <% }else{ %>
-                                                 <%=wallet.acc_balance / 1000 %>K VND
+                                                 <%=wallet.wallet_id.acc_balance / 1000 %>K VND
                                                   <% } %> 
                                               </div>
-                                              <div><%=wallet.name%></div>
+                                              <div><%=wallet.wallet_id.name%></div>
                                          </div>                                       
                                     </div>
                                   </div>

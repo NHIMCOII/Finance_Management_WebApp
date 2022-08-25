@@ -1,16 +1,16 @@
 const User = require('../models/user');
-// const Wallet = require('../models/wallet');
-// const Transaction = require('../models/transaction')
+const Wallet = require('../models/wallet');
+const Transaction = require('../models/transaction')
 
 exports.getIndex = (req,res,next) => {
     res.render('index');
 }
 
 exports.getDashboard = (req,res,next) => {
-    // Wallet.fetchAll(req.user._id)
-    // .then(wallets => {
-    //     Transaction.getRecentTransactions(req.user._id)
-    //     .then(recents => {
+    req.user.populate('myWallets.list.wallet_id')
+    .then(wallets => {
+        // Transaction.getRecentTransactions(req.user._id)
+        // .then(recents => {
     //         Transaction.getTotalIncomeByMonth(req.user._id)
     //         .then(incomes => {
     //             Transaction.getTotalExpenseByMonth(req.user._id)
@@ -22,14 +22,14 @@ exports.getDashboard = (req,res,next) => {
                         income: [],
                         expense: [],
                         recents: [],
-                        wallets: []
+                        wallets: wallets.myWallets.list
                         })
     //             })
     //         })
-    //     })
-    //     .catch(err => console.log(err))
-    // })
-    // .catch(err => console.log(err));
+        // })
+        .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err));
 }
 
 exports.getProfile = (req,res,next) => {

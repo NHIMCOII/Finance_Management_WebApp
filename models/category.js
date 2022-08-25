@@ -13,8 +13,6 @@ const categorySchema = new Schema({
     }
 })
 
-
-
 module.exports = mongoose.model('Category',categorySchema);
 
 // const getDb = require('../utils/database').getDb;
