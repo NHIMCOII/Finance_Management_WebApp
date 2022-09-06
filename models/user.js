@@ -114,6 +114,6 @@ module.exports = class User {
         })
         const db = getDb();
         return db.collection('users')
-        .updateOne({_id: this._id}, {$set: { myWallets: {list: updatedMyWallets}} })
+        .updateOne({_id: this._id}, {$set: { myWallets: {list: updatedMyWallets ? updatedMyWallets : null}} })
     }
 };

@@ -95,13 +95,15 @@
                                 <div class="container">
                                     <div class="row">                                     
                                         <div class="col-sm">
+                                            <% if(income.category != 'Money Transfer') { %> 
                                             <form action="/removeIncome" method="POST">
                                                 <input type="hidden" value="<%= income.amount %>" name="amount">
                                                 <input type="hidden" value="<%= income.wallet_id %>" name="wallet_id">
                                                 <input type="hidden" value="<%= income._id %>" name="income_id">
                                                 <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                                                 <button class="btn btn-danger btn-sb" data-toggle="tooltip" type="submit"><i class="fa-solid fa-eraser"></i>Remove</button>
-                                            </form>                                                                              
+                                            </form>  
+                                            <% } %>                                                                             
                                         </div>
                                     </div>
                                 </div>

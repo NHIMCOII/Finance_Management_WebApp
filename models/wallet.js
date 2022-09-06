@@ -81,6 +81,6 @@
         })
         const db = getDb();
         return db.collection('wallets')
-        .updateOne({_id: this._id}, {$set: { transactions: {list: updatedTransactions}} })
+        .updateOne({_id: this._id}, {$set: { transactions: {list: updatedTransactions ? updatedTransactions : null}} })
     }
 };
