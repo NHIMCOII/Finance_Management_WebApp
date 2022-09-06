@@ -141,8 +141,8 @@ exports.postMoneyTransfer = (req,res,next) => {
     .catch(err => console.log(err))
 }
 
-exports.postRemoveWallet = (req,res,next) => {
-    const wallet_id = req.body.wallet_id
+exports.deleteWallet = (req,res,next) => {
+    const wallet_id = req.params.wallet_id
     Wallet.findByIdAndRemove(wallet_id)
     .then(() => {
         // delete all transactions from this wallet
@@ -159,7 +159,10 @@ exports.postRemoveWallet = (req,res,next) => {
         })
     })
     .then(() => {
-        res.redirect('/myWallets')
+        res.status(200).json({message: 'Success'})
+        // res.redirect('/myWallets')
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        res.status(500).json({message: 'Failed'})
+    })
 }

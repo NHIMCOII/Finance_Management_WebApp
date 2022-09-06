@@ -21,6 +21,6 @@ router.get('/moneyTransfer',isAuth,walletController.getMoneyTransfer);
 
 router.post('/moneyTransfer',walletController.postMoneyTransfer);
 
-router.post('/removeWallet',walletController.postRemoveWallet);
+router.delete('/deleteWallet/:wallet_id',walletController.deleteWallet);
 
 module.exports = router;

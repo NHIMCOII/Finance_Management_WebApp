@@ -17,10 +17,10 @@ router.post('/expense',transactionController.postExpense);
 
 router.get('/incomeDetails/:income_id',isAuth,transactionController.getDetailsIncome);
 
-router.post('/removeIncome',transactionController.postDeleteIncome)
+router.delete('/incomeDetails/:income_id',transactionController.deleteIncome)
 
 router.get('/expenseDetails/:expense_id',isAuth,transactionController.getDetailsExpense);
 
-router.post('/removeExpense',transactionController.postDeleteExpense)
+router.delete('/expenseDetails/:expense_id',transactionController.deleteExpense)
 
 module.exports = router;

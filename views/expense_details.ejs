@@ -78,13 +78,13 @@
                                 <div class="container">
                                     <div class="row ">
                                         <div class="col-sm">
-                                            <form action="/removeExpense" method="POST">
+                                            <!-- <form action="/removeExpense" method="POST"> -->
                                                 <input type="hidden" value="<%= expense.amount %>" name="amount">
                                                 <input type="hidden" value="<%= expense.wallet_id %>" name="wallet_id">
-                                                <input type="hidden" value="<%= expense._id %>" name="expense_id">
+                                                <input type="hidden" value="<%= expense._id %>" name="transaction_id">
                                                 <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                                                <button class="btn btn-danger btn-sb" data-toggle="tooltip" type="submit"><i class="fa-solid fa-eraser"></i>Remove</button>
-                                            </form> 
+                                                <button class="btn btn-danger btn-sb" data-toggle="tooltip" type="button" onclick="deleteTransaction(this)"><i class="fa-solid fa-eraser"></i>Remove</button>
+                                            <!-- </form>  -->
                                         </div>
                                     </div>
                                 </div>

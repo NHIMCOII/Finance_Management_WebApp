@@ -64,11 +64,11 @@
                                                             <span class="action_btn">
                                                               <a href="/editWallet/<%=wallet.wallet_id._id.toString()%>"><button class="btn btn-warning" type="submit">Edit</button></a>
                                                               
-                                                              <form action="/removeWallet" method="POST">
+                                                              <!-- <form action="/removeWallet" method="POST"> -->
                                                                   <input type="hidden" value="<%= wallet.wallet_id._id %>" name="wallet_id">
                                                                   <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                                                                  <button class="btn btn-danger" type="submit">Remove</button>
-                                                              </form>
+                                                                  <button class="btn btn-danger" type="button" onclick="deleteWallet(this)">Delete</button>
+                                                              <!-- </form> -->
                                                             </span>
                                                           </td>
                                                       </tr>

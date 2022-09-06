@@ -62,16 +62,15 @@ exports.getDetailsIncome = (req,res,next) => {
                 income: income,
                 path: '/incomeDetails'
             })
-        })
+        }) 
         .catch(err => console.log(err))
     })
 }
 
-exports.postDeleteIncome = (req,res,next) => {
-    const income_id = req.body.income_id
+exports.deleteIncome = (req,res,next) => {
+    const income_id = req.params.income_id
     const wallet_id = req.body.wallet_id
     const amount = Number(req.body.amount)
-    console.log(income_id)
     Transaction.findByIdAndRemove(income_id)
     .then(() => {
         Wallet.findById(wallet_id)
@@ -83,9 +82,12 @@ exports.postDeleteIncome = (req,res,next) => {
             wallet.deleteFromTransactions(income_id)
         })
         .then(() => {
-            return res.redirect('/income')
+            res.status(200).json({message: 'Success'})
+            // return res.redirect('/income')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            res.status(500).json({message: 'Failed'})
+        })
     })
 }
 
@@ -155,8 +157,8 @@ exports.getDetailsExpense = (req,res,next) => {
     })
 }
 
-exports.postDeleteExpense = (req,res,next) => {
-    const expense_id = req.body.expense_id
+exports.deleteExpense = (req,res,next) => {
+    const expense_id = req.params.expense_id
     const wallet_id = req.body.wallet_id
     const amount = Number(req.body.amount)
     Transaction.findByIdAndRemove(expense_id)
@@ -170,9 +172,12 @@ exports.postDeleteExpense = (req,res,next) => {
             wallet.deleteFromTransactions(expense_id)
         })
         .then(() => {
-            return res.redirect('/expense')
+            res.status(200).json({message: 'Success'})
+            // return res.redirect('/expense')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            res.status(500).json({message: 'Failed'})
+        })
     })
 }
 
