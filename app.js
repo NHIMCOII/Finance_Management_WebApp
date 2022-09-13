@@ -6,8 +6,8 @@ const multer = require('multer')
 const mongoose = require('mongoose')
 
 const authRoutes = require('./routes/auth');
-const indexRoutes = require('./routes/index');
-// const transactionRoutes = require('./routes/transaction');
+const userRoutes = require('./routes/user');
+const transactionRoutes = require('./routes/transaction');
 // const walletRoutes = require('./routes/wallet');
 // const reportRoutes = require('./routes/report');
 
@@ -50,7 +50,7 @@ app.use((req,res,next) => {
 })
 
 app.use('/auth',authRoutes);
-app.use('/index',indexRoutes);
+app.use('/user',userRoutes);
 // app.use(transactionRoutes);
 // app.use(walletRoutes); 
 // app.use(reportRoutes);
