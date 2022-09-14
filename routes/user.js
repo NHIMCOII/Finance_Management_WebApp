@@ -9,19 +9,19 @@ const router = express.Router();
 router.get('/profile',isAuth,userController.profile);
 
 router.put('/editProfile',isAuth,
-// [
-//     body("username").trim().isAlpha(),
-//     body("email").trim().isEmail().not().isEmpty(),
-//     body("firstName").trim().isAlpha(),
-//     body("lastName").trim().isAlpha(),
-//     body("gender").trim().isBoolean(),
-//     body("job").trim().isAlpha(),
-//     body("phone").trim().isMobilePhone(),
-//     body("dob").trim().isDate(),
-//     body("facebook").trim().isURL(),
-//     body("linkedin").trim().isURL(),
-//     body("address").trim().isAlpha()
-// ],
+[
+    body("username").trim().isAlpha().isLength({min: 5},{max: 20}),
+    body("email").trim().isEmail().normalizeEmail(),
+    body("firstName").trim().isAlpha().optional({ nullable: true ,checkFalsy: true}),
+    body("lastName").trim().isAlpha().optional({ nullable: true ,checkFalsy: true}),
+    body("gender").trim().isBoolean().optional({ nullable: true ,checkFalsy: true}),
+    body("job").trim().isAlpha().optional({ nullable: true ,checkFalsy: true}),
+    body("phone").trim().isMobilePhone().optional({ nullable: true ,checkFalsy: true}),
+    body("dob").trim().isDate().optional({ nullable: true ,checkFalsy: true}),
+    body("facebook").trim().isURL().optional({ nullable: true ,checkFalsy: true}),
+    body("linkedin").trim().isURL().optional({ nullable: true ,checkFalsy: true}),
+    body("address").trim().isAlpha().optional({ nullable: true ,checkFalsy: true})
+],
 userController.editProfile);
 
 // router.get('/dashboard',isAuth,userController.getDashboard);   

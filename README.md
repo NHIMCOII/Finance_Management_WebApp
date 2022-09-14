@@ -25,28 +25,15 @@ npm install --save express
  - Installing Packages
 ```
 npm install --save body-parser
-npm install --save ejs
-npm install --save express-session
-npm install --save mongodb
-npm install --save connect-mongodb-session
-npm install --save mongoose
-npm install --save bcryptjs
-npm install --save csurf
-npm install --save connect-flash
-npm install --save express-validator
+    npm install --save express-validator
+    npm install --save mongoose
+    npm install --save multer
+    npm install --save uuid <for Windows>
+    npm install --save bcryptjs
+    npm install --save jsonwebtoken
+    npm install --save nodemailer
+    npm install --save nodemailer-sendgrid-transport
 ```
- - Create database tables (in .utils/database.sql)
-
- - Configuration Database (in ./utils/dbconfig.js)
-    Determine the dynamic port in your PC
-    Change the attribute "port" in db.config.js to the port that your server is listening on
-
- - Set up sessions-database: 
-     In SQL Server Management Studio, run the query in ./utils/database.sql
-     
- - Set up database configuarion: 
-   In ./utils/dbconfig.js, indentify your port that the sql server is listening on. Learn more: https://www.mssqltips.com/sqlservertip/2495/identify-sql-server-tcp-ip-port-being-used/.
-   Change the attribute "port" to the port you have identified.
 
 ## Step 2: Workflow
  ### GIT
@@ -64,10 +51,6 @@ git push origin [your_branch]
     git push -u origin [new branch]
 ```
  - Create Pull request
- 
- ### For /Views
- - Read any .ejs file and notice path changes in any tag use outer resources  (must change)
- - When done editing a .html file, change to .ejs file
  
 # FMS Free Bootstrap 4 Admin Template
 

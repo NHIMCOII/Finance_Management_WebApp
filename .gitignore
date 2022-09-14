@@ -3,5 +3,4 @@
 /node_modules
 Icon?
 .idea
-*.json
 .DS_Store

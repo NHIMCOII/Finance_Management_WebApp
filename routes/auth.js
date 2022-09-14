@@ -8,7 +8,7 @@ const router = express.Router();
 router.put(
   "/signup",
   [
-    body('username').trim().not().isEmpty(),
+    body('username').trim().isLength({min: 5},{max: 20}),
 
     body("email")
       .isEmail()
@@ -59,10 +59,18 @@ router.post(
   authController.login
 );
 
-// router.post("/logout", authController.postLogout);
+router.post("/reset",[
+  body("email").isEmail().normalizeEmail()
+], authController.reset);
 
-// router.get("/reset", authController.getReset);
-
-// router.post("/reset", authController.postReset);
+router.put("/reset/:token", [
+  body(
+    "password",
+    "Password must have at least 5 characters long and does not contain special characters"
+  )
+    .isLength({ min: 5 })
+    .isAlphanumeric()
+    .trim(),
+],authController.newPassword);
 
 module.exports = router;

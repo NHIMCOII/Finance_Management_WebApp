@@ -51,6 +51,8 @@ const userSchema = new Schema({
         type: String,
         required: false
     },
+    resetToken: String,
+    resetTokenExpiration: Date,
     myWallets:{
         list: [
             {wallet_id: {type: Schema.Types.ObjectId, ref: 'Wallet',required: false},}
@@ -67,7 +69,7 @@ userSchema.methods.addToMyWallets = function(wallet) {
     } else {
         const myWallets = [... this.myWallets.list]
         myWallets.push({wallet_id: wallet._id})
-        result = myWallets;
+        result = myWallets; 
     }
     this.myWallets.list = result
     return this.save()

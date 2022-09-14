@@ -7,8 +7,8 @@ const mongoose = require('mongoose')
 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
-const transactionRoutes = require('./routes/transaction');
-// const walletRoutes = require('./routes/wallet');
+// const transactionRoutes = require('./routes/transaction');
+const walletRoutes = require('./routes/wallet');
 // const reportRoutes = require('./routes/report');
 
 const MONGODB_URI = 
@@ -52,7 +52,7 @@ app.use((req,res,next) => {
 app.use('/auth',authRoutes);
 app.use('/user',userRoutes);
 // app.use(transactionRoutes);
-// app.use(walletRoutes); 
+app.use('/wallets',walletRoutes); 
 // app.use(reportRoutes);
 
 app.use((error,req,res,next) => {
