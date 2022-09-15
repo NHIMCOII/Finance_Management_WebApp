@@ -1,96 +1,72 @@
-const express = require('express');
 const path = require('path');
+
+const express = require('express');
 const bodyParser = require('body-parser');
-const session = require('express-session');
+const multer = require('multer')
+const mongoose = require('mongoose')
 
-//! session
-const MSSQLStore = require('connect-mssql-v2');
-const config = require('./utils/dbconfig');
-//!
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
+const walletRoutes = require('./routes/wallet');
+const transactionRoutes = require('./routes/transaction');
+const reportRoutes = require('./routes/report');
 
-const csrf = require('csurf');
-const flash = require('connect-flash');
-
-const errorController = require('./controllers/error');
+const MONGODB_URI = 
+    'mongodb+srv://DuyAnh:Nhimcoi2002@cluster0.lbaw2w3.mongodb.net/test?retryWrites=true&w=majority';
+    // 'mongodb://127.0.0.1:27017/fms';
 
 const app = express();
-const csrfProtection = csrf();
 
-app.set('view engine', 'ejs');
-app.set('views', 'views');
-
-const indexRoutes = require('./routes/index');
-const authRoutes = require('./routes/auth');
-const userInputRoutes = require('./routes/userInput');
-const walletRoutes = require('./routes/wallet');
-const reportRoutes = require('./routes/report');
-const User = require('./models/user');
-
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-const options = {
-    table: 'sessions',
-    autoRemove: true,
-    useUTC: true
-}
-
-const store = new MSSQLStore(config, options);
-
-app.use(
-	session({
-		store: store, // options are optional
-		secret: 'supersecret',
-		resave: false,
-		saveUninitialized: false,
-	})
-);
-
-app.use(csrfProtection);
-app.use(flash());
-
-app.use((req,res,next) => {
-	if(req.session.user === undefined){
-		return next();
-	}
-    User.findByPk(req.session.user[0].id)
-    .then(user => {
-        req.user = user[0][0];
-        next();
-    })
-    .catch(err => console.log(err));
-})
-
-app.use((req,res,next) => {
-	res.locals.isAuthenticated = req.session.isLoggedIn;
-	res.locals.csrfToken = req.csrfToken();
-	next();
+const { v4: uuidv4 } = require('uuid');
+ 
+const fileStorage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'images');
+    },
+    filename: function(req, file, cb) {
+        cb(null, uuidv4())
+    }
 });
 
-store.on('connect', () => {
-    console.log('connection established');
-    //console.log(err);
-})
-store.on('error', (error) => {
-    console.log(error);
-    console.log('connection error');
+const fileFilter = (req,file,cb) => {
+    if(file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
+        cb(null,true)
+    } else {
+        cb(null,false)
+    }
+}
 
-})
-store.on('sessionError', (error, classMathod) => {
-    console.log('eternal error');
-    console.log(classMathod);
-    console.log('\n\n\nerror\n\n\n')
-    console.log(error);
+app.use(
+    multer({storage: fileStorage,fileFilter: fileFilter}).single('image')
+)
+app.use('/images',express.static(path.join(__dirname, 'images')))
+app.use(bodyParser.json());
+
+app.use((req,res,next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    next()
 })
 
-app.use(indexRoutes);
-app.use(authRoutes);
-app.use(userInputRoutes);
-app.use(walletRoutes);
+app.use('/auth',authRoutes);
+app.use('/user',userRoutes);
+app.use('/wallets',walletRoutes); 
+app.use('/transactions',transactionRoutes);
 app.use(reportRoutes);
 
-app.use(errorController.get404);
+app.use((error,req,res,next) => {
+    const status = error.statusCode || 500
+    const message = error.message
+    const data = error.data
+    res.status(status).json({message: message, data: data})
+})
 
+mongoose.connect(MONGODB_URI)
+.then(result => {
+    app.listen(8080)
+    console.log('============ Connected ==========')
+})
+.catch(err => console.log(err))
 
-app.listen(3000);
+  

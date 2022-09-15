@@ -1,26 +1,23 @@
-const path = require('path');
-
 const express = require('express');
 
 const walletController = require('../controllers/wallet');
-const isAuth = require('../midleware/is-auth');
+const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
-router.get('/myWallets',isAuth,walletController.getMyWallet);
+router.get('/list',isAuth,walletController.myWallet);
 
-router.get('/addWallet',isAuth,walletController.getAddWallet);
+router.post('/add',isAuth,walletController.addWallet);
 
-router.post('/addWallet',walletController.postAddWallet);
+router.put('/edit/:wallet_id',isAuth,walletController.editWallet);
 
-router.get('/editWallet/:wallet_id',isAuth,walletController.getEditWallet);
+router.delete('/delete/:wallet_id',isAuth,walletController.deleteWallet);
 
-router.post('/editWallet',walletController.postEditWallet);
+router.get('/transfers',isAuth,walletController.getTransfers);
 
-router.get('/moneyTransfer',isAuth,walletController.getMoneyTransfer);
+router.post('/transfer',isAuth,walletController.postTransfers);
 
-router.post('/moneyTransfer',walletController.postMoneyTransfer);
+router.get('/transfer/:transfer_id',isAuth,walletController.detailsTransfer);
 
-router.post('/removeWallet',walletController.postRemoveWallet);
-
+ 
 module.exports = router;

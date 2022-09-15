@@ -1,29 +1,21 @@
-const path = require("path");
-const { check, body } = require("express-validator");
-
 const express = require("express");
+const { body } = require("express-validator");
 
 const authController = require("../controllers/auth");
 const User = require("../models/user");
-const { promiseImpl } = require("ejs");
 
 const router = express.Router();
-
-router.get("/signup", authController.getSignup);
-
-router.post(
+router.put(
   "/signup",
   [
-    check("email")
+    body('username').trim().isLength({min: 5},{max: 20}),
+
+    body("email")
       .isEmail()
       .withMessage("Please enter valid email")
       .custom((value, { req }) => {
-        // if (value === "test@test.com") {
-        //   throw new Error("This email address is forbidden");
-        // }
-        // return true;
-        return User.findByEmail(value).then((userDoc) => {
-          if (userDoc[0].length != 0) {
+        return User.findOne({ email: value }).then((userDoc) => {
+          if (userDoc) {
             return Promise.reject(
               "Email exists already, please pick a different one."
             );
@@ -31,45 +23,54 @@ router.post(
         });
       })
       .normalizeEmail(),
+      
     body(
       "password",
       "Plese enter a password at least 5 characters long without special characters"
     )
+      .trim()
       .isLength({ min: 5 })
-      .isAlphanumeric()
-      .trim(),
-    body("confirmPassword")
-    .trim()
-    .custom((value, { req }) => {
-      if (value !== req.body.password) {
-        throw new Error("Passwords have to match");
-      }
-      return true;
-    }),
-  ],
-  authController.postSignup
-);
+      .isAlphanumeric(),
 
-router.get("/login", authController.getLogin);
+    body("confirmPassword")
+      .trim()
+      .custom((value, { req }) => {
+        if (value !== req.body.password) {
+          throw new Error("Passwords have to match");
+        }
+        return true;
+      }),
+  ],
+  authController.signup
+);
 
 router.post(
   "/login",
   [
-    body("email", "Invalid email")
-    .isEmail()
-    .normalizeEmail(),
-    body("password", "Password must have at least 5 characters long and does not contain special characters")
+    body("email", "Invalid email").isEmail().normalizeEmail(),
+    body(
+      "password",
+      "Password must have at least 5 characters long and does not contain special characters"
+    )
       .isLength({ min: 5 })
       .isAlphanumeric()
       .trim(),
   ],
-  authController.postLogin
+  authController.login
 );
 
-router.post("/logout", authController.postLogout);
+router.post("/reset",[
+  body("email").isEmail().normalizeEmail()
+], authController.reset);
 
-router.get("/reset", authController.getReset);
-
-router.post("/reset", authController.postReset);
+router.put("/reset/:token", [
+  body(
+    "password",
+    "Password must have at least 5 characters long and does not contain special characters"
+  )
+    .isLength({ min: 5 })
+    .isAlphanumeric()
+    .trim(),
+],authController.newPassword);
 
 module.exports = router;
