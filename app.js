@@ -7,9 +7,9 @@ const mongoose = require('mongoose')
 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
-// const transactionRoutes = require('./routes/transaction');
 const walletRoutes = require('./routes/wallet');
-// const reportRoutes = require('./routes/report');
+const transactionRoutes = require('./routes/transaction');
+const reportRoutes = require('./routes/report');
 
 const MONGODB_URI = 
     'mongodb+srv://DuyAnh:Nhimcoi2002@cluster0.lbaw2w3.mongodb.net/test?retryWrites=true&w=majority';
@@ -51,9 +51,9 @@ app.use((req,res,next) => {
 
 app.use('/auth',authRoutes);
 app.use('/user',userRoutes);
-// app.use(transactionRoutes);
 app.use('/wallets',walletRoutes); 
-// app.use(reportRoutes);
+app.use('/transactions',transactionRoutes);
+app.use(reportRoutes);
 
 app.use((error,req,res,next) => {
     const status = error.statusCode || 500

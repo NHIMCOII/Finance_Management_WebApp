@@ -2,32 +2,6 @@ const { validationResult } = require("express-validator");
 
 const User = require("../models/user");
 
-// exports.getDashboard = (req,res,next) => {
-//     req.user.populate('myWallets.list.wallet_id')
-//     .then(wallets => {
-//         // Transaction.getRecentTransactions(req.user._id)
-//         // .then(recents => {
-//     //         Transaction.getTotalIncomeByMonth(req.user._id)
-//     //         .then(incomes => {
-//     //             Transaction.getTotalExpenseByMonth(req.user._id)
-//     //             .then(expenses => {
-//                         res.render('dashboard',{
-//                         pageTitle: 'Dashboard',
-//                         path: '/dashboard',
-//                         user: req.user,
-//                         income: [],
-//                         expense: [],
-//                         recents: [],
-//                         wallets: wallets.myWallets.list
-//                         })
-//     //             })
-//     //         })
-//         // })
-//         // .catch(err => console.log(err))
-//     })
-//     .catch(err => console.log(err));
-// }
-
 exports.profile = async (req, res, next) => {
   try {
     const user = await User.findById(req.userId);

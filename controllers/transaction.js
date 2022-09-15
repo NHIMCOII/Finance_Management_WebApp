@@ -1,183 +1,186 @@
-const Transaction  = require('../models/transaction');
-const Wallet = require('../models/wallet');
-const Category = require('../models/category')
+const Transaction = require("../models/transaction");
+const Wallet = require("../models/wallet");
+const Category = require("../models/category");
+const User = require("../models/user");
 
 // ================== INCOMES ================
 
-exports.getIncome = (req,res,next) => {
-    req.user.populate('myWallets.list.wallet_id')
-        .then((wallets) => {    
-            Transaction.find({user_id: req.user._id, amount: {$gte: 0}})  
-            .then(incomes => {
-                res.render('income',{
-                    user: req.user,
-                    wallets: wallets.myWallets.list,
-                    incomes: incomes ? incomes : [],
-                    pageTitle: 'Income',
-                    path: '/income'
-                });
-            })
-        })
-        .catch(err => {
-            console.log(err);
-        });
-}
+exports.getIncomes = async (req, res, next) => {
+  try {
+    const wallets = await User.findById(req.userId).populate("myWallets.list");
+    const incomes = await Transaction.find({
+      user_id: req.userId,
+      amount: { $gte: 0 },
+    });
+    res.status(200).json({
+      message: "Incomes Fetched",
+      wallets: wallets.myWallets.list,
+      incomes: incomes,
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
 
-exports.postIncome = (req,res,next) => {
-    const category = req.body.category_id
-    const amount = Number(req.body.amount)
-    const note = req.body.note
-    const date = Date(req.body.date)
-    const wallet_id = req.body.wallet_id
+exports.postIncome = async (req, res, next) => {
+  try {
+    const category = req.body.category;
+    const amount = new Number(req.body.amount);
+    const note = req.body.note;
+    const date = new Date(req.body.date);
+    const wallet_id = req.body.wallet_id;
 
-    Category.findOne({category: category})
-    .then(result => {
-        const income = new Transaction({user_id: req.user._id,wallet_id: wallet_id,category: category,amount: amount,date: date,note: note,parent: result.parent})
-        income.save().then(income => {
-            Wallet.findById(wallet_id)
-            .then((thisWallet) => {
-                thisWallet.acc_balance += amount
-                return thisWallet.save()
-            })
-            .then(wallet => {
-                wallet.addToTransactions(income)
-                res.redirect('/income');
-            })
-            .catch(err => console.log(err))
-        })
-    })
-    
-}
+    const parent = await Category.findOne({ category: category });
+    const income = new Transaction({
+      user_id: req.userId,
+      wallet_id: wallet_id,
+      category: category,
+      amount: amount,
+      date: date,
+      note: note,
+      parent: parent.parent,
+    });
+    income.save();
 
-exports.getDetailsIncome = (req,res,next) => {
-    const income_id = req.params.income_id
-    Transaction.findById(income_id)
-    .then((income) => {
-        Wallet.findById(income.wallet_id)
-        .then(wallet => {
-            res.render('income_details', {
-                pageTitle: 'Income Details',
-                user: req.user,
-                wallet: wallet,
-                income: income,
-                path: '/incomeDetails'
-            })
-        }) 
-        .catch(err => console.log(err))
-    })
-}
+    const wallet = await Wallet.findById(wallet_id);
+    wallet.acc_balance += amount;
+    wallet.transactions.list.push(income);
+    wallet.save();
 
-exports.deleteIncome = (req,res,next) => {
-    const income_id = req.params.income_id
-    const wallet_id = req.body.wallet_id
-    const amount = Number(req.body.amount)
-    Transaction.findByIdAndRemove(income_id)
-    .then(() => {
-        Wallet.findById(wallet_id)
-        .then((thisWallet) => {
-            thisWallet.acc_balance -= amount
-            return thisWallet
-        })
-        .then(wallet => {
-            wallet.deleteFromTransactions(income_id)
-        })
-        .then(() => {
-            res.status(200).json({message: 'Success'})
-            // return res.redirect('/income')
-        })
-        .catch(err => {
-            res.status(500).json({message: 'Failed'})
-        })
-    })
-}
+    res.status(200).json({ message: "Added new income", income: income });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
 
+exports.detailsIncome = async (req, res, next) => {
+  try {
+    const income_id = req.params.income_id;
+    const income = await Transaction.findById(income_id).populate("wallet_id");
+    res.status(200).json({ message: "Fetched Income", income: income });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.deleteIncome = async (req, res, next) => {
+  try {
+    const income_id = req.params.income_id;
+    const income = await Transaction.findById(income_id)
+    const wallet_id = income.wallet_id;
+    const amount = income.amount;
+    await Transaction.findByIdAndRemove(income_id);
+
+    const wallet = await Wallet.findById(wallet_id);
+    wallet.acc_balance -= amount;
+    wallet.transactions.list.pull(income_id);
+    await wallet.save()
+
+    res.status(200).json({ message: "Income Deleted" });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
 
 // ================== EXPENSES ================
 
-exports.getExpense = (req,res,next) => {
-    req.user.populate('myWallets.list.wallet_id')
-        .then((wallets) => {    
-            Transaction.find({user_id: req.user._id,amount: {$lt: 0}})  
-            .then(expenses => {
-                res.render('expense',{
-                    user: req.user,
-                    wallets: wallets.myWallets.list,
-                    expenses: expenses ? expenses : [],
-                    pageTitle: 'Expense',
-                    path: '/expense'
-                });
-            })
-        })
-        .catch(err => {
-            console.log(err);
-        });
-}
-
-exports.postExpense = (req,res,next) => {
-    const category = req.body.category_id
-    const amount = -Number(req.body.amount)
-    const note = req.body.note
-    const date = req.body.date
-    const wallet_id = req.body.wallet_id
-
-    Category.findOne({category: category})
-    .then(result => {
-        const expense = new Transaction({user_id: req.user._id,wallet_id: wallet_id,category: category,amount: amount,date: date,note: note,parent: result.parent})
-        expense.save().then(expense => {
-            Wallet.findById(wallet_id)
-            .then((thisWallet) => {
-                thisWallet.acc_balance += amount
-                return thisWallet.save()
-            })
-            .then(wallet => {
-                wallet.addToTransactions(expense)
-                res.redirect('/expense');
-            })
-            .catch(err => console.log(err))
-        })
-    })
-    
-}
-
-exports.getDetailsExpense = (req,res,next) => {
-    const expense_id = req.params.expense_id
-    Transaction.findById(expense_id)
-    .then((expense) => {
-        Wallet.findById(expense.wallet_id)
-        .then(wallet => {
-            res.render('expense_details', {
-                pageTitle: 'Expense Details',
-                user: req.user,
-                wallet: wallet,
-                expense: expense,
-                path: '/expenseDetails'
-            })
-        })
-        .catch(err => console.log(err))
-    })
-}
-
-exports.deleteExpense = (req,res,next) => {
-    const expense_id = req.params.expense_id
-    const wallet_id = req.body.wallet_id
-    const amount = Number(req.body.amount)
-    Transaction.findByIdAndRemove(expense_id)
-    .then(() => {
-        Wallet.findById(wallet_id)
-        .then((thisWallet) => {
-            thisWallet.acc_balance -= amount
-            return thisWallet
-        })
-        .then(wallet => {
-            wallet.deleteFromTransactions(expense_id)
-        })
-        .then(() => {
-            res.status(200).json({message: 'Success'})
-            // return res.redirect('/expense')
-        })
-        .catch(err => {
-            res.status(500).json({message: 'Failed'})
-        })
-    })
-}
-
+exports.getExpenses = async (req, res, next) => {
+    try {
+      const wallets = await User.findById(req.userId).populate("myWallets.list");
+      const expenses = await Transaction.find({
+        user_id: req.userId,
+        amount: { $lt: 0 },
+      });
+      res.status(200).json({
+        message: "Expenses Fetched",
+        wallets: wallets.myWallets.list,
+        expenses: expenses,
+      });
+    } catch (err) {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    }
+  };
+  
+  exports.postExpense = async (req, res, next) => {
+    try {
+      const category = req.body.category;
+      const amount = new Number(req.body.amount);
+      const note = req.body.note;
+      const date = new Date(req.body.date);
+      const wallet_id = req.body.wallet_id;
+  
+      const parent = await Category.findOne({ category: category });
+      const expense = new Transaction({
+        user_id: req.userId,
+        wallet_id: wallet_id,
+        category: category,
+        amount: -amount,
+        date: date,
+        note: note,
+        parent: parent.parent,
+      });
+      expense.save();
+  
+      const wallet = await Wallet.findById(wallet_id);
+      wallet.acc_balance -= amount;
+      wallet.transactions.list.push(expense);
+      wallet.save();
+  
+      res.status(200).json({ message: "Added new expense", expense: expense });
+    } catch (err) {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    }
+  };
+  
+  exports.detailsExpense = async (req, res, next) => {
+    try {
+      const expense_id = req.params.expense_id;
+      const expense = await Transaction.findById(expense_id).populate("wallet_id");
+      res.status(200).json({ message: "Fetched Expense", expense: expense });
+    } catch (err) {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    }
+  };
+  
+  exports.deleteExpense = async (req, res, next) => {
+    try {
+      const expense_id = req.params.expense_id;
+      const expense = await Transaction.findById(expense_id)
+      const wallet_id = expense.wallet_id;
+      const amount = expense.amount;
+      await Transaction.findByIdAndRemove(expense_id);
+  
+      const wallet = await Wallet.findById(wallet_id);
+      wallet.acc_balance -= amount;
+      wallet.transactions.list.pull(expense_id);
+      await wallet.save()
+  
+      res.status(200).json({ message: "Expense Deleted" });
+    } catch (err) {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    }
+  };

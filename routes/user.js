@@ -22,9 +22,6 @@ router.put('/editProfile',isAuth,
     body("linkedin").trim().isURL().optional({ nullable: true ,checkFalsy: true}),
     body("address").trim().isAlpha().optional({ nullable: true ,checkFalsy: true})
 ],
-userController.editProfile);
-
-// router.get('/dashboard',isAuth,userController.getDashboard);   
-
+userController.editProfile);  
 
 module.exports = router;

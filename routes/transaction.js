@@ -6,20 +6,20 @@ const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
-router.get('/income',isAuth,transactionController.getIncome);
+router.get('/incomes',isAuth,transactionController.getIncomes);
 
-// router.post('/income',transactionController.postIncome);
+router.post('/income',isAuth,transactionController.postIncome);
 
-// router.get('/expense',isAuth,transactionController.getExpense);
+router.get('/income/:income_id',isAuth,transactionController.detailsIncome);
 
-// router.post('/expense',transactionController.postExpense);
+router.delete('/income/:income_id',isAuth,transactionController.deleteIncome)
 
-// router.get('/incomeDetails/:income_id',isAuth,transactionController.getDetailsIncome);
+router.get('/expenses',isAuth,transactionController.getExpenses);
 
-// router.delete('/incomeDetails/:income_id',transactionController.deleteIncome)
+router.post('/expense',isAuth,transactionController.postExpense);
 
-// router.get('/expenseDetails/:expense_id',isAuth,transactionController.getDetailsExpense);
+router.get('/expense/:expense_id',isAuth,transactionController.detailsExpense);
 
-// router.delete('/expenseDetails/:expense_id',transactionController.deleteExpense)
+router.delete('/expense/:expense_id',isAuth,transactionController.deleteExpense)
 
 module.exports = router;

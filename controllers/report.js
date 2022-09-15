@@ -1,24 +1,65 @@
-// const Transaction = require("../models/transaction");
-// const Category = require('../models/category')
-// const User = require("../models/user");
-// const Wallet = require("../models/wallet");
+const Transaction = require("../models/transaction");
+const User = require("../models/user");
 
-exports.getMonthlyBalance = (req, res, next) => {
-  // Transaction.getTotalIncomeByMonth(req.user._id)
-  // .then((incomes) => {
-  //   Transaction.getTotalExpenseByMonth(req.user._id)
-  //   .then((expenses) => {
-  //     Transaction.getTotalExpenseByCategory(req.user._id)
-  //     .then(categories => {
-        res.render("monthlyBalance", {
-          pageTitle: "Monthly Balance",
-          path: "/monthlyBalance",
-          user: req.user,
-          income: [],
-          expense: [],
-          category: [],
-        })
-  //     })
-  //   });
-  // })
+exports.dashboard = async (req, res, next) => {
+  try {
+    const wallets = await User.findById(req.userId).populate("myWallets.list");
+    const recents = await Transaction.getRecentTransactions(req.userId)
+    .catch(err => {
+      throw err
+    })
+    const incomes = await Transaction.getTotalIncomeByMonth(req.userId)
+    .catch(err => {
+      throw err
+    })
+    const expenses = await Transaction.getTotalExpenseByMonth(req.userId)
+    .catch(err => {
+      throw err
+    })
+    res
+      .status(200)
+      .json({
+        message: "Fetched Dashboard",
+        wallets: wallets.myWallets.list,
+        recents: recents,
+        incomes: incomes,
+        expenses: expenses,
+      });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.monthlyBalance = async (req, res, next) => {
+  try {
+    const categories = await Transaction.getTotalExpenseByCategory(req.userId).catch(
+      (err) => {
+        throw err;
+      }
+    );
+    const incomes = await Transaction.getTotalIncomeByMonth(req.userId).catch(
+      (err) => {
+        throw err;
+      }
+    );
+    const expenses = await Transaction.getTotalExpenseByMonth(req.userId).catch(
+      (err) => {
+        throw err;
+      }
+    );
+    res.status(200).json({
+      message: "Fetched Monthly Balance",
+      categories: categories,
+      incomes: incomes,
+      expenses: expenses,
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
 };

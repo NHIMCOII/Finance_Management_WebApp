@@ -1,5 +1,3 @@
-const path = require('path');
-
 const express = require('express');
 
 const walletController = require('../controllers/wallet');
@@ -15,8 +13,11 @@ router.put('/edit/:wallet_id',isAuth,walletController.editWallet);
 
 router.delete('/delete/:wallet_id',isAuth,walletController.deleteWallet);
 
-// router.get('/moneyTransfer',isAuth,walletController.getMoneyTransfer);
+router.get('/transfers',isAuth,walletController.getTransfers);
 
-// router.post('/moneyTransfer',walletController.postMoneyTransfer);
+router.post('/transfer',isAuth,walletController.postTransfers);
 
+router.get('/transfer/:transfer_id',isAuth,walletController.detailsTransfer);
+
+ 
 module.exports = router;
