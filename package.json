@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "- [Download and Install NodeJs](https://nodejs.org/en/) Current\r  - Clone from Github \r ```\r git clone https://github.com/NHIMCOII/Finance_Management_WebApp.git\r ```\r  - Installing npm\r ```\r npm install\r ```\r  - Initialize npm\r ```\r  npm init\r ```\r  - Go into package.json -> scroll down to \"scripts\" -> add \"start\": \"nodemon app.js\" (remember to add ',')\r  - Installing Nodemon\r ```\r npm install nodemon --save-dev\r ```\r  - Installing Express \r ```\r npm install --save express \r ```\r  - Installing Packages\r ```\r npm install --save body-parser\r npm install --save ejs\r npm install --save express-session\r npm install --save mongodb\r npm install --save connect-mongodb-session\r npm install --save bcryptjs\r npm install --save csurf\r npm install --save connect-flash\r npm install --save express-validator\r ```\r  - Create database tables (in .utils/database.sql)",
   "main": "app.js",
+  "engines": {
+    "node": "18.9.0"
+  },
   "dependencies": {
     "abbrev": "^1.1.1",
     "accepts": "^1.3.8",

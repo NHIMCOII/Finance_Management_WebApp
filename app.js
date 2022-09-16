@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const multer = require("multer");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
-// const compression = require('compression')
+const compression = require("compression");
 const morgan = require("morgan");
 
 const authRoutes = require("./routes/auth");
@@ -17,7 +17,6 @@ const transactionRoutes = require("./routes/transaction");
 const reportRoutes = require("./routes/report");
 
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.lbaw2w3.mongodb.net/${process.env.MONGO_DEFAULT_DB}?retryWrites=true&w=majority`;
-// 'mongodb://127.0.0.1:27017/fms';
 
 const app = express();
 
@@ -58,7 +57,7 @@ app.use(
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(bodyParser.json());
 app.use(helmet());
-// app.use(compression())
+app.use(compression());
 app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use((req, res, next) => {
@@ -90,7 +89,7 @@ mongoose
     // https
     //   .createServer({ key: privateKey, cert: certificate }, app)
     //   .listen(process.env.PORT || 8080);
-      app.listen(process.env.PORT || 8080);
+    app.listen(process.env.PORT || 8080);
     console.log("============ Connected ==========");
   })
   .catch((err) => console.log(err));
