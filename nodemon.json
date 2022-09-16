@@ -1,0 +1,10 @@
+{
+    "env": {
+        "MONGO_USER": "DuyAnh",
+        "MONGO_PASSWORD": "Nhimcoi2002",
+        "MONGO_DEFAULT_DB": "Financial_Management_System",
+        "MONGO_SENDGRID_KEY": "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",
+        "MONGO_EMAIL": "FMS@gmail.com"
+
+    }
+}

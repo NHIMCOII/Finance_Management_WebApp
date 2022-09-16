@@ -33,6 +33,9 @@
     npm install --save jsonwebtoken
     npm install --save nodemailer
     npm install --save nodemailer-sendgrid-transport
+    npm install --save helmet
+    npm install --save compression <optional: depend on hosting provider>
+    npm install --save morgan
 ```
 
 ## Step 2: Workflow
