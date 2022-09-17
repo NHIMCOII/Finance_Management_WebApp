@@ -40,7 +40,7 @@ exports.signup = async (req, res, next) => {
     res.status(201).json({ message: "User Created", userId: savedUser._id });
     transporter.sendMail({
       to: email,
-      from: `${process.env.EMAIL}`,
+      from: process.env.EMAIL,
       subject: "Signup Succeeded",
       html: "<h1>You successfully signed up!</h1>",
     });
@@ -76,7 +76,7 @@ exports.login = async (req, res, next) => {
         email: loadedUser.email,
         userId: loadedUser._id.toString(),
       },
-      "secretString",
+      process.env.MONGO_JWT,
       { expiresIn: "24h" }
     );
     res.status(200).json({ token: token, userId: loadedUser._id.toString() });
@@ -109,7 +109,7 @@ exports.reset = async (req, res, next) => {
       res.status(200).json({ message: "Reset Token saved" });
       transporter.sendMail({
         to: email,
-        from: `${process.env.EMAIL}`,
+        from: process.env.EMAIL,
         subject: "Password Reset",
         html: `
         <p>You requested a password reset</p>
@@ -143,7 +143,7 @@ exports.newPassword = async (req,res,next) => {
     res.status(200).json({message: 'New password updated'})
     transporter.sendMail({
       to: user.email,
-      from: `${process.env.EMAIL}`,
+      from: process.env.EMAIL,
       subject: "New password",
       html: "<p>You successfully updated new password</p>",
     });
