@@ -1,11 +1,10 @@
-const path = require("path");
+
 const { check, body } = require("express-validator");
 
 const express = require("express");
 
 const authController = require("../controllers/auth");
 const User = require("../models/user");
-const { __values } = require("tslib");
 
 const router = express.Router();
 

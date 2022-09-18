@@ -1,0 +1,38 @@
+{
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^3.1.1",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.14.2",
+    "helmet": "^6.0.0",
+    "mongodb": "^4.9.1",
+    "mongoose": "^6.6.1"
+  },
+  "name": "finance_management_webapp",
+  "description": "- [Download and Install NodeJs](https://nodejs.org/en/) Current\r  - Clone from Github \r ```\r git clone https://github.com/NHIMCOII/Finance_Management_WebApp.git\r ```\r  - Installing npm\r ```\r npm install\r ```\r  - Initialize npm\r ```\r  npm init\r ```\r  - Go into package.json -> scroll down to \"scripts\" -> add \"start\": \"nodemon app.js\" (remember to add ',')\r  - Installing Nodemon\r ```\r npm install nodemon --save-dev\r ```\r  - Installing Express \r ```\r npm install --save express \r ```\r  - Installing Packages\r ```\r npm install --save body-parser\r npm install --save ejs\r npm install --save express-session\r npm install --save mongodb\r npm install --save connect-mongodb-session\r npm install --save mongoose\r npm install --save bcryptjs\r npm install --save csurf\r npm install --save connect-flash\r npm install --save express-validator\r ```\r  - Create database tables (in .utils/database.sql)",
+  "version": "1.0.0",
+  "main": "app.js",
+  "engines": {
+    "node": "18.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start:dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NHIMCOII/Finance_Management_WebApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NHIMCOII/Finance_Management_WebApp/issues"
+  },
+  "homepage": "https://github.com/NHIMCOII/Finance_Management_WebApp#readme"
+}

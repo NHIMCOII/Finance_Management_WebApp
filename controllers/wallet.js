@@ -1,9 +1,8 @@
-const User = require("../models/user");
 const Wallet = require("../models/wallet");
 const Transaction = require('../models/transaction');
 
 exports.getMyWallet = (req,res,next) => {
-    req.user.populate('myWallets.list.wallet_id')
+    req.user.populate('myWallets.list')
     .then((wallets) => {
         res.render('myWallets',{
             user: req.user,
@@ -35,10 +34,13 @@ exports.postAddWallet = (req,res,next) => {
     const percentage = req.body.percentage
     const period = req.body.period
     const note = req.body.note
-    const wallet = new Wallet({user_id: req.user,name: name,type: type ,acc_balance: acc_balance,percentage: percentage,period: period,note: note,transactions: {list: []}})
+    const wallet = new Wallet({user_id: req.user,name: name,type: type ,acc_balance: acc_balance,percentage: percentage,period: period,note: note})
     wallet.save()
     .then(result => {
-        req.user.addToMyWallets(wallet)
+        req.user.myWallets.list.push(wallet)
+        return req.user.save()
+    })
+    .then(() => {
         res.redirect('/myWallets')
     })
     .catch(err => console.log(err))
@@ -104,8 +106,8 @@ exports.getMoneyTransfer = (req,res,next) => {
 exports.postMoneyTransfer = (req,res,next) => {
     const wallet_id_A = req.body.wallet_id_A
     const wallet_id_B = req.body.wallet_id_B
-    const amount = Number(req.body.amount)
-    const date = Date(req.body.date)
+    const amount = new Number(req.body.amount)
+    const date = new Date(req.body.date)
     const note = req.body.note
     if(wallet_id_A == wallet_id_B){
         return res.redirect('/moneyTransfer')
@@ -127,12 +129,12 @@ exports.postMoneyTransfer = (req,res,next) => {
         })
         .then(result => {
             result.wallets.B.acc_balance += amount
-            // result.wallets.B.save()
-            result.wallets.B.addToTransactions(result.transfers.B)
+            result.wallets.B.transactions.list.push(result.transfers.B)
+            result.wallets.B.save()
 
             result.wallets.A.acc_balance -= amount
-            // result.wallets.A.save()
-            result.wallets.A.addToTransactions(result.transfers.A)
+            result.wallets.A.transactions.list.push(result.transfers.A)
+            result.wallets.A.save()
         })
     })
     .then(() => {
@@ -152,17 +154,17 @@ exports.deleteWallet = (req,res,next) => {
                 Transaction.findByIdAndRemove(item._id)
                 .then(() => {
                     // delete wallet in users      
-                    req.user.deleteFromMyWallets(wallet_id)
-                    .catch(err => console.log(err))
+                    req.user.myWallets.list.pull(wallet_id)
+                    return req.user.save()
                 })
             })
         })
     })
     .then(() => {
-        res.status(200).json({message: 'Success'})
-        // res.redirect('/myWallets')
+        // res.status(200).json({message: 'Success'})
+        res.redirect('/myWallets')
     })
     .catch(err => {
-        res.status(500).json({message: 'Failed'})
+        // res.status(500).json({message: 'Failed'})
     })
 }

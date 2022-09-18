@@ -122,7 +122,7 @@ exports.postSignup = (req, res, next) => {
   }
 
   bcrypt.hash(password, 12).then((hashedPassword) => {
-    const user = new User({username: username,email: email,password: hashedPassword,myWallets:{list: []}});
+    const user = new User({username: username,email: email,password: hashedPassword});
     user
       .save()
       .then((result) => {

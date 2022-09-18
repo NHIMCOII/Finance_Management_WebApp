@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session); 
+const helmet = require("helmet");
+const compression = require("compression");
 
 const User = require("./models/user");
 // const Category = require('./models/category')
@@ -38,11 +40,10 @@ const csrf = require('csurf');
 const flash = require('connect-flash');
 
 const errorController = require('./controllers/error');
-// const mongoConnect = require('./utils/database').mongoConnect;
 
 const MONGODB_URI = 
-    // 'mongodb+srv://DuyAnh:Nhimcoi2002@cluster0.lbaw2w3.mongodb.net/fms';
-    'mongodb://127.0.0.1:27017/fms';
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.lbaw2w3.mongodb.net/fms`;
+    // 'mongodb://127.0.0.1:27017/fms';
 
 const app = express();
 const store = new MongoDBStore({
@@ -76,6 +77,8 @@ app.use(
 
 app.use(csrfProtection);
 app.use(flash());
+app.use(helmet());
+app.use(compression());
 
 app.use((req,res,next) => {
 	if(!req.session.user){
@@ -97,7 +100,7 @@ app.use((req,res,next) => {
 
 app.use(indexRoutes);
 app.use(authRoutes);
-app.use(transactionRoutes);
+app.use(transactionRoutes); 
 app.use(walletRoutes); 
 app.use(reportRoutes);
 
@@ -106,7 +109,7 @@ app.use(errorController.get404);
 mongoose.connect(MONGODB_URI)
 .then(result => {
     console.log('=========== Connected ============')
-    app.listen(3000)
+    app.listen(process.env.PORT || 3000)
 })
 .catch(err => console.log(err))
 

@@ -6,7 +6,7 @@ const Category = require("../models/category");
 
 exports.getIncome = (req, res, next) => {
   req.user
-    .populate("myWallets.list.wallet_id")
+    .populate("myWallets.list")
     .then((wallets) => {
       Transaction.find({ user_id: req.user._id, amount: { $gte: 0 } }).then(
         (incomes) => {
@@ -27,7 +27,7 @@ exports.getIncome = (req, res, next) => {
 
 exports.postIncome = (req, res, next) => {
   const category = req.body.category_id;
-  const amount = Number(req.body.amount);
+  const amount = new Number(req.body.amount);
   const note = req.body.note;
   const date = req.body.date;
   const wallet_id = req.body.wallet_id;
@@ -49,8 +49,11 @@ exports.postIncome = (req, res, next) => {
           return thisWallet.save();
         })
         .then((wallet) => {
-          wallet.addToTransactions(income);
+          return wallet.transactions.list.push(income);
+        })
+        .then(() => {
           res.redirect("/income");
+
         })
         .catch((err) => console.log(err));
     });
@@ -85,7 +88,7 @@ exports.deleteIncome = (req, res, next) => {
         return thisWallet;
       })
       .then((wallet) => {
-        wallet.deleteFromTransactions(income_id);
+        wallet.transactions.list.pull(income_id);
       })
       .then(() => {
         // res.status(200).json({ message: "Success" });
@@ -101,7 +104,7 @@ exports.deleteIncome = (req, res, next) => {
 
 exports.getExpense = (req, res, next) => {
   req.user
-    .populate("myWallets.list.wallet_id")
+    .populate("myWallets.list")
     .then((wallets) => {
       Transaction.find({ user_id: req.user._id, amount: { $lt: 0 } }).then(
         (expenses) => {
@@ -122,9 +125,9 @@ exports.getExpense = (req, res, next) => {
 
 exports.postExpense = (req, res, next) => {
   const category = req.body.category_id;
-  const amount = -Number(req.body.amount);
+  const amount = new Number(req.body.amount);
   const note = req.body.note;
-  const date = req.body.date;
+  const date = new Date(req.body.date);
   const wallet_id = req.body.wallet_id;
 
   Category.findOne({ category: category }).then((result) => {
@@ -132,7 +135,7 @@ exports.postExpense = (req, res, next) => {
       user_id: req.user._id,
       wallet_id: wallet_id,
       category: category,
-      amount: amount,
+      amount: - amount,
       date: date,
       note: note,
       parent: result.parent,
@@ -140,11 +143,13 @@ exports.postExpense = (req, res, next) => {
     expense.save().then((expense) => {
       Wallet.findById(wallet_id)
         .then((thisWallet) => {
-          thisWallet.acc_balance += amount;
+          thisWallet.acc_balance -= amount;
           return thisWallet.save();
         })
         .then((wallet) => {
-          wallet.addToTransactions(expense);
+          return wallet.transactions.list.push(expense);
+        })
+        .then(() =>{
           res.redirect("/expense");
         })
         .catch((err) => console.log(err));
@@ -172,7 +177,7 @@ exports.getDetailsExpense = (req, res, next) => {
 exports.deleteExpense = (req, res, next) => {
   const expense_id = req.params.expense_id;
   const wallet_id = req.body.wallet_id;
-  const amount = Number(req.body.amount);
+  const amount = new Number(req.body.amount);
   Transaction.findByIdAndRemove(expense_id).then(() => {
     Wallet.findById(wallet_id)
       .then((thisWallet) => {
@@ -180,7 +185,7 @@ exports.deleteExpense = (req, res, next) => {
         return thisWallet;
       })
       .then((wallet) => {
-        wallet.deleteFromTransactions(expense_id);
+        wallet.transactions.list.pull(expense_id);
       })
       .then(() => {
         // res.status(200).json({ message: "Success" });
