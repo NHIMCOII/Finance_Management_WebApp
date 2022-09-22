@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        process.env.MONGO_SENDGRID_KEY,
+        process.env.SENDGRID_KEY,
     },
   })
 );
@@ -40,7 +40,7 @@ exports.signup = async (req, res, next) => {
     res.status(201).json({ message: "User Created", userId: savedUser._id });
     transporter.sendMail({
       to: email,
-      from: process.env.MONGO_EMAIL,
+      from: process.env.EMAIL,
       subject: "Signup Succeeded",
       html: "<h1>You successfully signed up!</h1>",
     });
@@ -76,8 +76,8 @@ exports.login = async (req, res, next) => {
         email: loadedUser.email,
         userId: loadedUser._id.toString(),
       },
-      process.env.MONGO_JWT,
-      { expiresIn: "24h" }
+      process.env.JWT,
+      { expiresIn: "3h" }
     );
     res.status(200).json({ token: token, userId: loadedUser._id.toString() });
   } catch (err) {
@@ -109,7 +109,7 @@ exports.reset = async (req, res, next) => {
       res.status(200).json({ message: "Reset Token saved" });
       transporter.sendMail({
         to: email,
-        from: process.env.MONGO_EMAIL,
+        from: process.env.EMAIL,
         subject: "Password Reset",
         html: `
         <p>You requested a password reset</p>
@@ -143,7 +143,7 @@ exports.newPassword = async (req,res,next) => {
     res.status(200).json({message: 'New password updated'})
     transporter.sendMail({
       to: user.email,
-      from: process.env.MONGO_EMAIL,
+      from: process.env.EMAIL,
       subject: "New password",
       html: "<p>You successfully updated new password</p>",
     });
