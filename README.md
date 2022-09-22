@@ -37,7 +37,11 @@
     npm install --save compression <optional: depend on hosting provider>
     npm install --save morgan
 ```
-
+ - For Testing
+```
+    npm install--save-dev mocha chai
+    npm install --save-dev sinon
+```
 ## Step 2: Workflow
  ### GIT
 ```

@@ -59,18 +59,18 @@ router.post(
   authController.login
 );
 
-router.post("/reset",[
-  body("email").isEmail().normalizeEmail()
-], authController.reset);
+// router.post("/reset",[
+//   body("email").isEmail().normalizeEmail()
+// ], authController.reset);
 
-router.put("/reset/:token", [
-  body(
-    "password",
-    "Password must have at least 5 characters long and does not contain special characters"
-  )
-    .isLength({ min: 5 })
-    .isAlphanumeric()
-    .trim(),
-],authController.newPassword);
+// router.put("/reset/:token", [
+//   body(
+//     "password",
+//     "Password must have at least 5 characters long and does not contain special characters"
+//   )
+//     .isLength({ min: 5 })
+//     .isAlphanumeric()
+//     .trim(),
+// ],authController.newPassword);
 
 module.exports = router;

@@ -2,3 +2,4 @@
 server.cert
 server.key
 nodemon.json
+/test

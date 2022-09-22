@@ -1,5 +1,5 @@
 const path = require("path");
-const fs = require("fs");
+// const fs = require("fs");
 // const https = require("https");
 
 const express = require("express");
@@ -8,7 +8,7 @@ const multer = require("multer");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const compression = require("compression");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
@@ -43,10 +43,10 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
+// const accessLogStream = fs.createWriteStream(
+//   path.join(__dirname, "access.log"),
+//   { flags: "a" }
+// );
 
 // const privateKey = fs.readFileSync("server.key");
 // const certificate = fs.readFileSync("server.cert");
@@ -58,7 +58,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(compression());
-app.use(morgan("combined", { stream: accessLogStream }));
+// app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
