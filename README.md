@@ -5,36 +5,41 @@
 ```
     git clone https://github.com/NHIMCOII/Finance_Management_WebApp.git
 ```
- - Installing npm
-```
-    npm install
-```
  - Initialize npm
 ```
     npm init
+```
+ - Installing dependencies
+```
+    npm install
 ```
  - Go into package.json -> scroll down to "scripts" -> add "start": "nodemon app.js" (remember to add ',')
  - Installing Nodemon
 ```
     npm install nodemon --save-dev
 ```
- - Installing Express 
-```
-    npm install --save express 
-```
+ 
  - Installing Packages
 ```
+    npm install --save express 
     npm install --save body-parser
     npm install --save express-validator
     npm install --save mongoose
     npm install --save multer
-    npm install --save uuid <for Windows>
+    npm install --save uuid 
     npm install --save bcryptjs
     npm install --save jsonwebtoken
     npm install --save nodemailer
     npm install --save nodemailer-sendgrid-transport
+    npm install --save helmet
+    npm install --save compression 
+    npm install --save morgan
 ```
-
+ - For Testing
+```
+    npm install--save-dev mocha chai
+    npm install --save-dev sinon
+```
 ## Step 2: Workflow
  ### GIT
 ```

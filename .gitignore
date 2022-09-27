@@ -1,6 +1,5 @@
-.sass-cache/
-*.css.map
 /node_modules
-Icon?
-.idea
-.DS_Store
+server.cert
+server.key
+nodemon.json
+/test
